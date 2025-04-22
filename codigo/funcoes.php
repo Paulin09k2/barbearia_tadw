@@ -64,5 +64,5 @@ function deletaragendamento($conexao, $id_agendamento, $barbeiro_id_barbeiro, $c
     
     return $funcionou;
 } 
-function
+
 ?>
