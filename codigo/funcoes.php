@@ -32,4 +32,15 @@ function deletarbarbeito($conexao, $id_barbeiro) {
     
     return $funcionou;
 }
+function salvaragendamento($conexao, $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente) {
+    $sql = "INSERT INTO agendamento (data_agendamento, status, barbeiro_id_barbeiro, cliente_id_cliente) VALUES (?, ?, ?, ?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    
+    mysqli_stmt_bind_param($comando, 'ssss', $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente);
+    
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    
+    return $funcionou;
+}
 ?>
