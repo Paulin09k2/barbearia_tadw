@@ -11,11 +11,11 @@ function salvarbarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimen
     
     return $funcionou;
 }
-function editarbarbeiro($conexao, $nome, $cpf, $endereco, $id) {
-    $sql = "UPDATE tb_cliente SET nome=?, cpf=?, endereco=? WHERE idcliente=?";
+function editarbarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $id) {
+    $sql = "UPDATE barbeiro SET nome=?, $email=?, telefone=?, $cpf, data_nascimento=?, data_admissao=? WHERE id_barbeiro=?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'sssi', $nome, $cpf, $endereco, $id);
+    mysqli_stmt_bind_param($comando, 'sssi', $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $id);
     $funcionou = mysqli_stmt_execute($comando);
 
     mysqli_stmt_close($comando);
