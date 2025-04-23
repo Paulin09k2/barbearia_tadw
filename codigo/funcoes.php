@@ -105,9 +105,36 @@ function deletarCliente($conexao, $id_cliente) {
 }
 #Funções André
 
-function listarCliente() {}
+function listarCliente($conexao) {
+    $sql = "SELECT * FROM tb_cliente";
+    $comando = mysqli_prepare($conexao, $sql);
 
-function listarBarbeiro() {}
+    mysqli_stmt_execute($comando);
+    $resultados = mysqli_stmt_get_result($comando);
+
+    $lista_clientes = [];
+    while ($cliente = mysqli_fetch_assoc($resultados)) {
+        $lista_clientes[] = $cliente;
+    }
+    mysqli_stmt_close($comando);
+
+    return $lista_clientes; }
+
+function listarBarbeiro($conexao)
+{
+    $sql = "SELECT * FROM tb_barbeiro"
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_execute($comando);
+    $resultados = mysqli_stmt_get_result($comando);
+
+    $lista_barbeiro
+    while ($barbeiro_fetch_assoc($resultados)) {
+        $lista_barbeiro[] = $barbeiro
+    }
+    mysqli_stmt_close($comando);
+
+    return $lista_barbeiro;}
 
 function salvarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estimado) {
     $sql = "INSERT INTO cliente (nome_servico, descricao, preco, tempo_estimado) VALUES (?, ?, ?, ?)";
@@ -141,7 +168,20 @@ function deletarServico($conexao, $id_servico) {
     
     return $funcionou; }
 
-function listaServico() {}
+function listaServico($conexao) {
+    $sql = "SELECT * FROM tb_servico";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_execute($comando);
+    $resultados = mysqli_stmt_get_result($comando);
+
+    $lista_servico = [];
+    while ($servico = mysqli_fetch_assoc($resultados)) {
+        $lista_servico[] = $servico;
+    }
+    mysqli_stmt_close($comando);
+
+    return $lista_servico; }
 
 
 
