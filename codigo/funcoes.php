@@ -66,11 +66,11 @@ function deletaragendamento($conexao, $id_agendamento, $barbeiro_id_barbeiro, $c
 } 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------Paulo Ricardo:
 
-function salvarCliente($conexao, $nome, $cpf, $endereco) {
-    $sql = "INSERT INTO tb_cliente (nome, cpf, endereco) VALUES (?, ?, ?)";
+function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro) {
+    $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro) VALUES (?, ?, ?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'sss', $nome, $cpf, $endereco);
+    mysqli_stmt_bind_param($comando, 'ssssss', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro);
     
     mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
@@ -79,11 +79,11 @@ function salvarCliente($conexao, $nome, $cpf, $endereco) {
 
 
 
-function editarCliente($conexao, $nome, $cpf, $endereco, $id) {
-    $sql = "UPDATE tb_cliente SET nome=?, cpf=?, endereco=? WHERE idcliente=?";
+function editarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $id) {
+    $sql = "UPDATE cliente SET nome=?, email=?, telefone=?, endereco=?, data_nascimento=?, data_cadastro=? WHERE idcliente=?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'sssi', $nome, $cpf, $endereco, $id);
+    mysqli_stmt_bind_param($comando, 'sssi', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $id);
     $funcionou = mysqli_stmt_execute($comando);
 
     mysqli_stmt_close($comando);
@@ -92,11 +92,11 @@ function editarCliente($conexao, $nome, $cpf, $endereco, $id) {
 
 
 
-function deletarCliente($conexao, $idcliente) {
-    $sql = "DELETE FROM tb_cliente WHERE idcliente = ?";
+function deletarCliente($conexao, $id_cliente) {
+    $sql = "DELETE FROM cliente WHERE idcliente = ?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'i', $idcliente);
+    mysqli_stmt_bind_param($comando, 'i', $id_cliente);
 
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
