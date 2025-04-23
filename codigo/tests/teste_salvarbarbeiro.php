@@ -10,5 +10,5 @@
     $data_admissao = "2000-01-01";
 
     salvarbarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao);
-
+    
 ?>
