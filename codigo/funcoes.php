@@ -11,6 +11,7 @@ function salvarbarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimen
     
     return $funcionou;
 }
+
 function editarbarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $id) {
     $sql = "UPDATE barbeiro SET nome=?, $email=?, telefone=?, $cpf, data_nascimento=?, data_admissao=? WHERE id_barbeiro=?";
     $comando = mysqli_prepare($conexao, $sql);
