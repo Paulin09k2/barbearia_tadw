@@ -3,7 +3,7 @@
     require_once "../funcoes.php";
 
     $nome = "Kaio";
-    $email = "";
+    $email = "kaio@gmail.com";
     $telefone = "Rua 1";
     $cpf = "321.456.235-11";
     $data_nascimento = "2000-01-01";
