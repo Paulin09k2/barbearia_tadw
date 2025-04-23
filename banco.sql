@@ -150,3 +150,40 @@ DEFAULT CHARACTER SET = utf8mb4;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+-- Inserindo barbeiros
+INSERT INTO barbeiro (nome, email, telefone, cpf, data_nascimento, data_admissao)
+VALUES 
+('João Silva', 'joao@barbearia.com', '11999999999', '12345678901', '1990-01-10', '2023-05-01'),
+('Carlos Mendes', 'carlos@barbearia.com', '11988888888', '23456789012', '1988-07-15', '2022-03-10');
+
+-- Inserindo clientes
+INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento)
+VALUES 
+('Pedro Lima', 'pedro@gmail.com', '11977777777', 'Rua das Flores, 123', '1995-03-20'),
+('Ana Souza', 'ana@gmail.com', '11966666666', 'Avenida Brasil, 456', '2000-09-30');
+
+-- Inserindo serviços
+INSERT INTO servico (nome_servico, descricao, preco, tempo_estimado)
+VALUES 
+('Corte Masculino', 'Corte de cabelo tradicional', 30.00, 30),
+('Barba', 'Design de barba com navalha', 25.00, 20),
+('Corte + Barba', 'Combo de corte e barba', 50.00, 50);
+
+-- Inserindo agendamentos
+INSERT INTO agendamento (data_agendamento, status, barbeiro_id_barbeiro, cliente_id_cliente)
+VALUES 
+('2025-04-25 10:00:00', 'confirmado', 1, 1),
+('2025-04-25 11:00:00', 'pendente', 2, 2);
+
+-- Inserindo avaliações
+INSERT INTO avaliacao (estrela, comentario, barbeiro_id_barbeiro, servico_id_servico)
+VALUES 
+(5, 'Excelente corte!', 1, 1),
+(4, 'Bom atendimento, mas atrasou um pouco.', 2, 2);
+
+-- Inserindo serviços agendados
+INSERT INTO agendamento_has_servico (agendamento_id_agendamento, servico_id_servico)
+VALUES 
+(1, 1),
+(1, 2),
+(2, 3);
