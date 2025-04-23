@@ -146,7 +146,21 @@ function deletarAvaliacao($conexao, $idavaliacao) {
 }
 
 
+function listarAvaliacao($conexao) {
+    $sql = "SELECT * FROM avaliacao";
+    $comando = mysqli_prepare($conexao, $sql);
 
+    mysqli_stmt_execute($comando);
+    $resultados = mysqli_stmt_get_result($comando);
+
+    $lista_clientes = [];
+    while ($cliente = mysqli_fetch_assoc($resultados)) {
+        $lista_clientes[] = $cliente;
+    }
+    mysqli_stmt_close($comando);
+
+    return $lista_clientes;
+}
 
 
 ?>
