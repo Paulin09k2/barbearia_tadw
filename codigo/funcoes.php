@@ -162,7 +162,6 @@ function listarAvaliacao($conexao) {
 
     return $lista_clientes;
 }
-function listarAvaliacaoerye
-ghudihg
+
 
 ?>
