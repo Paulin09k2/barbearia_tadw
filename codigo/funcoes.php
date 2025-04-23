@@ -65,7 +65,7 @@ function deletaragendamento($conexao, $id_agendamento, $barbeiro_id_barbeiro, $c
     
     return $funcionou;
 } 
-//int = i --varchar = s --date = s -- decimal = d ----------------------------------------------------------------------------------------------------------------------------------------------------------------------Paulo Ricardo:
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------Paulo Ricardo:
 
 function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro) {
     $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro) VALUES (?, ?, ?, ?, ?, ?)";
@@ -104,64 +104,52 @@ function deletarCliente($conexao, $id_cliente) {
     
     return $funcionou;
 }
+#Funções André
 
+function listarCliente() {}
 
+function listarBarbeiro() {}
 
-
-function salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico) {
-    $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro) VALUES (?, ?, ?, ?, ?, ?)";
+function salvarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estimado) {
+    $sql = "INSERT INTO cliente (nome_servico, descricao, preco, tempo_estimado) VALUES (?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'ssssss', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro);
+    mysqli_stmt_bind_param($comando, 'issdi', $nome_servico, $descricao, $preco, $tempo_estimado);
     
     mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
-    
-}
+    }
 
-
-
-function editarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico, $id) {
-    $sql = "UPDATE cliente SET nome=?, email=?, telefone=?, endereco=?, data_nascimento=?, data_cadastro=? WHERE idcliente=?";
+function editarServico($conexao,$nome_servico, $descricao, $preco, $tempo_estimado) {
+    $sql = "UPDATE cliente SET nome_servico=?, descricao=?, preco=?, tempo_estimado=? WHERE idservico=?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'sssi', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $id);
+    mysqli_stmt_bind_param($comando, 'issdi', $nome_servico, $descricao, $preco, $tempo_estimado );
     $funcionou = mysqli_stmt_execute($comando);
 
     mysqli_stmt_close($comando);
-    return $funcionou;    
-}
+    return $funcionou;
+ }
 
-
-
-function deletarAvaliacao($conexao, $idavaliacao) {
+function deletarServico($conexao, $id_servico) {
     $sql = "DELETE FROM cliente WHERE idcliente = ?";
     $comando = mysqli_prepare($conexao, $sql);
     
-    mysqli_stmt_bind_param($comando, 'i', $id_cliente);
+    mysqli_stmt_bind_param($comando, 'i', $id_servico);
 
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     
-    return $funcionou;
-}
+    return $funcionou; }
+
+function listaServico() {}
 
 
-function listarAvaliacao($conexao) {
-    $sql = "SELECT * FROM avaliacao";
-    $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_execute($comando);
-    $resultados = mysqli_stmt_get_result($comando);
 
-    $lista_clientes = [];
-    while ($cliente = mysqli_fetch_assoc($resultados)) {
-        $lista_clientes[] = $cliente;
-    }
-    mysqli_stmt_close($comando);
 
-    return $lista_clientes;
-}
+
+
 
 
 ?>
