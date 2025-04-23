@@ -64,7 +64,7 @@ function deletaragendamento($conexao, $id_agendamento, $barbeiro_id_barbeiro, $c
     
     return $funcionou;
 } 
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------Paulo Ricardo:
+//int = i --varchar = s --date = s -- decimal = d ----------------------------------------------------------------------------------------------------------------------------------------------------------------------Paulo Ricardo:
 
 function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro) {
     $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro) VALUES (?, ?, ?, ?, ?, ?)";
