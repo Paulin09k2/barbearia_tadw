@@ -154,16 +154,12 @@ function listarCliente($conexao) {
 
 
 function listarBarbeiro($conexao) {
-    $sql = "SELECT * FROM tb_barbeiro"
     $sql = "SELECT * FROM tb_servico";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_execute($comando);
     $resultados = mysqli_stmt_get_result($comando);
 
-    $lista_barbeiro
-    while ($barbeiro_fetch_assoc($resultados)) {
-        $lista_barbeiro[] = $barbeiro
     $lista_servico = [];
     while ($servico = mysqli_fetch_assoc($resultados)) {
         $lista_servico[] = $servico;
