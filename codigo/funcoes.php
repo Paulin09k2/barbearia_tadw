@@ -148,7 +148,6 @@ function listarCliente($conexao) {
     mysqli_stmt_close($comando);
 
     return $lista_clientes; }
-    
 #Funções André
 
 
@@ -166,7 +165,6 @@ function listarBarbeiro($conexao) {
     }
     mysqli_stmt_close($comando);
 
-    return $lista_barbeiro;}
 
 function salvarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estimado) {
     $sql = "INSERT INTO cliente (nome_servico, descricao, preco, tempo_estimado) VALUES (?, ?, ?, ?)";
