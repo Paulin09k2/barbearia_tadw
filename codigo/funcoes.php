@@ -1,5 +1,5 @@
 <?php
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------Kaio:
+//-----------------------------------------------------------------------------------------------------------------------------------------Kaio:
 function salvarbarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao) {
     $sql = "INSERT INTO barbeiro (nome, email, telefone, $cpf, data_nascimento, data_admissao) VALUES (?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
@@ -65,7 +65,7 @@ function deletaragendamento($conexao, $id_agendamento, $barbeiro_id_barbeiro, $c
     
     return $funcionou;
 } 
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------Paulo Ricardo:
+//---------------------------------------------------------------------------------------------------------------Paulo Ricardo:
 
 function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro) {
     $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro) VALUES (?, ?, ?, ?, ?, ?)";
