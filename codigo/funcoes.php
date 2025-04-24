@@ -133,7 +133,6 @@ function deletarAvaliacao($conexao, $idavaliacao) {
  
 
 }
-#Funções André
 
 function listarCliente($conexao) {
     $sql = "SELECT * FROM tb_cliente";
@@ -149,6 +148,10 @@ function listarCliente($conexao) {
     mysqli_stmt_close($comando);
 
     return $lista_clientes; }
+    
+#Funções André
+
+
 
 function listarBarbeiro($conexao) {
     $sql = "SELECT * FROM tb_barbeiro"
