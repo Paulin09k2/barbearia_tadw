@@ -71,7 +71,7 @@ function deletaragendamento($conexao, $id_agendamento, $barbeiro_id_barbeiro, $c
 
     return $funcionou;
 }
-//---------------------------------------------------------------------------------------------------------------Paulo Ricardo:
+//-----------int = 1 -- decimal = d -- varchar = s -- date = s --text = s----------------------------------------------------------------------------------------------------Paulo Ricardo:
 
 function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro)
 {
