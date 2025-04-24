@@ -91,7 +91,7 @@ function editarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nasc
     $sql = "UPDATE cliente SET nome=?, email=?, telefone=?, endereco=?, data_nascimento=?, data_cadastro=? WHERE idcliente=?";
     $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_bind_param($comando, 'sssi', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $id);
+    mysqli_stmt_bind_param($comando, 'ssssssi', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $id);
     $funcionou = mysqli_stmt_execute($comando);
 
     mysqli_stmt_close($comando);
@@ -102,7 +102,7 @@ function editarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nasc
 
 function deletarCliente($conexao, $id_cliente)
 {
-    $sql = "DELETE FROM cliente WHERE idcliente = ?";
+    $sql = "DELETE FROM cliente WHERE id_cliente = ?";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 'i', $id_cliente);
@@ -111,6 +111,23 @@ function deletarCliente($conexao, $id_cliente)
     mysqli_stmt_close($comando);
 
     return $funcionou;
+}
+
+function listarCliente($conexao)
+{
+    $sql = "SELECT * FROM cliente";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_execute($comando);
+    $resultados = mysqli_stmt_get_result($comando);
+
+    $lista_clientes = [];
+    while ($cliente = mysqli_fetch_assoc($resultados)) {
+        $lista_clientes[] = $cliente;
+    }
+    mysqli_stmt_close($comando);
+
+    return $lista_clientes;
 }
 
 function salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico)
@@ -142,22 +159,7 @@ function deletarAvaliacao($conexao, $idavaliacao)
     return $funcionou;
 }
 
-function listarCliente($conexao)
-{
-    $sql = "SELECT * FROM tb_cliente";
-    $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_execute($comando);
-    $resultados = mysqli_stmt_get_result($comando);
-
-    $lista_clientes = [];
-    while ($cliente = mysqli_fetch_assoc($resultados)) {
-        $lista_clientes[] = $cliente;
-    }
-    mysqli_stmt_close($comando);
-
-    return $lista_clientes;
-}
 
 #Funções André
 
