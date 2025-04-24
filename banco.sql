@@ -150,40 +150,86 @@ DEFAULT CHARACTER SET = utf8mb4;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
--- Inserindo barbeiros
-INSERT INTO barbeiro (nome, email, telefone, cpf, data_nascimento, data_admissao)
-VALUES 
-('João Silva', 'joao@barbearia.com', '11999999999', '12345678901', '1990-01-10', '2023-05-01'),
-('Carlos Mendes', 'carlos@barbearia.com', '11988888888', '23456789012', '1988-07-15', '2022-03-10');
 
--- Inserindo clientes
 INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento)
 VALUES 
-('Pedro Lima', 'pedro@gmail.com', '11977777777', 'Rua das Flores, 123', '1995-03-20'),
-('Ana Souza', 'ana@gmail.com', '11966666666', 'Avenida Brasil, 456', '2000-09-30');
+('Lucas Martins', 'lucas1@gmail.com', '11900000001', 'Rua A, 101', '1992-02-14'),
+('Mariana Lopes', 'mariana2@gmail.com', '11900000002', 'Rua B, 102', '1987-05-30'),
+('Felipe Souza', 'felipe3@gmail.com', '11900000003', 'Rua C, 103', '1995-11-22'),
+('Juliana Rocha', 'juliana4@gmail.com', '11900000004', 'Rua D, 104', '1990-06-18'),
+('Bruno Tavares', 'bruno5@gmail.com', '11900000005', 'Rua E, 105', '1989-03-10'),
+('Amanda Dias', 'amanda6@gmail.com', '11900000006', 'Rua F, 106', '1997-08-09'),
+('Gustavo Ferreira', 'gustavo7@gmail.com', '11900000007', 'Rua G, 107', '1993-12-12'),
+('Carla Mendes', 'carla8@gmail.com', '11900000008', 'Rua H, 108', '1991-09-05'),
+('Eduardo Nunes', 'eduardo9@gmail.com', '11900000009', 'Rua I, 109', '1985-07-17'),
+('Beatriz Silva', 'beatriz10@gmail.com', '11900000010', 'Rua J, 110', '1999-01-03'),
+('Rodrigo Pires', 'rodrigo11@gmail.com', '11900000011', 'Rua K, 111', '1994-04-20'),
+('Fernanda Alves', 'fernanda12@gmail.com', '11900000012', 'Rua L, 112', '1986-10-28'),
+('Tiago Lima', 'tiago13@gmail.com', '11900000013', 'Rua M, 113', '1998-06-06'),
+('Camila Borges', 'camila14@gmail.com', '11900000014', 'Rua N, 114', '1993-02-25'),
+('Rafael Costa', 'rafael15@gmail.com', '11900000015', 'Rua O, 115', '1990-07-07'),
+('Priscila Ramos', 'priscila16@gmail.com', '11900000016', 'Rua P, 116', '1991-10-10'),
+('Henrique Oliveira', 'henrique17@gmail.com', '11900000017', 'Rua Q, 117', '1988-03-19'),
+('Isabela Castro', 'isabela18@gmail.com', '11900000018', 'Rua R, 118', '1996-11-01'),
+('Diego Barbosa', 'diego19@gmail.com', '11900000019', 'Rua S, 119', '1992-05-08'),
+('Natália Moreira', 'natalia20@gmail.com', '11900000020', 'Rua T, 120', '1994-12-30');
 
--- Inserindo serviços
 INSERT INTO servico (nome_servico, descricao, preco, tempo_estimado)
 VALUES 
-('Corte Masculino', 'Corte de cabelo tradicional', 30.00, 30),
-('Barba', 'Design de barba com navalha', 25.00, 20),
-('Corte + Barba', 'Combo de corte e barba', 50.00, 50);
+('Corte degradê', 'Corte moderno com degradê', 40.00, 35),
+('Sobrancelha', 'Design e limpeza de sobrancelha', 15.00, 10),
+('Hidratação capilar', 'Tratamento hidratante para o cabelo', 60.00, 45),
+('Pé e mão', 'Serviço completo de manicure e pedicure', 35.00, 50),
+('Luzes masculinas', 'Descoloração e coloração parcial', 120.00, 90),
+('Relaxamento capilar', 'Redução de volume', 70.00, 60),
+('Progressiva', 'Alisamento com química', 150.00, 120),
+('Corte infantil', 'Corte para crianças', 25.00, 25),
+('Pintura cabelo', 'Coloração completa', 90.00, 80),
+('Barba desenhada', 'Barba modelada com detalhes', 30.00, 20),
+('Tratamento antiqueda', 'Tratamento capilar especial', 65.00, 40),
+('Raspar cabeça', 'Corte zero com navalha', 20.00, 15),
+('Escova', 'Escova modeladora', 50.00, 30),
+('Platinado', 'Descoloração total', 130.00, 100),
+('Corte freestyle', 'Corte com desenhos e riscos', 55.00, 40),
+('Alisamento masculino', 'Alisamento com escova progressiva', 85.00, 60),
+('Barba + Hidratação', 'Combo especial', 60.00, 45),
+('Desenho na sobrancelha', 'Detalhe com navalha', 10.00, 5),
+('Tratamento couro cabeludo', 'Limpeza profunda', 75.00, 60),
+('Corte executivo', 'Estilo formal e clássico', 45.00, 35);
 
--- Inserindo agendamentos
 INSERT INTO agendamento (data_agendamento, status, barbeiro_id_barbeiro, cliente_id_cliente)
 VALUES 
-('2025-04-25 10:00:00', 'confirmado', 1, 1),
-('2025-04-25 11:00:00', 'pendente', 2, 2);
+('2025-04-26 09:00:00', 'pendente', 1, 3),
+('2025-04-26 10:00:00', 'confirmado', 2, 4),
+('2025-04-26 11:00:00', 'cancelado', 1, 5),
+('2025-04-26 13:00:00', 'pendente', 2, 6),
+('2025-04-26 14:00:00', 'confirmado', 1, 7),
+('2025-04-27 09:00:00', 'confirmado', 2, 8),
+('2025-04-27 10:00:00', 'pendente', 1, 9),
+('2025-04-27 11:00:00', 'cancelado', 2, 10),
+('2025-04-27 13:00:00', 'confirmado', 1, 11),
+('2025-04-27 14:00:00', 'pendente', 2, 12),
+('2025-04-28 09:00:00', 'pendente', 1, 13),
+('2025-04-28 10:00:00', 'confirmado', 2, 14),
+('2025-04-28 11:00:00', 'cancelado', 1, 15),
+('2025-04-28 13:00:00', 'confirmado', 2, 16),
+('2025-04-28 14:00:00', 'pendente', 1, 17),
+('2025-04-29 09:00:00', 'confirmado', 2, 18),
+('2025-04-29 10:00:00', 'cancelado', 1, 19),
+('2025-04-29 11:00:00', 'pendente', 2, 20),
+('2025-04-29 13:00:00', 'confirmado', 1, 3),
+('2025-04-29 14:00:00', 'pendente', 2, 4);
 
--- Inserindo avaliações
 INSERT INTO avaliacao (estrela, comentario, barbeiro_id_barbeiro, servico_id_servico)
 VALUES 
-(5, 'Excelente corte!', 1, 1),
-(4, 'Bom atendimento, mas atrasou um pouco.', 2, 2);
+(5, 'Ótimo atendimento e corte impecável.', 1, 1),
+(4, 'Gostei do corte, mas poderia ser mais rápido.', 2, 2),
+(5, 'Excelente serviço de barba.', 1, 10),
+(3, 'Corte bom, ambiente barulhento.', 2, 3),
+(4, 'Profissional atencioso.', 1, 4),
+(5, 'Serviço top! Voltarei com certeza.', 2, 5),
+(2, 'Não gostei do corte.', 1, 6),
+(4, 'Hidratação boa, mas atrasou.', 2, 7),
+(5, 'Tudo perfeito!', 1, 8),
+(4, 'Sobrancelha ficou show.', 2, 18);
 
--- Inserindo serviços agendados
-INSERT INTO agendamento_has_servico (agendamento_id_agendamento, servico_id_servico)
-VALUES 
-(1, 1),
-(1, 2),
-(2, 3);
