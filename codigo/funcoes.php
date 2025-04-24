@@ -104,6 +104,35 @@ function deletarCliente($conexao, $id_cliente) {
     
     return $funcionou;
 }
+
+function salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico) {
+    $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro) VALUES (?, ?, ?, ?, ?, ?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'ssssss', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro);
+    mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+
+}
+
+function editarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico, $id) {
+    $sql = "UPDATE cliente SET nome=?, email=?, telefone=?, endereco=?, data_nascimento=?, data_cadastro=? WHERE idcliente=?";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'sssi', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $id);
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    return $funcionou;    
+}
+ 
+function deletarAvaliacao($conexao, $idavaliacao) {
+    $sql = "DELETE FROM cliente WHERE idcliente = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $id_cliente);
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    return $funcionou;
+ 
+
+}
 #Funções André
 
 function listarCliente($conexao) {
@@ -121,8 +150,7 @@ function listarCliente($conexao) {
 
     return $lista_clientes; }
 
-function listarBarbeiro($conexao)
-{
+function listarBarbeiro($conexao) {
     $sql = "SELECT * FROM tb_barbeiro"
     $comando = mysqli_prepare($conexao, $sql);
 
