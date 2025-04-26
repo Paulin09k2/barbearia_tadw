@@ -159,7 +159,19 @@ function deletarAvaliacao($conexao, $idavaliacao)
     return $funcionou;
 }
 
-
+function listarAvaliacao($conexao)
+{
+    $sql = "SELECT * FROM avaliacao";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_execute($comando);
+    $resultados = mysqli_stmt_get_result($comando);
+    $lista_avaliacao = [];
+    while ($avaliacao = mysqli_fetch_assoc($resultados)) {
+        $lista_avaliacao[] = $avaliacao;
+    }
+    mysqli_stmt_close($comando);
+    return $lista_avaliacao;
+}
 
 #Funções André
 
