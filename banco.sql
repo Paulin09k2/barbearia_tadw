@@ -233,3 +233,9 @@ VALUES
 (5, 'Tudo perfeito!', 1, 8),
 (4, 'Sobrancelha ficou show.', 2, 18);
 
+INSERT INTO barbeiro (nome, email, telefone, cpf, data_nascimento, data_admissao)
+VALUES
+('André Barbosa', 'andre.barbosa@barbearia.com', '11988887777', '12345678901', '1985-04-15', '2020-01-10'),
+('Rogério Lima', 'rogerio.lima@barbearia.com', '11977776666', '23456789012', '1990-09-22', '2021-03-12'),
+('Felipe Castro', 'felipe.castro@barbearia.com', '11966665555', '34567890123', '1987-12-01', '2019-07-08');
+
