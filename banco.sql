@@ -35,7 +35,6 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`barbeiro` (
   UNIQUE INDEX `email` (`email` ASC) VISIBLE,
   UNIQUE INDEX `cpf` (`cpf` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -53,7 +52,6 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`cliente` (
   PRIMARY KEY (`id_cliente`),
   UNIQUE INDEX `email` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -72,15 +70,14 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`agendamento` (
   CONSTRAINT `fk_agendamento_barbeiro1`
     FOREIGN KEY (`barbeiro_id_barbeiro`)
     REFERENCES `barbearia`.`barbeiro` (`id_barbeiro`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_agendamento_cliente1`
     FOREIGN KEY (`cliente_id_cliente`)
     REFERENCES `barbearia`.`cliente` (`id_cliente`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -95,7 +92,6 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`servico` (
   `tempo_estimado` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id_servico`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -114,13 +110,13 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`avaliacao` (
   CONSTRAINT `fk_avaliacao_barbeiro1`
     FOREIGN KEY (`barbeiro_id_barbeiro`)
     REFERENCES `barbearia`.`barbeiro` (`id_barbeiro`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_avaliacao_servico1`
     FOREIGN KEY (`servico_id_servico`)
     REFERENCES `barbearia`.`servico` (`id_servico`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -136,13 +132,13 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`agendamento_has_servico` (
   CONSTRAINT `fk_agendamento_has_servico_agendamento1`
     FOREIGN KEY (`agendamento_id_agendamento`)
     REFERENCES `barbearia`.`agendamento` (`id_agendamento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_agendamento_has_servico_servico1`
     FOREIGN KEY (`servico_id_servico`)
     REFERENCES `barbearia`.`servico` (`id_servico`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -151,91 +147,34 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento)
-VALUES 
-('Lucas Martins', 'lucas1@gmail.com', '11900000001', 'Rua A, 101', '1992-02-14'),
-('Mariana Lopes', 'mariana2@gmail.com', '11900000002', 'Rua B, 102', '1987-05-30'),
-('Felipe Souza', 'felipe3@gmail.com', '11900000003', 'Rua C, 103', '1995-11-22'),
-('Juliana Rocha', 'juliana4@gmail.com', '11900000004', 'Rua D, 104', '1990-06-18'),
-('Bruno Tavares', 'bruno5@gmail.com', '11900000005', 'Rua E, 105', '1989-03-10'),
-('Amanda Dias', 'amanda6@gmail.com', '11900000006', 'Rua F, 106', '1997-08-09'),
-('Gustavo Ferreira', 'gustavo7@gmail.com', '11900000007', 'Rua G, 107', '1993-12-12'),
-('Carla Mendes', 'carla8@gmail.com', '11900000008', 'Rua H, 108', '1991-09-05'),
-('Eduardo Nunes', 'eduardo9@gmail.com', '11900000009', 'Rua I, 109', '1985-07-17'),
-('Beatriz Silva', 'beatriz10@gmail.com', '11900000010', 'Rua J, 110', '1999-01-03'),
-('Rodrigo Pires', 'rodrigo11@gmail.com', '11900000011', 'Rua K, 111', '1994-04-20'),
-('Fernanda Alves', 'fernanda12@gmail.com', '11900000012', 'Rua L, 112', '1986-10-28'),
-('Tiago Lima', 'tiago13@gmail.com', '11900000013', 'Rua M, 113', '1998-06-06'),
-('Camila Borges', 'camila14@gmail.com', '11900000014', 'Rua N, 114', '1993-02-25'),
-('Rafael Costa', 'rafael15@gmail.com', '11900000015', 'Rua O, 115', '1990-07-07'),
-('Priscila Ramos', 'priscila16@gmail.com', '11900000016', 'Rua P, 116', '1991-10-10'),
-('Henrique Oliveira', 'henrique17@gmail.com', '11900000017', 'Rua Q, 117', '1988-03-19'),
-('Isabela Castro', 'isabela18@gmail.com', '11900000018', 'Rua R, 118', '1996-11-01'),
-('Diego Barbosa', 'diego19@gmail.com', '11900000019', 'Rua S, 119', '1992-05-08'),
-('Natália Moreira', 'natalia20@gmail.com', '11900000020', 'Rua T, 120', '1994-12-30');
-
-INSERT INTO servico (nome_servico, descricao, preco, tempo_estimado)
-VALUES 
-('Corte degradê', 'Corte moderno com degradê', 40.00, 35),
-('Sobrancelha', 'Design e limpeza de sobrancelha', 15.00, 10),
-('Hidratação capilar', 'Tratamento hidratante para o cabelo', 60.00, 45),
-('Pé e mão', 'Serviço completo de manicure e pedicure', 35.00, 50),
-('Luzes masculinas', 'Descoloração e coloração parcial', 120.00, 90),
-('Relaxamento capilar', 'Redução de volume', 70.00, 60),
-('Progressiva', 'Alisamento com química', 150.00, 120),
-('Corte infantil', 'Corte para crianças', 25.00, 25),
-('Pintura cabelo', 'Coloração completa', 90.00, 80),
-('Barba desenhada', 'Barba modelada com detalhes', 30.00, 20),
-('Tratamento antiqueda', 'Tratamento capilar especial', 65.00, 40),
-('Raspar cabeça', 'Corte zero com navalha', 20.00, 15),
-('Escova', 'Escova modeladora', 50.00, 30),
-('Platinado', 'Descoloração total', 130.00, 100),
-('Corte freestyle', 'Corte com desenhos e riscos', 55.00, 40),
-('Alisamento masculino', 'Alisamento com escova progressiva', 85.00, 60),
-('Barba + Hidratação', 'Combo especial', 60.00, 45),
-('Desenho na sobrancelha', 'Detalhe com navalha', 10.00, 5),
-('Tratamento couro cabeludo', 'Limpeza profunda', 75.00, 60),
-('Corte executivo', 'Estilo formal e clássico', 45.00, 35);
-
-INSERT INTO agendamento (data_agendamento, status, barbeiro_id_barbeiro, cliente_id_cliente)
-VALUES 
-('2025-04-26 09:00:00', 'pendente', 1, 3),
-('2025-04-26 10:00:00', 'confirmado', 2, 4),
-('2025-04-26 11:00:00', 'cancelado', 1, 5),
-('2025-04-26 13:00:00', 'pendente', 2, 6),
-('2025-04-26 14:00:00', 'confirmado', 1, 7),
-('2025-04-27 09:00:00', 'confirmado', 2, 8),
-('2025-04-27 10:00:00', 'pendente', 1, 9),
-('2025-04-27 11:00:00', 'cancelado', 2, 10),
-('2025-04-27 13:00:00', 'confirmado', 1, 11),
-('2025-04-27 14:00:00', 'pendente', 2, 12),
-('2025-04-28 09:00:00', 'pendente', 1, 13),
-('2025-04-28 10:00:00', 'confirmado', 2, 14),
-('2025-04-28 11:00:00', 'cancelado', 1, 15),
-('2025-04-28 13:00:00', 'confirmado', 2, 16),
-('2025-04-28 14:00:00', 'pendente', 1, 17),
-('2025-04-29 09:00:00', 'confirmado', 2, 18),
-('2025-04-29 10:00:00', 'cancelado', 1, 19),
-('2025-04-29 11:00:00', 'pendente', 2, 20),
-('2025-04-29 13:00:00', 'confirmado', 1, 3),
-('2025-04-29 14:00:00', 'pendente', 2, 4);
-
-INSERT INTO avaliacao (estrela, comentario, barbeiro_id_barbeiro, servico_id_servico)
-VALUES 
-(5, 'Ótimo atendimento e corte impecável.', 1, 1),
-(4, 'Gostei do corte, mas poderia ser mais rápido.', 2, 2),
-(5, 'Excelente serviço de barba.', 1, 10),
-(3, 'Corte bom, ambiente barulhento.', 2, 3),
-(4, 'Profissional atencioso.', 1, 4),
-(5, 'Serviço top! Voltarei com certeza.', 2, 5),
-(2, 'Não gostei do corte.', 1, 6),
-(4, 'Hidratação boa, mas atrasou.', 2, 7),
-(5, 'Tudo perfeito!', 1, 8),
-(4, 'Sobrancelha ficou show.', 2, 18);
 
 INSERT INTO barbeiro (nome, email, telefone, cpf, data_nascimento, data_admissao)
 VALUES
 ('André Barbosa', 'andre.barbosa@barbearia.com', '11988887777', '12345678901', '1985-04-15', '2020-01-10'),
 ('Rogério Lima', 'rogerio.lima@barbearia.com', '11977776666', '23456789012', '1990-09-22', '2021-03-12'),
 ('Felipe Castro', 'felipe.castro@barbearia.com', '11966665555', '34567890123', '1987-12-01', '2019-07-08');
-
+INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento)
+VALUES
+('João Mendes', 'joao.mendes@gmail.com', '11950000001', 'Rua Alfa, 10', '1993-01-15'),
+('Luana Ribeiro', 'luana.ribeiro@gmail.com', '11950000002', 'Rua Beta, 22', '1995-06-30'),
+('Carlos Silva', 'carlos.silva@gmail.com', '11950000003', 'Rua Gama, 35', '1988-10-05');
+INSERT INTO servico (nome_servico, descricao, preco, tempo_estimado)
+VALUES
+('Corte social', 'Corte clássico e elegante', 35.00, 30),
+('Barba completa', 'Aparar, desenhar e hidratar a barba', 25.00, 20),
+('Massagem capilar', 'Relaxamento com óleo essencial', 45.00, 25);
+INSERT INTO agendamento (data_agendamento, status, barbeiro_id_barbeiro, cliente_id_cliente)
+VALUES
+('2025-05-10 09:00:00', 'confirmado', 1, 1),
+('2025-05-10 10:00:00', 'pendente', 2, 2),
+('2025-05-10 11:00:00', 'confirmado', 3, 3);
+INSERT INTO avaliacao (estrela, comentario, barbeiro_id_barbeiro, servico_id_servico)
+VALUES
+(5, 'Excelente corte e atendimento!', 1, 1),
+(4, 'Barba ficou ótima, voltarei!', 2, 2),
+(3, 'Massagem relaxante, mas podia durar mais.', 3, 3);
+INSERT INTO agendamento_has_servico (agendamento_id_agendamento, servico_id_servico)
+VALUES
+(1, 1),  -- Corte social no agendamento 1
+(2, 2),  -- Barba completa no agendamento 2
+(3, 3);  -- Massagem capilar no agendamento 3
