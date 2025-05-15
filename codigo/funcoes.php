@@ -1,6 +1,6 @@
 <?php
 //-----------------------------------------------------------------------------------------------------------------------------------------Kaio:
-function salvarbarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao)
+function salvarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao)
 {
     $sql = "INSERT INTO barbeiro (nome, email, telefone, $cpf, data_nascimento, data_admissao) VALUES (?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
@@ -13,7 +13,7 @@ function salvarbarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimen
     return $funcionou;
 }
 
-function editarbarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $id)
+function editarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $id)
 {
     $sql = "UPDATE barbeiro SET nome=?, $email=?, telefone=?, $cpf, data_nascimento=?, data_admissao=? WHERE id_barbeiro=?";
     $comando = mysqli_prepare($conexao, $sql);
@@ -24,7 +24,7 @@ function editarbarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimen
     mysqli_stmt_close($comando);
     return $funcionou;
 }
-function deletarbarbeito($conexao, $id_barbeiro)
+function deletarBarbeito($conexao, $id_barbeiro)
 {
     $sql = "DELETE FROM barbeiro WHERE id_barbeiro = ?";
     $comando = mysqli_prepare($conexao, $sql);
@@ -36,7 +36,7 @@ function deletarbarbeito($conexao, $id_barbeiro)
 
     return $funcionou;
 }
-function salvaragendamento($conexao, $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente)
+function salvarAgendamento($conexao, $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente)
 {
     $sql = "INSERT INTO agendamento (data_agendamento, status, barbeiro_id_barbeiro, cliente_id_cliente) VALUES (?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
@@ -48,7 +48,7 @@ function salvaragendamento($conexao, $data_agendamento, $status, $barbeiro_id_ba
 
     return $funcionou;
 }
-function editaragendamento($conexao, $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente, $id_agendamento)
+function editarAgendamento($conexao, $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente, $id_agendamento)
 {
     $sql = "UPDATE agendamento SET data_agendamento=?, status=?, barbeiro_id_barbeiro=?, cliente_id_cliente=? WHERE id_agendamento=?";
     $comando = mysqli_prepare($conexao, $sql);
@@ -59,7 +59,7 @@ function editaragendamento($conexao, $data_agendamento, $status, $barbeiro_id_ba
     mysqli_stmt_close($comando);
     return $funcionou;
 }
-function deletaragendamento($conexao, $id_agendamento, $barbeiro_id_barbeiro, $cliente_id_cliente)
+function deletarAgendamento($conexao, $id_agendamento, $barbeiro_id_barbeiro, $cliente_id_cliente)
 {
     $sql = "DELETE FROM agendamento WHERE id_agendamento = ? AND barbeiro_id_barbeiro = ? AND cliente_id_cliente = ?";
     $comando = mysqli_prepare($conexao, $sql);
@@ -241,7 +241,7 @@ function listaServico($conexao)
     $lista_servico = [];
     while ($servico = mysqli_fetch_assoc($resultados)) {
         $lista_servico[] = $servico;
-    }
+    }codigo
     mysqli_stmt_close($comando);
 
     return $lista_servico;
