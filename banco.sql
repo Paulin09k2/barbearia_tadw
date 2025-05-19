@@ -42,17 +42,20 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `barbearia`.`cliente`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `barbearia`.`cliente` (
-  `id_cliente` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_cliente` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `telefone` VARCHAR(15) NOT NULL,
-  `endereco` VARCHAR(255) NULL DEFAULT NULL,
-  `data_nascimento` DATE NULL DEFAULT NULL,
+  `endereco` VARCHAR(255) DEFAULT NULL,
+  `data_nascimento` DATE DEFAULT NULL,
+  `senha` VARCHAR(255) NOT NULL, -- Campo para senha criptografada
   `data_cadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id_cliente`),
-  UNIQUE INDEX `email` (`email` ASC) VISIBLE)
+  UNIQUE INDEX `email` (`email` ASC)
+)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
+
 
 
 -- -----------------------------------------------------
