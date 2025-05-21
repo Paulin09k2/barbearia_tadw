@@ -1,0 +1,50 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  background-image: url('background.jpg'); /* use a imagem do fundo */
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+}
+
+.container {
+  text-align: center;
+  padding: 50px;
+}
+
+.logo {
+  width: 150px;
+  margin-bottom: 30px;
+}
+
+.menu button, .page button {
+  display: block;
+  margin: 10px auto;
+  padding: 10px 20px;
+  background-color: #0b2d4a;
+  border: 2px solid #e2b100;
+  border-radius: 12px;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.menu button:hover, .page button:hover {
+  background-color: #154162;
+}
+
+input {
+  display: block;
+  margin: 10px auto;
+  padding: 10px;
+  width: 80%;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+}
+
+.hidden {
+  display: none;
+}

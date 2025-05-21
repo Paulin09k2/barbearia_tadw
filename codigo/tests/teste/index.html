@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Barbearia Elite</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: url('barber-pole-bg.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .logo {
+      background-color: black;
+      padding: 20px;
+      border-radius: 20px;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .logo h1 {
+      font-size: 28px;
+      margin: 0;
+      color: white;
+    }
+    .btn {
+      background-color: #0a2342;
+      border: 3px solid gold;
+      color: gold;
+      padding: 10px 30px;
+      margin: 10px;
+      border-radius: 20px;
+      font-size: 16px;
+      cursor: pointer;
+      width: 200px;
+    }
+    .btn:hover {
+      background-color: #163d5c;
+    }
+    .form-input {
+      background-color: #0a2342;
+      color: gold;
+      border: none;
+      border-radius: 20px;
+      padding: 10px;
+      margin: 10px;
+      width: 250px;
+      text-align: center;
+    }
+    .hidden {
+      display: none;
+    }
+    .title {
+      font-size: 32px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      color: gold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="home">
+    <div class="logo">
+      <h1>Barbearia ELITE</h1>
+    </div>
+    <button class="btn" onclick="showPage('login')">Entrar</button>
+    <button class="btn" onclick="showPage('cadastro')">Cadastrar</button>
+    <button class="btn" onclick="showPage('barbeiro')">Barbeiro</button>
+  </div>
+
+  <div class="container hidden" id="login">
+    <h2 class="title">Login</h2>
+    <input type="text" class="form-input" placeholder="Email ou telefone">
+    <input type="password" class="form-input" placeholder="Senha">
+    <button class="btn">Entrar</button>
+    <button class="btn" onclick="showPage('home')">Voltar</button>
+  </div>
+
+  <div class="container hidden" id="cadastro">
+    <h2 class="title">Cadastro</h2>
+    <input type="text" class="form-input" placeholder="Endereço">
+    <input type="text" class="form-input" placeholder="Nome Completo">
+    <input type="password" class="form-input" placeholder="Senha">
+    <input type="date" class="form-input">
+    <input type="email" class="form-input" placeholder="Email">
+    <input type="tel" class="form-input" placeholder="Telefone">
+    <button class="btn">Cadastrar</button>
+    <button class="btn" onclick="showPage('home')">Voltar</button>
+  </div>
+
+  <div class="container hidden" id="barbeiro">
+    <h2 class="title">Menu do Barbeiro</h2>
+    <button class="btn">Avaliação</button>
+    <button class="btn">Agendamento</button>
+    <button class="btn">Histórico</button>
+    <button class="btn" onclick="showPage('home')">Voltar</button>
+  </div>
+
+  <script>
+    function showPage(id) {
+      document.querySelectorAll('.container').forEach(el => el.classList.add('hidden'));
+      document.getElementById(id).classList.remove('hidden');
+    }
+  </script>
+</body>
+</html>
+
