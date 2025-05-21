@@ -241,8 +241,11 @@ function listaServico($conexao)
     $lista_servico = [];
     while ($servico = mysqli_fetch_assoc($resultados)) {
         $lista_servico[] = $servico;
-    }codigo
-    //mysqli_stmt_close($comando);
+    }
 
-    //return $lista_servico;
+    mysqli_stmt_close($comando);
+    return $lista_servico;
 }
+
+
+?>

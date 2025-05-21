@@ -181,3 +181,12 @@ VALUES
 (1, 1),  -- Corte social no agendamento 1
 (2, 2),  -- Barba completa no agendamento 2
 (3, 3);  -- Massagem capilar no agendamento 3
+
+$sql = "INSERT INTO barbeiro (nome, email, telefone, $cpf, data_nascimento, data_admissao) VALUES (?, ?, ?)";
+$sql = "INSERT INTO barbeiro (nome, email, telefone, cpf, data_nascimento, data_admissao) VALUES (?, ?, ?, ?, ?, ?)";
+
+INSERT INTO barbeiro (nome, email, telefone, cpf, data_nascimento, data_admissao)
+VALUES
+('André Barbosa', 'andre.barbosa@barbearia.com', '11988887777', '12345678901', '1985-04-15', '2020-01-10'),
+('Rogério Lima', 'rogerio.lima@barbearia.com', '11977776666', '23456789012', '1990-09-22', '2021-03-12'),
+('Felipe Castro', 'felipe.castro@barbearia.com', '11966665555', '34567890123', '1987-12-01', '2019-07-08');
