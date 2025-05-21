@@ -1,121 +1,189 @@
-<?php
-// Este arquivo combina HTML, CSS e PHP
-session_start();
-?>
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Barbearia Elite</title>
+  <title>Histórico - Barbearia</title>
   <style>
-    body {
+    * {
       margin: 0;
       padding: 0;
-      font-family: Arial, sans-serif;
-      background: url('barber-pole-bg.jpg') no-repeat center center fixed;
-      background-size: cover;
-      color: white;
+      box-sizing: border-box;
     }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #1e1e1e;
+      color: #f0f0f0;
+    }
+
     .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 30px;
+      background: #2c2c2c;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
     }
-    .logo {
-      background-color: black;
-      padding: 20px;
-      border-radius: 20px;
+
+    h1, h2 {
       text-align: center;
+      margin-bottom: 20px;
+      color: #ffcc00;
+    }
+
+    .form-section, .table-section {
       margin-bottom: 40px;
     }
-    .logo h1 {
-      font-size: 28px;
-      margin: 0;
-      color: white;
+
+    .section-title {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      border-bottom: 2px solid #ffcc00;
+      display: inline-block;
+      padding-bottom: 6px;
     }
-    .btn {
-      background-color: #0a2342;
-      border: 3px solid gold;
-      color: gold;
-      padding: 10px 30px;
-      margin: 10px;
-      border-radius: 20px;
-      font-size: 16px;
-      cursor: pointer;
-      width: 200px;
-    }
-    .btn:hover {
-      background-color: #163d5c;
-    }
-    .form-input {
-      background-color: #0a2342;
-      color: gold;
+
+    form input,
+    form textarea,
+    form select,
+    form button {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      margin: 10px 0;
       border: none;
-      border-radius: 20px;
-      padding: 10px;
-      margin: 10px;
-      width: 250px;
-      text-align: center;
+      border-radius: 6px;
+      font-size: 1rem;
     }
-    .hidden {
-      display: none;
+
+    form input,
+    form textarea,
+    form select {
+      background-color: #444;
+      color: #f0f0f0;
     }
-    .title {
-      font-size: 32px;
+
+    form input::placeholder,
+    form textarea::placeholder {
+      color: #aaa;
+    }
+
+    form button {
+      background-color: #ffcc00;
+      color: #000;
       font-weight: bold;
-      margin-bottom: 20px;
-      color: gold;
+      transition: background-color 0.3s ease;
+    }
+
+    form button:hover {
+      background-color: #e6b800;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    th, td {
+      padding: 14px;
+      border: 1px solid #444;
+      text-align: left;
+    }
+
+    th {
+      background-color: #3a3a3a;
+      color: #ffcc00;
+    }
+
+    td {
+      background-color: #2e2e2e;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 20px;
+      }
+
+      form input,
+      form textarea,
+      form select,
+      form button {
+        font-size: 0.95rem;
+      }
     }
   </style>
 </head>
 <body>
   <div class="container">
-    <div class="logo">
-      <h1>Barbearia ELITE</h1>
+    <h1>Histórico</h1>
+
+    <div class="form-section">
+      <h2 class="section-title">Entrar</h2>
+      <form>
+        <input type="text" placeholder="Email ou telefone">
+        <input type="password" placeholder="Senha">
+        <button type="submit">Entrar</button>
+      </form>
     </div>
-    <?php if (!isset($_POST['action'])): ?>
-      <form method="post">
-        <button class="btn" name="action" value="login">Entrar</button>
-        <button class="btn" name="action" value="cadastro">Cadastrar</button>
-        <button class="btn" name="action" value="barbeiro">Barbeiro</button>
+
+    <div class="form-section">
+      <h2 class="section-title">Cadastrar</h2>
+      <form>
+        <input type="text" placeholder="Nome Completo">
+        <input type="text" placeholder="Endereço">
+        <input type="email" placeholder="Email">
+        <input type="tel" placeholder="Telefone">
+        <input type="date" placeholder="Data de nascimento">
+        <input type="text" placeholder="CPF">
+        <input type="password" placeholder="Senha">
+        <button type="submit">Cadastrar</button>
       </form>
-    <?php elseif ($_POST['action'] == 'login'): ?>
-      <h2 class="title">Login</h2>
-      <form method="post">
-        <input type="text" name="usuario" class="form-input" placeholder="Email ou telefone">
-        <input type="password" name="senha" class="form-input" placeholder="Senha">
-        <button class="btn">Entrar</button>
-        <button class="btn" type="submit" name="action" value="home">Voltar</button>
+    </div>
+
+    <div class="table-section">
+      <h2 class="section-title">Avaliação / Agendamento / Histórico</h2>
+      <form>
+        <select>
+          <option>Selecione o serviço</option>
+          <option>Corte</option>
+          <option>Barba</option>
+          <option>Corte e Barba</option>
+        </select>
+        <textarea rows="4" placeholder="Fale de nosso barbeiro ou serviço"></textarea>
+        <button type="submit">Enviar</button>
       </form>
-    <?php elseif ($_POST['action'] == 'cadastro'): ?>
-      <h2 class="title">Cadastro</h2>
-      <form method="post">
-        <input type="text" name="endereco" class="form-input" placeholder="Endereço">
-        <input type="text" name="nome" class="form-input" placeholder="Nome Completo">
-        <input type="password" name="senha" class="form-input" placeholder="Senha">
-        <input type="date" name="nascimento" class="form-input">
-        <input type="email" name="email" class="form-input" placeholder="Email">
-        <input type="tel" name="telefone" class="form-input" placeholder="Telefone">
-        <button class="btn">Cadastrar</button>
-        <button class="btn" type="submit" name="action" value="home">Voltar</button>
-      </form>
-    <?php elseif ($_POST['action'] == 'barbeiro'): ?>
-      <h2 class="title">Menu do Barbeiro</h2>
-      <form method="post">
-        <button class="btn" name="action" value="avaliacao">Avaliação</button>
-        <button class="btn" name="action" value="agendamento">Agendamento</button>
-        <button class="btn" name="action" value="historico">Histórico</button>
-        <button class="btn" type="submit" name="action" value="home">Voltar</button>
-      </form>
-    <?php else: ?>
-      <p>Ação desconhecida.</p>
-      <form method="post">
-        <button class="btn" type="submit" name="action" value="home">Voltar</button>
-      </form>
-    <?php endif; ?>
+      <table>
+        <thead>
+          <tr><th>Barbeiro</th><th>Serviço</th><th>Data e Hora</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Julio</td><td>Militar</td><td>04/04/24 - 16:00</td></tr>
+          <tr><td>Marcos</td><td>Wolfcut</td><td>09/05/24 - 11:00</td></tr>
+          <tr><td>Julio</td><td>Norman</td><td>23/09/24 - 19:00</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="table-section">
+      <h2 class="section-title">Serviços</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Serviço</th>
+            <th>Horário</th>
+            <th>Valor</th>
+            <th>Descrição</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Cortes</td><td>20 a 30 min</td><td>R$30,00</td><td>Todos os cortes com esse valor</td></tr>
+          <tr><td>Cortes e Barba</td><td>30 a 40 min</td><td>R$50,00</td><td>Hidratação e barba firme</td></tr>
+          <tr><td>Barba</td><td>5 a 10 min</td><td>R$20,00</td><td>Escolha do cliente</td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </body>
 </html>
