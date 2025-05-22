@@ -35,7 +35,6 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`barbeiro` (
   UNIQUE INDEX `email` (`email` ASC) VISIBLE,
   UNIQUE INDEX `cpf` (`cpf` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -43,18 +42,20 @@ DEFAULT CHARACTER SET = utf8mb4;
 -- Table `barbearia`.`cliente`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `barbearia`.`cliente` (
-  `id_cliente` INT(11) NOT NULL AUTO_INCREMENT,
+  `id_cliente` INT NOT NULL AUTO_INCREMENT,
   `nome` VARCHAR(100) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `telefone` VARCHAR(15) NOT NULL,
-  `endereco` VARCHAR(255) NULL DEFAULT NULL,
-  `data_nascimento` DATE NULL DEFAULT NULL,
+  `endereco` VARCHAR(255) DEFAULT NULL,
+  `data_nascimento` DATE DEFAULT NULL,
+  `senha` VARCHAR(255) NOT NULL, -- Campo para senha criptografada
   `data_cadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP(),
   PRIMARY KEY (`id_cliente`),
-  UNIQUE INDEX `email` (`email` ASC) VISIBLE)
+  UNIQUE INDEX `email` (`email` ASC)
+)
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4;
+
 
 
 -- -----------------------------------------------------
@@ -72,15 +73,14 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`agendamento` (
   CONSTRAINT `fk_agendamento_barbeiro1`
     FOREIGN KEY (`barbeiro_id_barbeiro`)
     REFERENCES `barbearia`.`barbeiro` (`id_barbeiro`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_agendamento_cliente1`
     FOREIGN KEY (`cliente_id_cliente`)
     REFERENCES `barbearia`.`cliente` (`id_cliente`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 3
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -95,7 +95,6 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`servico` (
   `tempo_estimado` INT(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id_servico`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4;
 
 
@@ -114,13 +113,13 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`avaliacao` (
   CONSTRAINT `fk_avaliacao_barbeiro1`
     FOREIGN KEY (`barbeiro_id_barbeiro`)
     REFERENCES `barbearia`.`barbeiro` (`id_barbeiro`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_avaliacao_servico1`
     FOREIGN KEY (`servico_id_servico`)
     REFERENCES `barbearia`.`servico` (`id_servico`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -136,13 +135,13 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`agendamento_has_servico` (
   CONSTRAINT `fk_agendamento_has_servico_agendamento1`
     FOREIGN KEY (`agendamento_id_agendamento`)
     REFERENCES `barbearia`.`agendamento` (`id_agendamento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_agendamento_has_servico_servico1`
     FOREIGN KEY (`servico_id_servico`)
     REFERENCES `barbearia`.`servico` (`id_servico`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -150,40 +149,40 @@ DEFAULT CHARACTER SET = utf8mb4;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
--- Inserindo barbeiros
-INSERT INTO barbeiro (nome, email, telefone, cpf, data_nascimento, data_admissao)
-VALUES 
-('João Silva', 'joao@barbearia.com', '11999999999', '12345678901', '1990-01-10', '2023-05-01'),
-('Carlos Mendes', 'carlos@barbearia.com', '11988888888', '23456789012', '1988-07-15', '2022-03-10');
 
--- Inserindo clientes
+
+
 INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento)
-VALUES 
-('Pedro Lima', 'pedro@gmail.com', '11977777777', 'Rua das Flores, 123', '1995-03-20'),
-('Ana Souza', 'ana@gmail.com', '11966666666', 'Avenida Brasil, 456', '2000-09-30');
-
--- Inserindo serviços
+VALUES
+('João Mendes', 'joao.mendes@gmail.com', '11950000001', 'Rua Alfa, 10', '1993-01-15'),
+('Luana Ribeiro', 'luana.ribeiro@gmail.com', '11950000002', 'Rua Beta, 22', '1995-06-30'),
+('Carlos Silva', 'carlos.silva@gmail.com', '11950000003', 'Rua Gama, 35', '1988-10-05');
 INSERT INTO servico (nome_servico, descricao, preco, tempo_estimado)
-VALUES 
-('Corte Masculino', 'Corte de cabelo tradicional', 30.00, 30),
-('Barba', 'Design de barba com navalha', 25.00, 20),
-('Corte + Barba', 'Combo de corte e barba', 50.00, 50);
-
--- Inserindo agendamentos
+VALUES
+('Corte social', 'Corte clássico e elegante', 35.00, 30),
+('Barba completa', 'Aparar, desenhar e hidratar a barba', 25.00, 20),
+('Massagem capilar', 'Relaxamento com óleo essencial', 45.00, 25);
 INSERT INTO agendamento (data_agendamento, status, barbeiro_id_barbeiro, cliente_id_cliente)
-VALUES 
-('2025-04-25 10:00:00', 'confirmado', 1, 1),
-('2025-04-25 11:00:00', 'pendente', 2, 2);
-
--- Inserindo avaliações
+VALUES
+('2025-05-10 09:00:00', 'confirmado', 1, 1),
+('2025-05-10 10:00:00', 'pendente', 2, 2),
+('2025-05-10 11:00:00', 'confirmado', 3, 3);
 INSERT INTO avaliacao (estrela, comentario, barbeiro_id_barbeiro, servico_id_servico)
-VALUES 
-(5, 'Excelente corte!', 1, 1),
-(4, 'Bom atendimento, mas atrasou um pouco.', 2, 2);
-
--- Inserindo serviços agendados
+VALUES
+(5, 'Excelente corte e atendimento!', 1, 1),
+(4, 'Barba ficou ótima, voltarei!', 2, 2),
+(3, 'Massagem relaxante, mas podia durar mais.', 3, 3);
 INSERT INTO agendamento_has_servico (agendamento_id_agendamento, servico_id_servico)
-VALUES 
-(1, 1),
-(1, 2),
-(2, 3);
+VALUES
+(1, 1),  -- Corte social no agendamento 1
+(2, 2),  -- Barba completa no agendamento 2
+(3, 3);  -- Massagem capilar no agendamento 3
+
+$sql = "INSERT INTO barbeiro (nome, email, telefone, $cpf, data_nascimento, data_admissao) VALUES (?, ?, ?)";
+$sql = "INSERT INTO barbeiro (nome, email, telefone, cpf, data_nascimento, data_admissao) VALUES (?, ?, ?, ?, ?, ?)";
+
+INSERT INTO barbeiro (nome, email, telefone, cpf, data_nascimento, data_admissao)
+VALUES
+('André Barbosa', 'andre.barbosa@barbearia.com', '11988887777', '12345678901', '1985-04-15', '2020-01-10'),
+('Rogério Lima', 'rogerio.lima@barbearia.com', '11977776666', '23456789012', '1990-09-22', '2021-03-12'),
+('Felipe Castro', 'felipe.castro@barbearia.com', '11966665555', '34567890123', '1987-12-01', '2019-07-08');
