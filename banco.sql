@@ -150,6 +150,16 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`avaliacao` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
+INSERT INTO `barbearia`.`barbeiro` 
+(`nome`, `email`, `telefone`, `cpf`, `data_nascimento`, `data_admissao`, `senha_barbeiro`)
+VALUES 
+('João Silva', 'joao.silva@barbearia.com', '11999990000', '12345678901', '1990-05-10', '2023-01-15', 'senha123');
+
+INSERT INTO `barbearia`.`barbeiro` 
+(`nome`, `email`, `telefone`, `cpf`, `data_nascimento`, `data_admissao`, `senha_barbeiro`)
+VALUES 
+('Carlos Souza', 'carlos.souza@barbearia.com', '11988887777', '98765432100', '1985-08-20', '2022-10-05', 'segredo456');
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
