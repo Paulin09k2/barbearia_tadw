@@ -2,7 +2,7 @@
 //-----------------------------------------------------------------------------------------------------------------------------------------Kaio:
 function salvarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao)
 {
-    $sql = "INSERT INTO barbeiro (nome, email, telefone, $cpf, data_nascimento, data_admissao) VALUES (?, ?, ?)";
+    $sql = "INSERT INTO barbeiro (nome, email, telefone, cpf, data_nascimento, data_admissao) VALUES (?, ?, ?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 'ssssss', $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao);
