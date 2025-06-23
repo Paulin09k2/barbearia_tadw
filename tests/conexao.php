@@ -1,11 +1,7 @@
 <?php
+$servidor = 'localhost';
+$usuario = 'root';
+$password = '123';
+$banco = 'banco';
 
-$host = 'db';        
-$usuario = 'root';           
-$senha = '123';               
-$banco = 'banco';    
-
-
-$conexao = new mysqli($host, $usuario, $senha, $banco);
-
-
+$conexao = mysqli_connect($servidor, $usuario, $password, $banco);
