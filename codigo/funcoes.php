@@ -146,9 +146,9 @@ function salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro,
 
 function editarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico, $id)
 {
-    $sql = "UPDATE cliente SET nome=?, email=?, telefone=?, endereco=?, data_nascimento=?, data_cadastro=? WHERE idcliente=?";
+    $sql = "UPDATE avaliacao SET estrela=?, comentario=?, barbeiro_id_barbeiro=?, servico_id_servico=? WHERE id_avaliacao=?";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'sssi', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $id);
+    mysqli_stmt_bind_param($comando, 'isiii', $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico, $id);
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     return $funcionou;
