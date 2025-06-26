@@ -1,13 +1,14 @@
 <?php
     require_once "conexao.php";
-    require_once "../funcoes.php";
+    require_once "funcoes.php";
 
     $nome = "Kaio";
-    $email = "p@gmail.com";
-    $telefone = "45545"; // Exemplo de telefone correto
+    $email = "gcfdw@gmail.com";
+    $telefone = "45545"; 
     $cpf = "321.456.235-11";
     $data_nascimento = "2000-01-01";
     $data_admissao = "2000-01-02";
+    $senha_barbeiro = "123456";
 
     $resultado = salvarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao);
 
