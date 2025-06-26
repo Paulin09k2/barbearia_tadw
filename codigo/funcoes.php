@@ -249,5 +249,4 @@ function listaServico($conexao)
     return $lista_servico;
 }
 
-
 ?>
