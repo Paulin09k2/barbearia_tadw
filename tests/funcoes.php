@@ -181,40 +181,40 @@ function listarAvaliacao($conexao)
 
 
 
-function listarBarbeiro($conexao)
-{
-    $sql = "SELECT * FROM tb_servico";
+function listarBarbeiro($conexao) {
+    $sql = "SELECT * FROM barbeiro";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_execute($comando);
     $resultados = mysqli_stmt_get_result($comando);
 
-    $lista_servico = [];
-    while ($servico = mysqli_fetch_assoc($resultados)) {
-        $lista_servico[] = $servico;
+    $lista_Barbeiro = [];
+    while ($barbeiro = mysqli_fetch_assoc($resultados)) {
+        $lista_Barbeiro[] = $barbeiro;
     }
     mysqli_stmt_close($comando);
 
-    return $lista_servico;
+    return $lista_Barbeiro;
 }
 
 function salvarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estimado)
 {
-    $sql = "INSERT INTO cliente (nome_servico, descricao, preco, tempo_estimado) VALUES (?, ?, ?, ?)";
+    $sql = "INSERT INTO servico (nome_servico, descricao, preco, tempo_estimado) VALUES (?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_bind_param($comando, 'issdi', $nome_servico, $descricao, $preco, $tempo_estimado);
+    mysqli_stmt_bind_param($comando, 'ssss', $nome_servico, $descricao, $preco, $tempo_estimado);
 
     mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
 }
+
 
 function editarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estimado)
 {
     $sql = "UPDATE cliente SET nome_servico=?, descricao=?, preco=?, tempo_estimado=? WHERE idservico=?";
     $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_bind_param($comando, 'issdi', $nome_servico, $descricao, $preco, $tempo_estimado);
+    mysqli_stmt_bind_param($comando, 'ssss', $nome_servico, $descricao, $preco, $tempo_estimado);
     $funcionou = mysqli_stmt_execute($comando);
 
     mysqli_stmt_close($comando);
