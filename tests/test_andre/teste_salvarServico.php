@@ -4,8 +4,8 @@
 
     $nome_servico = "corte";
     $descricao = "maquina e tesoura";
-    $preco = "30reais";
-    $tempo_estimado = "30minutos";
+    $preco = "30.00";
+    $tempo_estimado = "30";
 
     salvarServico($conexao,$nome_servico, $descricao, $preco, $tempo_estimado);
 ?>
