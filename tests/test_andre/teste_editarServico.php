@@ -2,13 +2,12 @@
 require_once "../conexao.php";
 require_once "../funcoes.php";
 
-$nome ="Fulano";
-$email = "fulano@gmail.com";
-$telefone = "123456789";
-$endeeco = "ifGoiano";
-$data_nascimento = "15/2/97";
-$data_cadastro = "20/05/25";
-$senha_cliente = "1234";
+$id_servico = 1; 
+$nome_servico = "Corte de Cabelo";  
+$decriçao_servico = "Corte de cabelo masculino com máquina e tesoura";
+$preco = "50.00";
 
-editarCliente($conexao,$nome, $email,$telefone, $endeeco,$data_nascimento, $data_cadastro, $senha_cliente);
+
+editarServico($conexao, $nome_servico, $id_servico , $decriçao_servico, $preco, );
+
 ?>
