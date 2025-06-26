@@ -2,7 +2,7 @@
 require_once "conexao.php";
 require_once "funcoes.php";
 
-$nome = "laio";
+$nome = "aio";
 $email = "io@gmail.com";
 $telefone = "45545"; 
 $cpf = "32145623891";
