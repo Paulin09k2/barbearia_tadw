@@ -1,6 +1,6 @@
 <?php
 //-----------------------------------------------------------------------------------------------------------------------------------------Kaio:
-function salvarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $senha_barbeiro = null)
+function salvarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $senha_barbeiro )
 {
     $sql = "INSERT INTO barbeiro (nome, email, telefone, cpf, data_nascimento, data_admissao, senha_barbeiro) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
@@ -72,12 +72,12 @@ function deletarAgendamento($conexao, $id_agendamento, $barbeiro_id_barbeiro, $c
 }
 //-----------int = 1 -- decimal = d -- varchar = s -- date = s --text = s----------------------------------------------------------------------------------------------------Paulo Ricardo:
 
-function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro)
+function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente )
 {
-    $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro) VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro, senha_cliente) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
 
-    mysqli_stmt_bind_param($comando, 'ssssss', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro);
+    mysqli_stmt_bind_param($comando, 'sssssss', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente);
 
     mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
@@ -135,7 +135,7 @@ function salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro,
     $sql = "INSERT INTO avaliacao (estrela, comentario, barbeiro_id_barbeiro, servico_id_servico) VALUES (?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
 
-    // 'i' para inteiro, 's' para string
+
     mysqli_stmt_bind_param($comando, 'isii', $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico);
 
     $funcionou = mysqli_stmt_execute($comando);
@@ -157,7 +157,7 @@ function deletarAvaliacao($conexao, $idavaliacao)
 {
     $sql = "DELETE FROM cliente WHERE idcliente = ?";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'i', $id_cliente);
+    mysqli_stmt_bind_param($comando, 'i', $idavaliacao);
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     return $funcionou;
