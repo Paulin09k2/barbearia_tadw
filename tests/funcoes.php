@@ -224,9 +224,11 @@ function editarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estim
 function deletarServico($conexao, $id_servico)
 {
     $sql = "DELETE FROM cliente WHERE idcliente = ?";
+    $sql = "DELETE FROM servico WHERE id_servico = ?";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 'i', $id_servico);
+    mysqli_stmt_bind_param($comando, 'i', $servico_id_servico);
 
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
@@ -237,6 +239,7 @@ function deletarServico($conexao, $id_servico)
 function listaServico($conexao)
 {
     $sql = "SELECT * FROM tb_servico";
+    $sql = "SELECT * FROM servico";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_execute($comando);
