@@ -10,5 +10,5 @@ $data_nascimento = "15/2/97";
 $data_cadastro = "20/05/25";
 $senha_cliente = "1234";
 
-editarCliente($nome, $email,$telefone, $endeeco,$data_nascimento, $data_cadastro, $senha_cliente);
+editarCliente($conexao,$nome, $email,$telefone, $endeeco,$data_nascimento, $data_cadastro, $senha_cliente);
 ?>

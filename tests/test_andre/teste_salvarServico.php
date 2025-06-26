@@ -7,5 +7,5 @@
     $preco = "30reais";
     $tempo_estimado = "30minutos";
 
-    salvarServico($nome_servico, $descricao, $preco, $tempo_estimado);
+    salvarServico($conexao,$nome_servico, $descricao, $preco, $tempo_estimado);
 ?>
