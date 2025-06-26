@@ -2,10 +2,10 @@
 require_once "conexao.php";
 require_once "funcoes.php";
 
-$nome = "Kaio";
+$nome = "paulo";
 $email = "gcfdw@gmail.com";
 $telefone = "45545"; 
-$cpf = "321.456.235-11";
+$cpf = "32145623511";
 $data_nascimento = "2000-01-01";
 $data_admissao = "2000-01-02";
 $senha = "123456";
