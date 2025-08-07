@@ -81,11 +81,7 @@ function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nasc
 
     mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
-}
 
-
-
-{
     $comando = mysqli_prepare($conexao, $sql);
 
     $funcionou = mysqli_stmt_execute($comando);
