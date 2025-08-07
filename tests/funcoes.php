@@ -82,14 +82,11 @@ function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nasc
     mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
 
-<<<<<<< HEAD
-=======
-
+}
 
 function editarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente, $id_cliente)
 {
     $sql = "UPDATE cliente SET nome=?, email=?, telefone=?, endereco=?, data_nascimento=?, data_cadastro=? senha_cliente=? WHERE id_cliente=?";
->>>>>>> 772b0ab9881498d7e268d6f4e13f27022057cc39
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 'sssssssi', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente, $id_cliente);
