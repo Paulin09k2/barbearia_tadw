@@ -8,8 +8,8 @@ $email = "kaio_atualizado@email.com";
 $telefone = "87988887777";
 $endereco = "Rua Nova, Bairro Central";
 $data_nascimento = "2000-08-15";
-$data_cadastro = "2024-06-26";
-$id = 1; 
+$senha_cliente = "12345kjh";
+$id_cliente = 1; 
 
-editarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $id);
+editarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $senha_cliente, $id_cliente);
 ?>
