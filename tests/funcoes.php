@@ -23,7 +23,7 @@ function editarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimen
     mysqli_stmt_close($comando);
     return $funcionou;
 }
-function deletarBarbeito($conexao, $id_barbeiro)
+function deletarBarbeiro($conexao, $id_barbeiro)
 {
     $sql = "DELETE FROM barbeiro WHERE id_barbeiro = ?";
     $comando = mysqli_prepare($conexao, $sql);
