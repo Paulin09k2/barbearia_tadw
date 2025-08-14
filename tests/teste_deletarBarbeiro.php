@@ -4,7 +4,14 @@ require_once "../funcoes.php";
 
 $id_barbeiro = 5;
 
-$resultado = deletarBarbeiro($conexao, $id_barbeiro);
+if (!$conexao) {
+    die("Erro na conexão com o banco de dados.");
+}
 
-echo $resultado ? "Barbeiro deletado com sucesso!" : "Erro ao deletar barbeiro.";
+if (isset($id_barbeiro) && is_numeric($id_barbeiro)) {
+    $resultado = deletarBarbeiro($conexao, $id_barbeiro);
+    echo $resultado ? "Barbeiro deletado com sucesso!" : "Erro ao deletar barbeiro.";
+} else {
+    echo "ID do barbeiro inválido.";
+}
 ?>
