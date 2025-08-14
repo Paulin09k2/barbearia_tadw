@@ -2,7 +2,7 @@
 require_once "../conexao.php";
 require_once "../funcoes.php";
 
-$id_barbeiro = 1;
+$id_barbeiro = 5;
 
 $resultado = deletarBarbeiro($conexao, $id_barbeiro);
 
