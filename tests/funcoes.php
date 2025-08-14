@@ -12,9 +12,9 @@ function salvarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimen
 
 
 
-function editarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $id)
+function editarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento,  $id)
 {
-    $sql = "UPDATE barbeiro SET nome=?, $email=?, telefone=?, $cpf, data_nascimento=?, data_admissao=? WHERE id_barbeiro=?";
+    $sql = "UPDATE barbeiro SET nome=?, email=?, telefone=?, cpf=?, data_nascimento=? WHERE id_barbeiro=?";
     $comando = mysqli_prepare($conexao, $sql);
 
     mysqli_stmt_bind_param($comando, 'ssssss', $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $id);
