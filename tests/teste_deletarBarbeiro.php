@@ -1,8 +1,8 @@
 <?php
-require_once "../conexao.php";
-require_once "../funcoes.php";
+require_once "./conexao.php";
+require_once "./funcoes.php";
 
-$id_barbeiro = 5;
+$id_barbeiro = 3;
 
 if (!$conexao) {
     die("Erro na conexão com o banco de dados.");
