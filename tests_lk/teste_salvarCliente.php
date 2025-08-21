@@ -1,7 +1,6 @@
 <?php
-require_once "conexao.php";
-require_once "funcoes.php";
-
+require_once "../conexao.php";
+require_once "../funcoes.php";
     $nome = "ulo";
     $endereco = "Rua 1";
     $email = "ipo@gmail.com";
