@@ -124,13 +124,11 @@ function listarCliente($conexao)
 }
 
 
-function salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico)
+function deletarAvaliacao($conexao, $idavaliacao)
 {
-    $sql = "INSERT INTO avaliacao (estrela, comentario, barbeiro_id_barbeiro, servico_id_servico) VALUES (?, ?, ?, ?)";
+    $sql = "DELETE FROM cliente WHERE idcliente = ?";
     $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_bind_param($comando, 'isii', $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico);
-
+    mysqli_stmt_bind_param($comando, 'i', $idavaliacao);
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     return $funcionou;
@@ -144,16 +142,6 @@ function editarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro,
     mysqli_stmt_close($comando);
     return $funcionou;
 }
-function deletarAvaliacao($conexao, $idavaliacao)
-{
-    $sql = "DELETE FROM cliente WHERE idcliente = ?";
-    $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'i', $idavaliacao);
-    $funcionou = mysqli_stmt_execute($comando);
-    mysqli_stmt_close($comando);
-    return $funcionou;
-}
-
 function listarAvaliacao($conexao)
 {
     $sql = "SELECT * FROM avaliacao";
@@ -167,7 +155,17 @@ function listarAvaliacao($conexao)
     mysqli_stmt_close($comando);
     return $lista_avaliacao;
 }
+function salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico)
+{
+    $sql = "INSERT INTO avaliacao (estrela, comentario, barbeiro_id_barbeiro, servico_id_servico) VALUES (?, ?, ?, ?)";
+    $comando = mysqli_prepare($conexao, $sql);
 
+    mysqli_stmt_bind_param($comando, 'isii', $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico);
+
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    return $funcionou;
+}
 #Funções André
 
 
