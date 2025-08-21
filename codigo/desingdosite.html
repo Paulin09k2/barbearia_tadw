@@ -4,14 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Barbearia Elite</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@400;500&display=swap" rel="stylesheet" />
   <style>
     :root {
-      --main-color: #1c2f49;
-      --navy-dark: #132235;
-      --gold: #c5a880;
-      --background-dark: #0c0f14;
-      --text-light: #ffffff;
+      --dark-blue: #0d1b2a;
+      --medium-blue: #1b263b;
+      --light-blue: #415a77;
+      --white: #ffffff;
+      --gray: #eaeaea;
     }
 
     * {
@@ -23,18 +23,21 @@
 
     body {
       font-family: 'Roboto', sans-serif;
-      background: linear-gradient(to right, var(--background-dark), var(--navy-dark));
-      color: var(--text-light);
+      background: var(--white);
+      color: var(--dark-blue);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
+    /* Cabeçalho */
     header {
-      background-color: #111d2e;
-      padding: 20px 0;
+      background-color: var(--dark-blue);
+      padding: 15px 0;
       position: fixed;
       width: 100%;
       z-index: 1000;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.6);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
     }
 
     .container {
@@ -49,137 +52,154 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 15px;
+      gap: 10px;
     }
 
     .logo img {
       height: 50px;
       width: auto;
+      border-radius: 8px;
     }
 
     header h1 {
       font-family: 'Playfair Display', serif;
-      font-size: 28px;
-      color: var(--text-light);
+      font-size: 26px;
+      color: var(--white);
+      letter-spacing: 1px;
+    }
+
+    nav {
+      display: flex;
+      gap: 25px;
     }
 
     nav a {
-      color: var(--text-light);
-      margin-left: 20px;
+      color: var(--white);
       text-decoration: none;
-      font-weight: bold;
-      transition: color 0.3s ease;
+      font-weight: 500;
+      transition: 0.3s;
+      position: relative;
+    }
+
+    nav a::after {
+      content: "";
+      position: absolute;
+      width: 0%;
+      height: 2px;
+      bottom: -5px;
+      left: 0;
+      background-color: var(--light-blue);
+      transition: width 0.3s ease;
     }
 
     nav a:hover {
-      color: var(--gold);
+      color: var(--light-blue);
     }
 
-    .section {
-      padding: 100px 20px;
-      text-align: center;
+    nav a:hover::after {
+      width: 100%;
     }
 
-    .section h2 {
-      font-size: 36px;
-      font-family: 'Playfair Display', serif;
-      margin-bottom: 20px;
-    }
-
+    /* Hero */
     .hero {
-      background-image: url('https://images.unsplash.com/photo-1600172454520-92d43bb341e3');
       height: 100vh;
+      background: url('https://images.unsplash.com/photo-1600172454520-92d43bb341e3') no-repeat center/cover;
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
-      flex-direction: column;
-      background-attachment: fixed;
-      background-size: cover;
-      background-position: center;
+      color: var(--white);
+      position: relative;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      top:0; left:0; right:0; bottom:0;
+      background: rgba(13,27,42,0.8);
     }
 
     .hero h2,
-    .hero p {
-      background: rgba(0, 0, 0, 0.6);
-      padding: 20px;
-      border-radius: 10px;
+    .hero p,
+    .hero a {
+      position: relative;
+      z-index: 1;
     }
 
     .hero h2 {
-      font-size: 48px;
+      font-size: 50px;
       font-family: 'Playfair Display', serif;
+      margin-bottom: 15px;
     }
 
     .hero p {
       font-size: 20px;
-      margin-top: 20px;
+      margin-bottom: 30px;
     }
 
     .btn {
       display: inline-block;
-      margin-top: 30px;
-      padding: 12px 25px;
-      background-color: var(--navy-dark);
-      color: var(--text-light);
-      text-decoration: none;
-      border-radius: 5px;
+      padding: 12px 28px;
+      background-color: var(--white);
+      color: var(--dark-blue);
+      border-radius: 30px;
       font-weight: bold;
-      transition: all 0.3s ease;
+      transition: 0.3s;
+      text-decoration: none;
     }
 
     .btn:hover {
-      background-color: var(--gold);
-      color: #000;
+      background-color: var(--light-blue);
+      color: var(--white);
     }
 
-    .login-form {
-      max-width: 400px;
+    /* Seções */
+    .section {
+      padding: 90px 20px;
+      text-align: center;
+      background: var(--white);
+    }
+
+    .section:nth-child(even) {
+      background: var(--gray);
+    }
+
+    .section h2 {
+      font-size: 34px;
+      font-family: 'Playfair Display', serif;
+      margin-bottom: 15px;
+      color: var(--dark-blue);
+    }
+
+    .section p {
+      max-width: 750px;
       margin: auto;
+      font-size: 18px;
+      color: var(--medium-blue);
     }
 
-    .login-form input,
-    .login-form button {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 5px;
-      font-size: 16px;
-      border: none;
-    }
-
-    .login-form button {
-      background-color: var(--gold);
-      font-weight: bold;
-      cursor: pointer;
-    }
-
+    /* Fotos */
     #fotos div {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
       gap: 20px;
-      margin-top: 30px;
+      margin-top: 40px;
     }
 
     #fotos img {
-      width: 300px;
-      height: 400px;
+      width: 280px;
+      height: 380px;
       object-fit: cover;
-      border-radius: 10px;
+      border-radius: 12px;
       cursor: pointer;
-      transition: transform 0.3s;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.3);
     }
 
     #fotos img:hover {
       transform: scale(1.05);
-    }
-
-    footer {
-      background-color: #0e192a;
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
     }
 
     /* Painel lateral */
@@ -190,17 +210,17 @@
       right: 0;
       width: 400px;
       height: 100%;
-      background: #1c2f49;
-      color: white;
-      padding: 20px;
-      box-shadow: -2px 0 10px rgba(0,0,0,0.5);
+      background: var(--dark-blue);
+      color: var(--white);
+      padding: 25px;
+      box-shadow: -3px 0 15px rgba(0,0,0,0.5);
       overflow-y: auto;
       z-index: 2000;
     }
 
     #cortePainel span {
       cursor: pointer;
-      font-size: 24px;
+      font-size: 30px;
       position: absolute;
       top: 15px;
       right: 20px;
@@ -209,47 +229,55 @@
     #cortePainel img {
       width: 100%;
       margin-top: 20px;
-      border-radius: 10px;
+      border-radius: 12px;
     }
 
     #agendeBtn {
       display: inline-block;
       margin-top: 20px;
-      background: #e5e5e5;
-      color: black;
-      padding: 10px 20px;
-      border-radius: 20px;
+      background: var(--white);
+      color: var(--dark-blue);
+      padding: 12px 25px;
+      border-radius: 30px;
       font-weight: bold;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: 0.3s;
+      text-decoration: none;
     }
 
     #agendeBtn:hover {
-      background: #ccc;
+      background: var(--light-blue);
+      color: var(--white);
+    }
+
+    /* Footer */
+    footer {
+      background-color: var(--medium-blue);
+      text-align: center;
+      padding: 25px;
+      font-size: 14px;
+      color: var(--white);
+    }
+
+    /* ===== Animações ao rolar ===== */
+    .hidden {
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 1s ease;
+    }
+
+    .show {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     @media(max-width: 768px) {
-      .hero h2 {
-        font-size: 32px;
-      }
-
-      nav {
-        flex-wrap: wrap;
-        justify-content: center;
-      }
-
-      .logo h1 {
-        font-size: 22px;
-      }
-
-      #fotos img {
-        width: 90%;
-        height: auto;
-      }
-
-      #cortePainel {
-        width: 100%;
-      }
+      .hero h2 { font-size: 34px; }
+      .hero p { font-size: 18px; }
+      nav { flex-wrap: wrap; justify-content: center; }
+      .logo h1 { font-size: 22px; }
+      #fotos img { width: 90%; height: auto; }
+      #cortePainel { width: 100%; }
     }
   </style>
 </head>
@@ -274,31 +302,31 @@
 
   <section class="hero" id="inicio">
     <h2>Bem-vindo à Barbearia Elite</h2>
-    <p>Estilo clássico com atitude moderna</p>
+    <p>Tradição e modernidade em um só lugar</p>
     <a href="#agendamento" class="btn">Agende seu horário</a>
   </section>
 
-  <section class="section" id="agendamento">
+  <section class="section hidden" id="agendamento">
     <h2>Agendamento</h2>
-    <p>Escolha o dia, horário e o barbeiro de sua preferência. Atendimento com hora marcada.</p>
+    <p>Escolha o dia, horário e o barbeiro de sua preferência. Atendimento personalizado com hora marcada.</p>
     <a href="#" class="btn">Fazer agendamento</a>
   </section>
 
-  <section class="section parallax" style="background-image: url('https://images.unsplash.com/photo-1559599238-9e396f3cc809');" id="avaliacao">
+  <section class="section hidden" id="avaliacao">
     <h2>Avaliação</h2>
-    <p>Confira a opinião de nossos clientes e deixe sua própria avaliação após o atendimento.</p>
+    <p>Confira as opiniões de nossos clientes e deixe sua avaliação após o atendimento.</p>
     <a href="#" class="btn">Enviar avaliação</a>
   </section>
 
-  <section class="section" id="barbeiro">
+  <section class="section hidden" id="barbeiro">
     <h2>Nossos Barbeiros</h2>
-    <p>Profissionais experientes, treinados para oferecer o melhor corte, barba e experiência.</p>
+    <p>Profissionais altamente capacitados, prontos para oferecer a melhor experiência em cortes e barbas.</p>
     <a href="#" class="btn">Conheça os barbeiros</a>
   </section>
 
-  <section class="section parallax" id="fotos">
+  <section class="section hidden" id="fotos">
     <h2>Fotos</h2>
-    <p>Confira alguns dos nossos cortes feitos por profissionais da Barbearia Elite.</p>
+    <p>Alguns dos cortes feitos pelos nossos profissionais:</p>
     <div>
       <img src="corte-americano1.jpg" alt="Corte Militar" onclick="abrirPainel(this.src, 'Militar', 'Corte com laterais raspadas e topo baixo, ideal para quem busca praticidade.')">
       <img src="second-row-crochet-2024-10-28T133031.webp" alt="Corte Social" onclick="abrirPainel(this.src, 'Social', 'Estilo clássico e elegante, perfeito para ocasiões formais.')">
@@ -306,7 +334,7 @@
     </div>
   </section>
 
-  <footer>
+  <footer class="hidden">
     &copy; 2025 Barbearia Elite. Todos os direitos reservados.
   </footer>
 
@@ -316,7 +344,7 @@
     <h3 id="tituloCorte">Detalhes do Corte</h3>
     <img id="imagemCorte" src="" alt="Corte selecionado">
     <p id="descricaoCorte" style="margin-top:15px;">Descrição do corte.</p>
-    <a id="agendeBtn" href="#agendamento">Agende esse corte aqui!!!</a>
+    <a id="agendeBtn" href="#agendamento">Agende esse corte</a>
   </div>
 
   <script>
@@ -330,6 +358,19 @@
     function fecharPainel() {
       document.getElementById('cortePainel').style.display = 'none';
     }
+
+    // ==== Animações ao rolar ====
+    const elementos = document.querySelectorAll('.hidden');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('show');
+          observer.unobserve(entry.target); // anima só 1x
+        }
+      });
+    }, { threshold: 0.2 });
+
+    elementos.forEach(el => observer.observe(el));
   </script>
 
 </body>
