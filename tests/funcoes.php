@@ -156,25 +156,20 @@ function salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro,
 function listarBarbeiro($conexao) {
     $sql = "SELECT * FROM barbeiro";
     $comando = mysqli_prepare($conexao, $sql);
-
     mysqli_stmt_execute($comando);
     $resultados = mysqli_stmt_get_result($comando);
-
     $lista_Barbeiro = [];
     while ($barbeiro = mysqli_fetch_assoc($resultados)) {
         $lista_Barbeiro[] = $barbeiro;
     }
     mysqli_stmt_close($comando);
-
     return $lista_Barbeiro;
 }
 function salvarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estimado)
 {
     $sql = "INSERT INTO servico (nome_servico, descricao, preco, tempo_estimado) VALUES (?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
-
     mysqli_stmt_bind_param($comando, 'ssss', $nome_servico, $descricao, $preco, $tempo_estimado);
-
     mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
 }
@@ -182,10 +177,8 @@ function editarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estim
 {
     $sql = "UPDATE cliente SET nome_servico=?, descricao=?, preco=?, tempo_estimado=? WHERE idservico=?";
     $comando = mysqli_prepare($conexao, $sql);
-
     mysqli_stmt_bind_param($comando, 'ssss', $nome_servico, $descricao, $preco, $tempo_estimado);
     $funcionou = mysqli_stmt_execute($comando);
-
     mysqli_stmt_close($comando);
     return $funcionou;
 }
@@ -194,10 +187,8 @@ function deletarServico($conexao, $id_servico)
     $sql = "DELETE FROM cliente WHERE idcliente = ?";
     $sql = "DELETE FROM servico WHERE id_servico = ?";
     $comando = mysqli_prepare($conexao, $sql);
-
     mysqli_stmt_bind_param($comando, 'i', $id_servico);
     mysqli_stmt_bind_param($comando, 'i', $servico_id_servico);
-
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
 
@@ -208,15 +199,12 @@ function listaServico($conexao)
     $sql = "SELECT * FROM tb_servico";
     $sql = "SELECT * FROM servico";
     $comando = mysqli_prepare($conexao, $sql);
-
     mysqli_stmt_execute($comando);
     $resultados = mysqli_stmt_get_result($comando);
-
     $lista_servico = [];
     while ($servico = mysqli_fetch_assoc($resultados)) {
         $lista_servico[] = $servico;
     }
-
     mysqli_stmt_close($comando);
     return $lista_servico;
 }
