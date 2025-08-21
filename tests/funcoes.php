@@ -68,9 +68,11 @@ function deletarCliente($conexao, $id_cliente)
 }
 function editarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $senha_cliente, $id_cliente)
 {
-    $sql = "UPDATE cliente SET nome=?, email=?, telefone=?, endereco=?, data_nascimento=?, data_cadastro=? senha_cliente=? WHERE id_cliente=?";
+    $sql = "UPDATE cliente 
+            SET nome=?, email=?, telefone=?, endereco=?, data_nascimento=?, senha_cliente=? 
+            WHERE id_cliente=?";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'sssssssi', $nome, $email, $telefone, $endereco, $data_nascimento, $senha_cliente, $id_cliente);
+    mysqli_stmt_bind_param($comando, 'ssssssi', $nome, $email, $telefone, $endereco, $data_nascimento, $senha_cliente, $id_cliente);
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     return $funcionou;
