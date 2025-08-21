@@ -14,10 +14,8 @@ function editarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimen
 {
     $sql = "UPDATE barbeiro SET nome=?, email=?, telefone=?, cpf=?, data_nascimento=? WHERE id_barbeiro=?";
     $comando = mysqli_prepare($conexao, $sql);
-
     mysqli_stmt_bind_param($comando, 'ssssss', $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $id);
     $funcionou = mysqli_stmt_execute($comando);
-
     mysqli_stmt_close($comando);
     return $funcionou;
 }
@@ -25,34 +23,26 @@ function deletarBarbeiro($conexao, $id_barbeiro)
 {
     $sql = "DELETE FROM barbeiro WHERE id_barbeiro = ?";
     $comando = mysqli_prepare($conexao, $sql);
-
     mysqli_stmt_bind_param($comando, 'i', $id_barbeiro);
-
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
-
     return $funcionou;
 }
 function salvarAgendamento($conexao, $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente)
 {
     $sql = "INSERT INTO agendamento (data_agendamento, status, barbeiro_id_barbeiro, cliente_id_cliente) VALUES (?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
-
     mysqli_stmt_bind_param($comando, 'ssss', $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente);
-
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
-
     return $funcionou;
 }
 function editarAgendamento($conexao, $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente, $id_agendamento)
 {
     $sql = "UPDATE agendamento SET data_agendamento=?, status=?, barbeiro_id_barbeiro=?, cliente_id_cliente=? WHERE id_agendamento=?";
     $comando = mysqli_prepare($conexao, $sql);
-
     mysqli_stmt_bind_param($comando, 'ssssi', $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente, $id_agendamento);
     $funcionou = mysqli_stmt_execute($comando);
-
     mysqli_stmt_close($comando);
     return $funcionou;
 }
@@ -60,12 +50,9 @@ function deletarAgendamento($conexao, $id_agendamento, $barbeiro_id_barbeiro, $c
 {
     $sql = "DELETE FROM agendamento WHERE id_agendamento = ? AND barbeiro_id_barbeiro = ? AND cliente_id_cliente = ?";
     $comando = mysqli_prepare($conexao, $sql);
-
     mysqli_stmt_bind_param($comando, 'iii', $id_agendamento, $barbeiro_id_barbeiro, $cliente_id_cliente);
-
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
-
     return $funcionou;
 }
 //-----------int = 1 -- decimal = d -- varchar = s -- date = s --text = s----------------------------------------------------------------------------------------------------Paulo Ricardo:
