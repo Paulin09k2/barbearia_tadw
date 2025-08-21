@@ -9,9 +9,6 @@ function salvarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimen
     mysqli_stmt_close($comando);
     return $funcionou;
 }
-
-
-
 function editarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento,  $id)
 {
     $sql = "UPDATE barbeiro SET nome=?, email=?, telefone=?, cpf=?, data_nascimento=? WHERE id_barbeiro=?";
@@ -184,7 +181,6 @@ function listarBarbeiro($conexao) {
 
     return $lista_Barbeiro;
 }
-
 function salvarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estimado)
 {
     $sql = "INSERT INTO servico (nome_servico, descricao, preco, tempo_estimado) VALUES (?, ?, ?, ?)";
@@ -195,8 +191,6 @@ function salvarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estim
     mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
 }
-
-
 function editarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estimado)
 {
     $sql = "UPDATE cliente SET nome_servico=?, descricao=?, preco=?, tempo_estimado=? WHERE idservico=?";
@@ -208,7 +202,6 @@ function editarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estim
     mysqli_stmt_close($comando);
     return $funcionou;
 }
-
 function deletarServico($conexao, $id_servico)
 {
     $sql = "DELETE FROM cliente WHERE idcliente = ?";
@@ -223,7 +216,6 @@ function deletarServico($conexao, $id_servico)
 
     return $funcionou;
 }
-
 function listaServico($conexao)
 {
     $sql = "SELECT * FROM tb_servico";
@@ -241,5 +233,4 @@ function listaServico($conexao)
     mysqli_stmt_close($comando);
     return $lista_servico;
 }
-
 ?>
