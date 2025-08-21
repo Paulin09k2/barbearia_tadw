@@ -83,7 +83,6 @@ function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nasc
     mysqli_stmt_close($comando);
 
 }
-
 function editarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $senha_cliente, $id_cliente)
 {
     $sql = "UPDATE cliente SET nome=?, email=?, telefone=?, endereco=?, data_nascimento=?, data_cadastro=? senha_cliente=? WHERE id_cliente=?";
@@ -95,9 +94,6 @@ function editarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nasc
     mysqli_stmt_close($comando);
     return $funcionou;
 }
-
-
-
 function deletarCliente($conexao, $id_cliente)
 {
     $sql = "DELETE FROM cliente WHERE id_cliente = ?";
@@ -110,7 +106,6 @@ function deletarCliente($conexao, $id_cliente)
 
     return $funcionou;
 }
-
 function listarCliente($conexao)
 {
     $sql = "SELECT * FROM cliente";
@@ -134,14 +129,12 @@ function salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro,
     $sql = "INSERT INTO avaliacao (estrela, comentario, barbeiro_id_barbeiro, servico_id_servico) VALUES (?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
 
-
     mysqli_stmt_bind_param($comando, 'isii', $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico);
 
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     return $funcionou;
 }
-
 function editarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico, $id)
 {
     $sql = "UPDATE avaliacao SET estrela=?, comentario=?, barbeiro_id_barbeiro=?, servico_id_servico=? WHERE id_avaliacao=?";
@@ -151,7 +144,6 @@ function editarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro,
     mysqli_stmt_close($comando);
     return $funcionou;
 }
-
 function deletarAvaliacao($conexao, $idavaliacao)
 {
     $sql = "DELETE FROM cliente WHERE idcliente = ?";
