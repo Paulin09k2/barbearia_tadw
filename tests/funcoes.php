@@ -72,28 +72,6 @@ function deletarAgendamento($conexao, $id_agendamento, $barbeiro_id_barbeiro, $c
 }
 //-----------int = 1 -- decimal = d -- varchar = s -- date = s --text = s----------------------------------------------------------------------------------------------------Paulo Ricardo:
 
-function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente )
-{
-    $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro, senha_cliente) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_bind_param($comando, 'sssssss', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente);
-
-    mysqli_stmt_execute($comando);
-    mysqli_stmt_close($comando);
-
-}
-function editarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $senha_cliente, $id_cliente)
-{
-    $sql = "UPDATE cliente SET nome=?, email=?, telefone=?, endereco=?, data_nascimento=?, data_cadastro=? senha_cliente=? WHERE id_cliente=?";
-    $comando = mysqli_prepare($conexao, $sql);
-
-    mysqli_stmt_bind_param($comando, 'sssssssi', $nome, $email, $telefone, $endereco, $data_nascimento, $senha_cliente, $id_cliente);
-    $funcionou = mysqli_stmt_execute($comando);
-
-    mysqli_stmt_close($comando);
-    return $funcionou;
-}
 function deletarCliente($conexao, $id_cliente)
 {
     $sql = "DELETE FROM cliente WHERE id_cliente = ?";
@@ -104,6 +82,17 @@ function deletarCliente($conexao, $id_cliente)
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
 
+    return $funcionou;
+}
+function editarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $senha_cliente, $id_cliente)
+{
+    $sql = "UPDATE cliente SET nome=?, email=?, telefone=?, endereco=?, data_nascimento=?, data_cadastro=? senha_cliente=? WHERE id_cliente=?";
+    $comando = mysqli_prepare($conexao, $sql);
+
+    mysqli_stmt_bind_param($comando, 'sssssssi', $nome, $email, $telefone, $endereco, $data_nascimento, $senha_cliente, $id_cliente);
+    $funcionou = mysqli_stmt_execute($comando);
+
+    mysqli_stmt_close($comando);
     return $funcionou;
 }
 function listarCliente($conexao)
@@ -122,7 +111,17 @@ function listarCliente($conexao)
 
     return $lista_clientes;
 }
+function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente )
+{
+    $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro, senha_cliente) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $comando = mysqli_prepare($conexao, $sql);
 
+    mysqli_stmt_bind_param($comando, 'sssssss', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente);
+
+    mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+
+}
 
 function deletarAvaliacao($conexao, $idavaliacao)
 {
