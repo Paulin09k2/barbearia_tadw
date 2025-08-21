@@ -1,5 +1,6 @@
 <?php
-//-----------------------------------------------------------------------------------------------------------------------------------------Kaio:
+//-----------int = 1 -- decimal = d -- varchar = s -- date = s --text = s----------------------------------------------------------------------------------------------------Kaio:
+
 function salvarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $senha_barbeiro )
 {
     $sql = "INSERT INTO barbeiro (nome, email, telefone, cpf, data_nascimento, data_admissao, senha_barbeiro) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -150,9 +151,7 @@ function salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro,
     mysqli_stmt_close($comando);
     return $funcionou;
 }
-#Funções André
-
-
+//-----------int = 1 -- decimal = d -- varchar = s -- date = s --text = s----------------------------------------------------------------------------------------------------Andre:
 
 function listarBarbeiro($conexao) {
     $sql = "SELECT * FROM barbeiro";
