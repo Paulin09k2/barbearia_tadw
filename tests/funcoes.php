@@ -1,20 +1,10 @@
 <?php
 //-----------int = 1 -- decimal = d -- varchar = s -- date = s --text = s----------------------------------------------------------------------------------------------------Kaio:
-
-function salvarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $senha_barbeiro )
+function deletarAgendamento($conexao, $id_agendamento, $barbeiro_id_barbeiro, $cliente_id_cliente)
 {
-    $sql = "INSERT INTO barbeiro (nome, email, telefone, cpf, data_nascimento, data_admissao, senha_barbeiro) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "DELETE FROM agendamento WHERE id_agendamento = ? AND barbeiro_id_barbeiro = ? AND cliente_id_cliente = ?";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'sssssss', $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $senha_barbeiro);
-    $funcionou = mysqli_stmt_execute($comando);
-    mysqli_stmt_close($comando);
-    return $funcionou;
-}
-function editarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento,  $id)
-{
-    $sql = "UPDATE barbeiro SET nome=?, email=?, telefone=?, cpf=?, data_nascimento=? WHERE id_barbeiro=?";
-    $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'ssssss', $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $id);
+    mysqli_stmt_bind_param($comando, 'iii', $id_agendamento, $barbeiro_id_barbeiro, $cliente_id_cliente);
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     return $funcionou;
@@ -28,15 +18,6 @@ function deletarBarbeiro($conexao, $id_barbeiro)
     mysqli_stmt_close($comando);
     return $funcionou;
 }
-function salvarAgendamento($conexao, $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente)
-{
-    $sql = "INSERT INTO agendamento (data_agendamento, status, barbeiro_id_barbeiro, cliente_id_cliente) VALUES (?, ?, ?, ?)";
-    $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'ssss', $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente);
-    $funcionou = mysqli_stmt_execute($comando);
-    mysqli_stmt_close($comando);
-    return $funcionou;
-}
 function editarAgendamento($conexao, $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente, $id_agendamento)
 {
     $sql = "UPDATE agendamento SET data_agendamento=?, status=?, barbeiro_id_barbeiro=?, cliente_id_cliente=? WHERE id_agendamento=?";
@@ -46,15 +27,34 @@ function editarAgendamento($conexao, $data_agendamento, $status, $barbeiro_id_ba
     mysqli_stmt_close($comando);
     return $funcionou;
 }
-function deletarAgendamento($conexao, $id_agendamento, $barbeiro_id_barbeiro, $cliente_id_cliente)
+function editarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento,  $id)
 {
-    $sql = "DELETE FROM agendamento WHERE id_agendamento = ? AND barbeiro_id_barbeiro = ? AND cliente_id_cliente = ?";
+    $sql = "UPDATE barbeiro SET nome=?, email=?, telefone=?, cpf=?, data_nascimento=? WHERE id_barbeiro=?";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'iii', $id_agendamento, $barbeiro_id_barbeiro, $cliente_id_cliente);
+    mysqli_stmt_bind_param($comando, 'ssssss', $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $id);
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     return $funcionou;
 }
+function salvarAgendamento($conexao, $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente)
+{
+    $sql = "INSERT INTO agendamento (data_agendamento, status, barbeiro_id_barbeiro, cliente_id_cliente) VALUES (?, ?, ?, ?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'ssss', $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente);
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    return $funcionou;
+}
+function salvarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $senha_barbeiro )
+{
+    $sql = "INSERT INTO barbeiro (nome, email, telefone, cpf, data_nascimento, data_admissao, senha_barbeiro) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'sssssss', $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $senha_barbeiro);
+    $funcionou = mysqli_stmt_execute($comando);
+    mysqli_stmt_close($comando);
+    return $funcionou;
+}
+
 //-----------int = 1 -- decimal = d -- varchar = s -- date = s --text = s----------------------------------------------------------------------------------------------------Paulo Ricardo:
 
 function deletarCliente($conexao, $id_cliente)
