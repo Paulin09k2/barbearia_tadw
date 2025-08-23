@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel Barbeiro - Barbearia Elite</title>
+  <style>
+    :root {
+      --preto-fundo: #0b0f18;
+      --azul-escuro: #101e31;
+      --azul-principal: #142136;
+      --azul-card: #1b2a45;
+      --cinza-form: #dedbd3;
+      --cinza-botao: #666;
+      --dourado: #585252;
+      --branco: #ffffff;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: var(--preto-fundo);
+      color: var(--branco);
+      display: flex;
+    }
+
+    .sidebar {
+      width: 250px;
+      background-color: var(--azul-principal);
+      height: 100vh;
+      padding: 30px 20px;
+      box-shadow: 2px 0 10px rgba(0, 0, 0, 0.4);
+    }
+
+    .sidebar h2 {
+      font-size: 20px;
+      margin-bottom: 30px;
+      color: var(--dourado);
+    }
+
+    .sidebar a {
+      display: block;
+      color: var(--branco);
+      text-decoration: none;
+      margin: 15px 0;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .sidebar a:hover {
+      color: var(--dourado);
+    }
+
+    .content {
+      flex: 1;
+      padding: 40px;
+      background: linear-gradient(to right, var(--preto-fundo), var(--azul-principal));
+    }
+
+    .content h1 {
+      font-size: 28px;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background-color: var(--azul-card);
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+    }
+
+    .card h3 {
+      margin-bottom: 10px;
+      color: var(--dourado);
+    }
+
+    .btn {
+      background-color: var(--cinza-botao);
+      color: var(--branco);
+      border: none;
+      padding: 10px 15px;
+      margin-right: 10px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .btn:hover {
+      opacity: 0.8;
+    }
+
+    .form-card {
+      background-color: var(--azul-card);
+      padding: 20px;
+      border-radius: 10px;
+      margin-top: 20px;
+    }
+
+    .form-card label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    .form-card input, .form-card select {
+      width: 100%;
+      padding: 8px;
+      border: none;
+      border-radius: 5px;
+      margin-top: 5px;
+      background-color: var(--cinza-form);
+      color: #000;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+
+    table th, table td {
+      border: 1px solid #ccc;
+      padding: 10px;
+      text-align: center;
+    }
+
+    table th {
+      background-color: var(--azul-principal);
+      color: var(--branco);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <h2>Barbeiro: Paulo</h2>
+    <a href="#" onclick="loadPage('dashboard')">Painel</a>
+    <a href="#" onclick="loadPage('agendamentos')">Agendamentos</a>
+    <a href="#" onclick="loadPage('barbeiros')">Barbeiros</a>
+    <a href="#" onclick="loadPage('clientes')">Clientes</a>
+    <a href="#" onclick="loadPage('horarios')">Horários</a>
+    <a href="#">Sair</a>
+  </div>
+
+  <div class="content" id="main-content">
+    <h1>Bem-vindo, Barbeiro </h1>
+    <div class="card">
+      <h3>Agendamentos de hoje</h3>
+      <p>5 clientes agendados</p>
+    </div>
+    <div class="card">
+      <h3>Barbeiros ativos</h3>
+      <p>3 barbeiros em serviço</p>
+    </div>
+  </div>
+
+  <script>
+    function loadPage(page) {
+      let content = document.getElementById('main-content');
+      if (page === 'dashboard') {
+        content.innerHTML = `
+          <h1>Bem-vindo, Barbeiro</h1>
+          <div class="card">
+            <h3>Agendamentos de hoje</h3>
+            <p>5 clientes agendados</p>
+          </div>
+          <div class="card">
+            <h3>Barbeiros ativos</h3>
+            <p>3 barbeiros em serviço</p>
+          </div>
+        `;
+      } else if (page === 'agendamentos') {
+        content.innerHTML = `
+          <h1>Agendamentos</h1>
+          <button class="btn" onclick="showForm('add-agendamento')">Adicionar</button>
+          <div class="card">
+            <h3>Cliente: João Silva</h3>
+            <p>Data: 07/06/2025 - Horário: 14:00 - Barbeiro: Pedro</p>
+            <button class="btn" onclick="showForm('edit-agendamento')">Editar</button>
+          </div>
+          <div id="form-container"></div>
+        `;
+      } else if (page === 'barbeiros') {
+        content.innerHTML = `
+          <h1>Barbeiros</h1>
+          <div class="card" id="barbeiros-list">
+            <h3>Pedro Oliveira</h3>
+            <p>Especialista em cortes clássicos</p>
+            <button class="btn" onclick="excluirItem(this)">Excluir</button>
+          </div>
+          <div id="form-container"></div>
+        `;
+      } else if (page === 'clientes') {
+        content.innerHTML = `
+          <h1>Clientes</h1>
+          <button class="btn" onclick="showForm('add-cliente')">Adicionar</button>
+          <div class="card">
+            <h3>João Silva</h3>
+            <p>Email: joao@email.com</p>
+            <p>Telefone: (11) 91234-5678</p>
+            <p>Endereço: Rua das Rosas, 123</p>
+            <p>Data de Nascimento: 10/05/1990</p>
+            <p>Data de Cadastro: 01/06/2025</p>
+            <button class="btn" onclick="showForm('edit-cliente')">Editar</button>
+          </div>
+          <div id="form-container"></div>
+        `;
+      } else if (page === 'horarios') {
+        content.innerHTML = `
+          <h1>Horários Disponíveis</h1>
+          <div class="card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Horário</th>
+                  <th>Status</th>
+                  <th>Tipo de Corte</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>09:00</td>
+                  <td>Disponível</td>
+                  <td>
+                    <select>
+                      <option value="">-- Selecione --</option>
+                      <option value="degrade">Degradê</option>
+                      <option value="social">Social</option>
+                      <option value="militar">Militar</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>10:00</td>
+                  <td>Marcado</td>
+                  <td>
+                    <select>
+                      <option value="">-- Selecione --</option>
+                      <option value="degrade" selected>Degradê</option>
+                      <option value="social">Social</option>
+                      <option value="militar">Militar</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>11:00</td>
+                  <td>Disponível</td>
+                  <td>
+                    <select>
+                      <option value="">-- Selecione --</option>
+                      <option value="degrade">Degradê</option>
+                      <option value="social">Social</option>
+                      <option value="militar">Militar</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>13:00</td>
+                  <td>Marcado</td>
+                  <td>
+                    <select>
+                      <option value="">-- Selecione --</option>
+                      <option value="degrade">Degradê</option>
+                      <option value="social" selected>Social</option>
+                      <option value="militar">Militar</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td>14:00</td>
+                  <td>Disponível</td>
+                  <td>
+                    <select>
+                      <option value="">-- Selecione --</option>
+                      <option value="degrade">Degradê</option>
+                      <option value="social">Social</option>
+                      <option value="militar">Militar</option>
+                    </select>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        `;
+      }
+    }
+
+    function showForm(formType) {
+      let formContainer = document.getElementById('form-container');
+      if (formType === 'add-agendamento' || formType === 'edit-agendamento') {
+        formContainer.innerHTML = `
+          <div class="form-card">
+            <h3>${formType === 'add-agendamento' ? 'Adicionar' : 'Editar'} Agendamento</h3>
+            <label>Nome do Cliente</label>
+            <input type="text" placeholder="Nome">
+            <label>Data</label>
+            <input type="date">
+            <label>Horário</label>
+            <input type="time">
+            <label>Barbeiro</label>
+            <input type="text" placeholder="Nome do Barbeiro">
+          </div>
+        `;
+      } else if (formType === 'add-barbeiro' || formType === 'edit-barbeiro') {
+        formContainer.innerHTML = `
+          <div class="form-card">
+            <h3>${formType === 'add-barbeiro' ? 'Adicionar' : 'Editar'} Barbeiro</h3>
+            <label>Nome</label>
+            <input type="text" placeholder="Nome do Barbeiro">
+            <label>Especialidade</label>
+            <input type="text" placeholder="Especialidade">
+          </div>
+        `;
+      } else if (formType === 'add-cliente' || formType === 'edit-cliente') {
+        formContainer.innerHTML = `
+          <div class="form-card">
+            <h3>${formType === 'add-cliente' ? 'Adicionar' : 'Editar'} Cliente</h3>
+            <label>Nome</label>
+            <input type="text" placeholder="Nome do Cliente">
+            <label>Email</label>
+            <input type="email" placeholder="Email do Cliente">
+            <label>Telefone</label>
+            <input type="tel" placeholder="Telefone do Cliente">
+            <label>Endereço</label>
+            <input type="text" placeholder="Endereço">
+            <label>Data de Nascimento</label>
+            <input type="date">
+            <label>Data de Cadastro</label>
+            <input type="date">
+          </div>
+        `;
+      }
+    }
+
+    function excluirItem(button) {
+      const card = button.closest('.card');
+      card.remove();
+    }
+  </script>
+
+</body>
+</html>

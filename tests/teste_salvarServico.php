@@ -1,6 +1,6 @@
 <?php
-    require_once "../conexao.php";
-    require_once "../funcoes.php";
+    require_once "conexao.php";
+    require_once "funcoes.php";
 
     $nome_servico = "corte";
     $descricao = "maquina e tesoura";

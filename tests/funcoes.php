@@ -31,7 +31,7 @@ function editarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimen
 {
     $sql = "UPDATE barbeiro SET nome=?, email=?, telefone=?, cpf=?, data_nascimento=? WHERE id_barbeiro=?";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'ssssss', $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $id_barbeiro);
+    mysqli_stmt_bind_param($comando, 'ssiisi', $nome, $email, $telefone, $cpf, $data_nascimento, $id_barbeiro);
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     return $funcionou;
@@ -111,7 +111,7 @@ function deletarAvaliacao($conexao, $id_avaliacao)
 }
 function editarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico, $id)
 {
-    $sql = "UPDATE avaliacao SET estrela=?, comentario=?, barbeiro_id_barbeiro=?, servico_id_servico=? WHERE id_avaliacao=?";
+    $sql = "UPDATE avaliacao SET estrela=?, comentario=?, barbeiro_id_barbeiro=?, servico_id_servico=? WHERE idavaliacao=?";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'isiii', $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico, $id);
     $funcionou = mysqli_stmt_execute($comando);
@@ -163,11 +163,11 @@ function salvarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estim
     mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
 }
-function editarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estimado)
+function editarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estimado, $id_servico)
 {
-    $sql = "UPDATE cliente SET nome_servico=?, descricao=?, preco=?, tempo_estimado=? WHERE idservico=?";
+    $sql = "UPDATE servico SET nome_servico=?, descricao=?, preco=?, tempo_estimado=? WHERE id_servico=?";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'ssss', $nome_servico, $descricao, $preco, $tempo_estimado);
+    mysqli_stmt_bind_param($comando, 'ssssi', $nome_servico, $descricao, $preco, $tempo_estimado, $id_servico);
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     return $funcionou;
