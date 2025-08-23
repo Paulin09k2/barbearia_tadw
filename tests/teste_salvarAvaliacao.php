@@ -1,6 +1,6 @@
 <?php
-require_once "../conexao.php";
-require_once "../funcoes.php";
+require_once "conexao.php";
+require_once "funcoes.php";
 
 $estrela = 5;
 $comentario = "Ótimo atendimento!";

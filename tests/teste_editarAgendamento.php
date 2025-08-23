@@ -1,6 +1,6 @@
 <?php
-require_once "../conexao.php";
-require_once "../funcoes.php";
+require_once "conexao.php";
+require_once "funcoes.php";
 
 $data_agendamento = "2025-09-02 10:00:00";
 $status = "confirmado";

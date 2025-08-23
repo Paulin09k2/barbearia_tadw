@@ -74,13 +74,13 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`agendamento` (
   CONSTRAINT `fk_agendamento_cliente1`
     FOREIGN KEY (`cliente_id_cliente`)
     REFERENCES `barbearia`.`cliente` (`id_cliente`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_agendamento_barbeiro1`
     FOREIGN KEY (`barbeiro_id_barbeiro`)
     REFERENCES `barbearia`.`barbeiro` (`id_barbeiro`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 AUTO_INCREMENT = 4
 DEFAULT CHARACTER SET = utf8mb4;
@@ -113,13 +113,13 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`agenda_servico` (
   CONSTRAINT `fk_agendamento_has_servico_agendamento1`
     FOREIGN KEY (`agendamento_id_agendamento`)
     REFERENCES `barbearia`.`agendamento` (`id_agendamento`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_agendamento_has_servico_servico1`
     FOREIGN KEY (`servico_id_servico`)
     REFERENCES `barbearia`.`servico` (`id_servico`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -140,27 +140,17 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`avaliacao` (
   CONSTRAINT `fk_avaliacao_barbeiro1`
     FOREIGN KEY (`barbeiro_id_barbeiro`)
     REFERENCES `barbearia`.`barbeiro` (`id_barbeiro`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_avaliacao_servico1`
     FOREIGN KEY (`servico_id_servico`)
     REFERENCES `barbearia`.`servico` (`id_servico`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
-INSERT INTO `barbearia`.`barbeiro` 
-(`nome`, `email`, `telefone`, `cpf`, `data_nascimento`, `data_admissao`, `senha_barbeiro`)
-VALUES 
-('João Silva', 'joao.silva@barbearia.com', '11999990000', '12345678901', '1990-05-10', '2023-01-15', 'senha123');
-
-INSERT INTO `barbearia`.`barbeiro` 
-(`nome`, `email`, `telefone`, `cpf`, `data_nascimento`, `data_admissao`, `senha_barbeiro`)
-VALUES 
-('Carlos Souza', 'carlos.souza@barbearia.com', '11988887777', '98765432100', '1985-08-20', '2022-10-05', 'segredo456');
-
-
+-- -----------------------------------------------------
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;

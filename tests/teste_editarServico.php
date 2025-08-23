@@ -1,6 +1,6 @@
 <?php
-require_once "../conexao.php";
-require_once "../funcoes.php";
+require_once "conexao.php";
+require_once "funcoes.php";
 
 $id_servico = 1; 
 $nome_servico = "Corte de Cabelo";  

@@ -1,6 +1,6 @@
 <?php
-require_once "../conexao.php";
-require_once "../funcoes.php";
+require_once "conexao.php";
+require_once "funcoes.php";
 
 $id = 1; // ID real da avaliação existente
 $estrela = 4;
