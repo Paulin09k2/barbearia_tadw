@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Barbearia Elite</title>
+  <meta name="description" content="Barbearia Elite — cortes masculinos, barba e cuidados premium. Agende online." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --navy:#0b1a2b; /* azul marinho */
+      --navy-700:#0f2742;
+      --navy-600:#133150;
+      --gray-900:#0f172a;
+      --gray-700:#334155;
+      --gray-500:#6b7280;
+      --gray-300:#cbd5e1;
+      --gray-200:#e5e7eb;
+      --gray-100:#f3f4f6;
+      --white:#ffffff;
+      --brand:#1e3a8a; /* azul forte para realces */
+      --accent:#3b82f6; /* azul para interações */
+      --radius:18px;
+      --shadow:0 10px 25px rgba(2, 6, 23, 0.25);
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,"Helvetica Neue",Arial,"Noto Sans",sans-serif;
+      color:var(--gray-900);
+      background:linear-gradient(180deg, var(--navy) 0%, #0c1d31 35%, #0e2340 100%);
+    }
+
+    /* ===== NAVBAR ===== */
+    .navbar{
+      position:sticky; top:0; z-index:1000;
+      backdrop-filter:saturate(120%) blur(10px);
+      background:rgba(11,26,43,0.75);
+      border-bottom:1px solid rgba(255,255,255,0.06);
+    }
+    .nav-inner{
+      max-width:1200px; margin:0 auto; padding:12px 20px;
+      display:flex; align-items:center; gap:14px; justify-content:space-between;
+    }
+    .brand{
+      display:flex; align-items:center; gap:12px; color:var(--white); text-decoration:none;
+    }
+    .logo{
+      width:40px; height:40px; border-radius:12px; display:grid; place-items:center;
+      background:linear-gradient(135deg, #0f2742, #1f3e6d);
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.15), 0 6px 18px rgba(0,0,0,0.35);
+      color:#dbeafe; font-weight:800; letter-spacing:0.5px;
+    }
+    .brand span{font-weight:700; font-size:18px}
+
+    .nav-links{display:flex; gap:16px; align-items:center}
+    .nav-links a{
+      color:#e2e8f0; text-decoration:none; font-weight:500; padding:10px 12px; border-radius:12px;
+      transition:all .2s ease;
+    }
+    .nav-links a:hover{background:rgba(255,255,255,0.08); color:#fff}
+
+    .login-btn{
+      padding:10px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.15);
+      color:#e0e7ff; background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      box-shadow:inset 0 1px 0 rgba(255,255,255,0.2);
+      cursor:pointer; font-weight:600;
+    }
+    .login-btn:hover{border-color:rgba(255,255,255,0.3)}
+
+    .hamburger{display:none; width:40px; height:40px; border-radius:12px; border:1px solid rgba(255,255,255,0.15); background:transparent; color:#e5e7eb}
+
+    @media (max-width: 940px){
+      .nav-links{display:none}
+      .hamburger{display:inline-grid; place-items:center}
+      .nav-drawer{
+        position:fixed; inset:60px 14px auto 14px; border-radius:16px; padding:12px;
+        background:rgba(15, 39, 66, 0.95); border:1px solid rgba(255,255,255,0.08);
+        display:none; flex-direction:column; gap:8px;
+      }
+      .nav-drawer a{ color:#e5e7eb; padding:12px 14px; border-radius:12px; text-decoration:none; }
+      .nav-drawer a:hover{ background:rgba(255,255,255,0.08); }
+    }
+
+    /* ===== HERO ===== */
+    .hero{
+      position:relative; overflow:hidden; color:var(--white);
+      min-height:82vh; display:grid; align-items:center;
+      background:radial-gradient(1200px 400px at 20% 10%, rgba(59,130,246,0.18), transparent 60%),
+                 radial-gradient(800px 300px at 80% 40%, rgba(30,58,138,0.25), transparent 70%);
+      isolation:isolate;
+    }
+    .hero::before{
+      content:""; position:absolute; inset:-10% -10% auto -10%; height:130%; z-index:-1;
+      background:url('https://images.unsplash.com/photo-1534260172397-5a88f6b4f3f0?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat fixed; /* parallax */
+      filter:brightness(.5) contrast(1.1) saturate(1.1);
+      transform:translateZ(0);
+    }
+    .hero-inner{max-width:1200px; margin:0 auto; padding:90px 20px 40px; display:grid; grid-template-columns:1.1fr .9fr; gap:28px}
+    .hero h1{font-size:clamp(32px, 5vw, 56px); line-height:1.05; margin:0 0 12px}
+    .subtitle{color:#c7d2fe; font-size:clamp(16px, 2.3vw, 20px); max-width:58ch}
+    .cta{
+      display:flex; gap:12px; margin-top:22px; flex-wrap:wrap
+    }
+    .btn{appearance:none; border:0; cursor:pointer; font-weight:700; padding:14px 18px; border-radius:14px}
+    .btn.primary{background:linear-gradient(180deg, #3b82f6, #1e3a8a); color:white; box-shadow:var(--shadow)}
+    .btn.ghost{background:transparent; color:#e2e8f0; border:1px solid rgba(255,255,255,0.25)}
+
+    .hero-card{
+      background:linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+      border:1px solid rgba(255,255,255,0.18); border-radius:var(--radius); padding:18px; backdrop-filter: blur(6px);
+      box-shadow: 0 12px 28px rgba(0,0,0,.35);
+    }
+    .hero-grid{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .mini{
+      border-radius:16px; padding:16px; background:rgba(255,255,255,0.06); border:1px solid rgba(255,255,255,0.1);
+    }
+    .mini h3{margin:0 0 6px; font-size:16px}
+    .mini p{margin:0; font-size:14px; color:#d1d5db}
+
+    @media (max-width: 900px){
+      .hero-inner{grid-template-columns:1fr}
+    }
+
+    /* ===== GENERIC SECTIONS ===== */
+    section{scroll-margin-top:90px}
+    .section{
+      max-width:1200px; margin:0 auto; padding:70px 20px;
+    }
+    .card{
+      background:linear-gradient(180deg, #0f2742, #0b1a2b); color:#e5e7eb;
+      border:1px solid rgba(255,255,255,0.06); border-radius:var(--radius); box-shadow:var(--shadow);
+    }
+    .section-title{color:#fff; font-size:clamp(22px, 3.2vw, 34px); margin:0 0 12px}
+    .section-sub{color:#cbd5e1; margin:0 0 26px}
+
+    /* ===== SERVIÇOS ===== */
+    .services{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    .service{padding:18px}
+    .service h3{margin:10px 0 6px}
+    .price{font-weight:700; color:#c7d2fe}
+    @media (max-width: 900px){
+      .services{grid-template-columns:1fr}
+    }
+
+    /* ===== EQUIPE ===== */
+    .team{display:grid; grid-template-columns:repeat(4,1fr); gap:16px}
+    .member{overflow:hidden}
+    .member .photo{height:210px; border-top-left-radius:var(--radius); border-top-right-radius:var(--radius); background:#0b1a2b; display:block; object-fit:cover; width:100%}
+    .member .info{padding:14px}
+    .tag{display:inline-block; padding:6px 10px; border-radius:999px; font-size:12px; background:#1e3a8a; color:#e0e7ff}
+    .member h4{margin:10px 0 6px; color:#fff}
+    .member p{margin:0; color:#cbd5e1}
+    @media (max-width: 1100px){.team{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width: 640px){.team{grid-template-columns:1fr}}
+
+    /* ===== AVALIAÇÕES ===== */
+    .reviews{display:grid; grid-template-columns:repeat(3,1fr); gap:16px}
+    .review{padding:18px}
+    .stars{font-size:18px; letter-spacing:2px; color:#fde68a}
+    @media (max-width: 900px){.reviews{grid-template-columns:1fr}}
+
+    /* ===== FOTOS (GALERIA) ===== */
+    .gallery{display:grid; grid-template-columns:repeat(4,1fr); gap:12px}
+    .gallery img{width:100%; height:220px; object-fit:cover; border-radius:14px; border:1px solid rgba(255,255,255,0.08)}
+    @media (max-width: 1100px){.gallery{grid-template-columns:repeat(2,1fr)}}
+    @media (max-width: 640px){.gallery{grid-template-columns:1fr}}
+
+    /* ===== AGENDAMENTO ===== */
+    .booking{
+      display:grid; grid-template-columns:1.1fr .9fr; gap:18px;
+    }
+    .booking form{
+      background:linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+      border:1px solid rgba(255,255,255,0.08); border-radius:var(--radius); padding:18px; color:#e5e7eb
+    }
+    label{display:block; font-size:14px; color:#cbd5e1; margin-bottom:6px}
+    input, select, textarea{
+      width:100%; padding:12px 14px; border-radius:12px; border:1px solid rgba(255,255,255,0.12);
+      background:#0b1a2b; color:#e5e7eb; outline:none
+    }
+    .grid-2{display:grid; grid-template-columns:1fr 1fr; gap:12px}
+    .grid-3{display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px}
+    .submit{margin-top:14px}
+    .aside{
+      background:linear-gradient(180deg, #0f2742, #0b1a2b); border-radius:var(--radius); padding:20px; color:#e5e7eb;
+      border:1px solid rgba(255,255,255,0.08);
+    }
+    .aside li{margin:8px 0; color:#cbd5e1}
+    @media (max-width: 900px){.booking{grid-template-columns:1fr}}
+
+    /* ===== CONTATO ===== */
+    .contact{
+      display:grid; grid-template-columns:1fr 1fr; gap:16px
+    }
+    .contact-card{padding:18px}
+    .contact .map{min-height:300px; border-radius:var(--radius); border:1px solid rgba(255,255,255,0.08); overflow:hidden}
+    @media (max-width: 900px){.contact{grid-template-columns:1fr}}
+
+    /* ===== FOOTER ===== */
+    footer{
+      color:#94a3b8; border-top:1px solid rgba(255,255,255,0.08); margin-top:40px
+    }
+    .footer-inner{max-width:1200px; margin:0 auto; padding:26px 20px; display:flex; flex-wrap:wrap; gap:14px; justify-content:space-between}
+
+    /* ===== ANIMAÇÕES ===== */
+    .reveal{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease}
+    .reveal.in{opacity:1; transform:none}
+    .fade-in{animation:fade .8s ease forwards}
+    @keyframes fade{from{opacity:0; transform:translateY(8px)} to{opacity:1; transform:none}}
+  </style>
+</head>
+<body>
+  <!-- ===== NAVBAR ===== -->
+  <header class="navbar" aria-label="Barra de navegação principal">
+    <div class="nav-inner">
+      <a class="brand" href="#inicio" aria-label="Ir para início">
+        <div class="logo">BE</div>
+        <span>Barbearia Elite</span>
+      </a>
+      <nav class="nav-links" aria-label="Navegação">
+        <a href="#servicos">Serviços</a>
+        <a href="#equipe">Equipe</a>
+        <a href="#avaliacoes">Avaliações</a>
+        <a href="#agendamento">Agendamento</a>
+        <a href="#fotos">Fotos</a>
+        <a href="#contato">Contato</a>
+      </nav>
+      <div style="display:flex; gap:10px; align-items:center">
+        <a class="login-btn" href="#login" aria-label="Entrar">Login</a>
+        <button class="hamburger" id="menuBtn" aria-label="Abrir menu">☰</button>
+      </div>
+    </div>
+    <div class="nav-drawer" id="drawer" role="dialog" aria-modal="true" aria-label="Menu">
+      <a href="#servicos" onclick="toggleDrawer(false)">Serviços</a>
+      <a href="#equipe" onclick="toggleDrawer(false)">Equipe</a>
+      <a href="#avaliacoes" onclick="toggleDrawer(false)">Avaliações</a>
+      <a href="#agendamento" onclick="toggleDrawer(false)">Agendamento</a>
+      <a href="#fotos" onclick="toggleDrawer(false)">Fotos</a>
+      <a href="#contato" onclick="toggleDrawer(false)">Contato</a>
+      <a href="#login" class="login-btn" style="text-align:center" onclick="toggleDrawer(false)">Login</a>
+    </div>
+  </header>
+
+  <!-- ===== HERO ===== -->
+  <section id="inicio" class="hero">
+    <div class="hero-inner">
+      <div class="fade-in">
+        <h1>Elegância e precisão em cada corte.</h1>
+        <p class="subtitle">Na Barbearia Elite, combinamos técnicas clássicas e tendências modernas para oferecer uma experiência premium — do acolhimento ao acabamento.</p>
+        <div class="cta">
+          <a class="btn primary" href="#agendamento">Agendar agora</a>
+          <a class="btn ghost" href="#servicos">Ver serviços</a>
+        </div>
+      </div>
+      <div class="hero-card reveal">
+        <div class="hero-grid">
+          <div class="mini">
+            <h3>Horários</h3>
+            <p>Seg–Sáb: 09h–20h • Dom: 10h–16h</p>
+          </div>
+          <div class="mini">
+            <h3>Endereço</h3>
+            <p>Av. Central, 123 — Centro</p>
+          </div>
+          <div class="mini">
+            <h3>Destaque</h3>
+            <p>Barba com toalha quente e finalização premium.</p>
+          </div>
+          <div class="mini">
+            <h3>Forma de pagamento</h3>
+            <p>Pix, crédito, débito e dinheiro.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SERVIÇOS ===== -->
+  <section id="servicos" class="section">
+    <h2 class="section-title">Serviços</h2>
+    <p class="section-sub">Qualidade e cuidado em cada detalhe.</p>
+    <div class="services">
+      <article class="card service reveal">
+        <h3>Corte Clássico</h3>
+        <p>Consulta rápida, lavagem e finalização profissional.</p>
+        <p class="price">R$ 45</p>
+      </article>
+      <article class="card service reveal">
+        <h3>Barba Completa</h3>
+        <p>Modelagem, toalha quente e balm refrescante.</p>
+        <p class="price">R$ 35</p>
+      </article>
+      <article class="card service reveal">
+        <h3>Corte + Barba</h3>
+        <p>Combo especial para visual completo.</p>
+        <p class="price">R$ 70</p>
+      </article>
+      <article class="card service reveal">
+        <h3>Degradê/Fade</h3>
+        <p>Acabamento de alto nível com pente e navalha.</p>
+        <p class="price">R$ 55</p>
+      </article>
+      <article class="card service reveal">
+        <h3>Social Executivo</h3>
+        <p>Estilo limpo, discreto e sofisticado.</p>
+        <p class="price">R$ 50</p>
+      </article>
+      <article class="card service reveal">
+        <h3>Tratamento Capilar</h3>
+        <p>Hidratação e revitalização anti-ressecamento.</p>
+        <p class="price">R$ 40</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== EQUIPE ===== -->
+  <section id="equipe" class="section">
+    <h2 class="section-title">Nossa equipe</h2>
+    <p class="section-sub">Profissionais especialistas, prontos para te atender.</p>
+    <div class="team">
+      <article class="card member reveal" aria-label="Barbeiro: Lucas Andrade">
+        <img class="photo" alt="Barbeiro Lucas cortando cabelo" src="https://images.unsplash.com/photo-1593702295092-3d05a3c55334?q=80&w=1887&auto=format&fit=crop"/>
+        <div class="info">
+          <span class="tag">Fade & Navalha</span>
+          <h4>Lucas Andrade</h4>
+          <p>Especialista em cortes modernos e acabamento com navalha.</p>
+        </div>
+      </article>
+      <article class="card member reveal" aria-label="Barbeiro: Rafael Silva">
+        <img class="photo" alt="Barbeiro Rafael aparando barba" src="https://images.unsplash.com/photo-1622286342621-4bd786c2447a?q=80&w=2070&auto=format&fit=crop"/>
+        <div class="info">
+          <span class="tag">Barbas & Modelagem</span>
+          <h4>Rafael Silva</h4>
+          <p>Barbas personalizadas, toalha quente e finalização premium.</p>
+        </div>
+      </article>
+      <article class="card member reveal" aria-label="Barbeiro: Diego Costa">
+        <img class="photo" alt="Barbeiro Diego penteando cliente" src="https://images.unsplash.com/photo-1602746875433-40c9a8cf4bd1?q=80&w=1887&auto=format&fit=crop"/>
+        <div class="info">
+          <span class="tag">Clássico & Social</span>
+          <h4>Diego Costa</h4>
+          <p>Estilo executivo e cortes clássicos com precisão.</p>
+        </div>
+      </article>
+      <article class="card member reveal" aria-label="Barbeiro: Bruno Martins">
+        <img class="photo" alt="Barbeiro Bruno finalizando corte com secador" src="https://images.unsplash.com/photo-1618641986557-1ecd230959aa?q=80&w=1974&auto=format&fit=crop"/>
+        <div class="info">
+          <span class="tag">Design & Tendências</span>
+          <h4>Bruno Martins</h4>
+          <p>Detalhes criativos e design de risco com simetria.</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== AVALIAÇÕES ===== -->
+  <section id="avaliacoes" class="section">
+    <h2 class="section-title">O que dizem</h2>
+    <p class="section-sub">Experiências reais de clientes.</p>
+    <div class="reviews">
+      <article class="card review reveal">
+        <div class="stars" aria-label="5 de 5">★★★★★</div>
+        <p>"Ambiente top e atendimento impecável. Saí renovado!" — <strong>Henrique</strong></p>
+      </article>
+      <article class="card review reveal">
+        <div class="stars" aria-label="5 de 5">★★★★★</div>
+        <p>"O combo corte + barba é sensacional. Voltarei sempre." — <strong>Eduardo</strong></p>
+      </article>
+      <article class="card review reveal">
+        <div class="stars" aria-label="5 de 5">★★★★★</div>
+        <p>"Profissionais atenciosos e super caprichosos." — <strong>Marcos</strong></p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== AGENDAMENTO ===== -->
+  <section id="agendamento" class="section">
+    <h2 class="section-title">Agendamento</h2>
+    <p class="section-sub">Escolha o serviço, o profissional e o melhor horário para você.</p>
+    <div class="booking">
+      <form class="reveal" onsubmit="event.preventDefault(); alert('Agendamento enviado! Entraremos em contato.');">
+        <div class="grid-2">
+          <div>
+            <label for="nome">Nome completo</label>
+            <input id="nome" name="nome" placeholder="Seu nome" required />
+          </div>
+          <div>
+            <label for="telefone">Telefone/WhatsApp</label>
+            <input id="telefone" name="telefone" placeholder="(00) 90000-0000" required />
+          </div>
+        </div>
+        <div class="grid-3" style="margin-top:12px">
+          <div>
+            <label for="servico">Serviço</label>
+            <select id="servico" name="servico" required>
+              <option value="">Selecione</option>
+              <option>Corte Clássico</option>
+              <option>Barba Completa</option>
+              <option>Corte + Barba</option>
+              <option>Degradê/Fade</option>
+              <option>Social Executivo</option>
+              <option>Tratamento Capilar</option>
+            </select>
+          </div>
+          <div>
+            <label for="profissional">Profissional</label>
+            <select id="profissional" name="profissional">
+              <option>Primeiro disponível</option>
+              <option>Lucas</option>
+              <option>Rafael</option>
+              <option>Diego</option>
+              <option>Bruno</option>
+            </select>
+          </div>
+          <div>
+            <label for="data">Data</label>
+            <input type="date" id="data" name="data" required />
+          </div>
+        </div>
+        <div class="grid-2" style="margin-top:12px">
+          <div>
+            <label for="hora">Horário</label>
+            <input type="time" id="hora" name="hora" required />
+          </div>
+          <div>
+            <label for="observacoes">Observações</label>
+            <input id="observacoes" name="observacoes" placeholder="Preferências, referências, etc." />
+          </div>
+        </div>
+        <button class="btn primary submit" type="submit">Confirmar agendamento</button>
+      </form>
+
+      <aside class="aside reveal" aria-label="Informações de agendamento">
+        <h3 style="margin-top:0">Informações</h3>
+        <ul>
+          <li>Chegue 10 minutos antes do horário.</li>
+          <li>Cancelamentos gratuitos até 2h antes.</li>
+          <li>Desconto de 10% no combo de quarta-feira.</li>
+        </ul>
+        <h4>Atendimento</h4>
+        <p>Segunda a Sábado: 09h – 20h<br/>Domingo: 10h – 16h</p>
+        <h4>Contato</h4>
+        <p>WhatsApp: (00) 90000-0000</p>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ===== GALERIA ===== -->
+  <section id="fotos" class="section">
+    <h2 class="section-title">Galeria</h2>
+    <p class="section-sub">Alguns dos nossos trabalhos recentes.</p>
+    <div class="gallery">
+      <img class="reveal" alt="Corte degradê" src="https://images.unsplash.com/photo-1534835877830-2f97b90a8053?q=80&w=2070&auto=format&fit=crop"/>
+      <img class="reveal" alt="Modelagem de barba" src="https://images.unsplash.com/photo-1622286342621-4bd786c2447a?q=80&w=2070&auto=format&fit=crop"/>
+      <img class="reveal" alt="Corte clássico masculino" src="https://images.unsplash.com/photo-1472162072942-cd5147eb3902?q=80&w=2067&auto=format&fit=crop"/>
+      <img class="reveal" alt="Finalização com secador" src="https://images.unsplash.com/photo-1618641986557-1ecd230959aa?q=80&w=1974&auto=format&fit=crop"/>
+      <img class="reveal" alt="Penteado elegante" src="https://images.unsplash.com/photo-1517837016564-a0e8bd9e76de?q=80&w=1974&auto=format&fit=crop"/>
+      <img class="reveal" alt="Barbeiro trabalhando" src="https://images.unsplash.com/photo-1593702295092-3d05a3c55334?q=80&w=1887&auto=format&fit=crop"/>
+      <img class="reveal" alt="Corte social executivo" src="https://images.unsplash.com/photo-1610130273449-1df3b9a49df7?q=80&w=1974&auto=format&fit=crop"/>
+      <img class="reveal" alt="Ferramentas de barbearia" src="https://images.unsplash.com/photo-1503951458645-643d53bfd90f?q=80&w=2070&auto=format&fit=crop"/>
+    </div>
+  </section>
+
+  <!-- ===== CONTATO ===== -->
+  <section id="contato" class="section">
+    <h2 class="section-title">Contato</h2>
+    <p class="section-sub">Fale com a gente ou faça uma visita.</p>
+    <div class="contact">
+      <div class="card contact-card reveal">
+        <h3 style="margin-top:0">Endereço</h3>
+        <p>Av. Central, 123 — Centro, Sua Cidade</p>
+        <h3>Telefone</h3>
+        <p>(00) 90000-0000</p>
+        <h3>Email</h3>
+        <p>contato@barbeariaelite.com</p>
+        <a class="btn ghost" href="mailto:contato@barbeariaelite.com" aria-label="Enviar email">Enviar email</a>
+      </div>
+      <div class="map reveal" aria-label="Mapa da barbearia">
+        <!-- Substitua pelo seu iframe de mapa real -->
+        <iframe title="Mapa" src="https://www.openstreetmap.org/export/embed.html?bbox=-43.209%2C-22.912%2C-43.179%2C-22.882&amp;layer=mapnik" style="border:0; width:100%; height:100%" loading="lazy"></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== LOGIN (SEÇÃO DESTINO DO BOTÃO) ===== -->
+  <section id="login" class="section">
+    <h2 class="section-title">Área do cliente</h2>
+    <p class="section-sub">Acesse para acompanhar seus agendamentos.</p>
+    <div class="booking">
+      <form class="reveal" onsubmit="event.preventDefault(); alert('Login de exemplo. Conecte ao seu backend PHP.');">
+        <div class="grid-2">
+          <div>
+            <label for="email">E-mail</label>
+            <input id="email" name="email" type="email" placeholder="voce@email.com" required />
+          </div>
+          <div>
+            <label for="senha">Senha</label>
+            <input id="senha" name="senha" type="password" placeholder="********" required />
+          </div>
+        </div>
+        <button class="btn primary submit" type="submit">Entrar</button>
+        <p style="color:#cbd5e1; font-size:14px">Não tem conta? <a href="#" style="color:#93c5fd">Crie uma</a></p>
+      </form>
+      <aside class="aside reveal">
+        <h3 style="margin-top:0">Vantagens</h3>
+        <ul>
+          <li>Histórico de agendamentos</li>
+          <li>Reagendar em 1 clique</li>
+          <li>Ofertas exclusivas</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <div>&copy; <span id="year"></span> Barbearia Elite. Todos os direitos reservados.</div>
+      <div>Feito com cuidado e estilo.</div>
+    </div>
+  </footer>
+
+  <script>
+    // Ano no rodapé
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Drawer mobile
+    const drawer = document.getElementById('drawer');
+    const menuBtn = document.getElementById('menuBtn');
+    function toggleDrawer(force){
+      const open = typeof force === 'boolean' ? force : drawer.style.display !== 'flex';
+      drawer.style.display = open ? 'flex' : 'none';
+    }
+    menuBtn.addEventListener('click', () => toggleDrawer());
+
+    // Fechar ao clicar fora
+    document.addEventListener('click', (e)=>{
+      if(drawer.style.display === 'flex' && !drawer.contains(e.target) && e.target !== menuBtn){
+        toggleDrawer(false);
+      }
+    });
+
+    // Interseção para revelar elementos (fade/slide)
+    const reveal = new IntersectionObserver((entries)=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){ entry.target.classList.add('in'); reveal.unobserve(entry.target); }
+      })
+    }, {threshold: 0.12});
+    document.querySelectorAll('.reveal').forEach(el=>reveal.observe(el));
+
+    // Parallax suave no hero (tradução mínima para evitar jank)
+    const hero = document.querySelector('.hero');
+    let ticking=false;
+    window.addEventListener('scroll', ()=>{
+      if(!ticking){
+        window.requestAnimationFrame(()=>{
+          const y = window.scrollY * 0.15;
+          hero.style.backgroundPosition = `center ${-y}px`;
+          ticking=false;
+        });
+        ticking=true;
+      }
+    }, {passive:true});
+  </script>
+</body>
+</html>

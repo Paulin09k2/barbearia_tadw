@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barbearia Elite - Tradição e Modernidade</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;500;600&display=swap");
+
+      * {
+        scroll-behavior: smooth;
+      }
+
+      .font-playfair {
+        font-family: "Playfair Display", serif;
+      }
+      .font-inter {
+        font-family: "Inter", sans-serif;
+      }
+
+      .fade-in {
+        opacity: 0;
+        transform: translateY(30px);
+        transition: all 0.8s ease-out;
+      }
+
+      .fade-in.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      .slide-in-left {
+        opacity: 0;
+        transform: translateX(-50px);
+        transition: all 0.8s ease-out;
+      }
+
+      .slide-in-left.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .slide-in-right {
+        opacity: 0;
+        transform: translateX(50px);
+        transition: all 0.8s ease-out;
+      }
+
+      .slide-in-right.visible {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      .card-hover {
+        transition: all 0.3s ease;
+      }
+
+      .card-hover:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(30, 58, 138, 0.2);
+      }
+
+      .parallax-bg {
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+      }
+
+      .gradient-overlay {
+        background: linear-gradient(
+          135deg,
+          rgba(30, 58, 138, 0.9) 0%,
+          rgba(59, 130, 246, 0.8) 100%
+        );
+      }
+
+      .nav-fixed {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+        background: rgba(30, 58, 138, 0.95);
+        transition: all 0.3s ease;
+      }
+
+      .star-rating {
+        color: #fbbf24;
+      }
+
+      .service-row:nth-child(even) {
+        background-color: rgba(30, 58, 138, 0.05);
+      }
+
+      .whatsapp-float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 40px;
+        right: 40px;
+        background-color: #25d366;
+        color: white;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 2px 2px 3px #999;
+        z-index: 100;
+        animation: pulse 2s infinite;
+      }
+
+      @keyframes pulse {
+        0% {
+          transform: scale(1);
+        }
+        50% {
+          transform: scale(1.1);
+        }
+        100% {
+          transform: scale(1);
+        }
+      }
+
+      .logo-animation {
+        animation: logoFloat 3s ease-in-out infinite;
+      }
+
+      @keyframes logoFloat {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+      }
+    </style>
+  </head>
+  <body class="font-inter bg-gray-50">
+    <!-- Navigation -->
+    <nav class="nav-fixed">
+      <div class="container mx-auto px-4 py-4">
+        <div class="flex justify-between items-center">
+          <div class="flex items-center space-x-3">
+            <div
+              class="w-10 h-10 bg-white rounded-full flex items-center justify-center"
+            >
+              <i class="fas fa-cut text-blue-900 text-lg"></i>
+            </div>
+            <span class="text-white font-playfair text-xl font-bold"
+              >Barbearia Elite</span
+            >
+          </div>
+
+          <div class="hidden md:flex space-x-6">
+            <a
+              href="#inicio"
+              class="text-white hover:text-blue-200 transition-colors"
+              >Início</a
+            >
+            <a
+              href="#servicos"
+              class="text-white hover:text-blue-200 transition-colors"
+              >Serviços</a
+            >
+            <a
+              href="#cortes"
+              class="text-white hover:text-blue-200 transition-colors"
+              >Cortes</a
+            >
+            <a
+              href="#equipe"
+              class="text-white hover:text-blue-200 transition-colors"
+              >Equipe</a
+            >
+            <a
+              href="#contato"
+              class="text-white hover:text-blue-200 transition-colors"
+              >Contato</a
+            >
+          </div>
+
+          <button
+            class="bg-white text-blue-900 px-4 py-2 rounded-lg font-medium hover:bg-blue-50 transition-colors"
+          >
+            <i class="fas fa-user mr-2"></i>Login
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section
+      id="inicio"
+      class="min-h-screen flex items-center justify-center parallax-bg"
+      style="
+        background-image: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+      "
+    >
+      <div class="gradient-overlay absolute inset-0"></div>
+      <div class="container mx-auto px-4 text-center relative z-10">
+        <div class="fade-in">
+          <div class="logo-animation mb-8">
+            <div
+              class="w-32 h-32 bg-white rounded-full flex items-center justify-center mx-auto mb-6 shadow-2xl"
+            >
+              <i class="fas fa-cut text-blue-900 text-5xl"></i>
+            </div>
+          </div>
+          <h1
+            class="font-playfair text-5xl md:text-7xl font-bold text-white mb-6"
+          >
+            Barbearia Elite
+          </h1>
+          <p class="text-xl md:text-2xl text-blue-100 mb-8 max-w-3xl mx-auto">
+            Onde tradição encontra modernidade. Há mais de 20 anos oferecendo os
+            melhores cortes e cuidados masculinos com excelência e sofisticação.
+          </p>
+          <div class="flex flex-col sm:flex-row gap-4 justify-center">
+            <a
+              href="#servicos"
+              class="bg-white text-blue-900 px-8 py-4 rounded-lg font-semibold hover:bg-blue-50 transition-all transform hover:scale-105"
+            >
+              Ver Serviços
+            </a>
+            <a
+              href="#contato"
+              class="border-2 border-white text-white px-8 py-4 rounded-lg font-semibold hover:bg-white hover:text-blue-900 transition-all"
+            >
+              Agendar Horário
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="servicos" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16 fade-in">
+          <h2
+            class="font-playfair text-4xl md:text-5xl font-bold text-blue-900 mb-4"
+          >
+            Nossos Serviços
+          </h2>
+          <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+            Oferecemos uma gama completa de serviços premium para o homem
+            moderno
+          </p>
+        </div>
+
+        <div
+          class="bg-white rounded-2xl shadow-2xl overflow-hidden slide-in-left"
+        >
+          <div class="overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-blue-900 text-white">
+                <tr>
+                  <th class="px-6 py-4 text-left font-semibold">Serviço</th>
+                  <th class="px-6 py-4 text-center font-semibold">Preço</th>
+                  <th class="px-6 py-4 text-center font-semibold">Duração</th>
+                  <th class="px-6 py-4 text-center font-semibold">Avaliação</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="service-row border-b border-gray-100">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center">
+                      <i class="fas fa-cut text-blue-900 mr-3"></i>
+                      <div>
+                        <div class="font-semibold text-gray-900">
+                          Corte Tradicional
+                        </div>
+                        <div class="text-sm text-gray-500">
+                          Corte clássico com acabamento perfeito
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-center font-semibold text-blue-900">
+                    R$ 45
+                  </td>
+                  <td class="px-6 py-4 text-center text-gray-600">45 min</td>
+                  <td class="px-6 py-4 text-center">
+                    <div class="star-rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="service-row border-b border-gray-100">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center">
+                      <i class="fas fa-user-tie text-blue-900 mr-3"></i>
+                      <div>
+                        <div class="font-semibold text-gray-900">
+                          Corte + Barba
+                        </div>
+                        <div class="text-sm text-gray-500">
+                          Serviço completo com design de barba
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-center font-semibold text-blue-900">
+                    R$ 70
+                  </td>
+                  <td class="px-6 py-4 text-center text-gray-600">60 min</td>
+                  <td class="px-6 py-4 text-center">
+                    <div class="star-rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="service-row border-b border-gray-100">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center">
+                      <i class="fas fa-spa text-blue-900 mr-3"></i>
+                      <div>
+                        <div class="font-semibold text-gray-900">
+                          Tratamento Premium
+                        </div>
+                        <div class="text-sm text-gray-500">
+                          Hidratação, massagem e cuidados especiais
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-center font-semibold text-blue-900">
+                    R$ 120
+                  </td>
+                  <td class="px-6 py-4 text-center text-gray-600">90 min</td>
+                  <td class="px-6 py-4 text-center">
+                    <div class="star-rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                  </td>
+                </tr>
+                <tr class="service-row">
+                  <td class="px-6 py-4">
+                    <div class="flex items-center">
+                      <i class="fas fa-crown text-blue-900 mr-3"></i>
+                      <div>
+                        <div class="font-semibold text-gray-900">
+                          Pacote VIP
+                        </div>
+                        <div class="text-sm text-gray-500">
+                          Experiência completa com todos os serviços
+                        </div>
+                      </div>
+                    </div>
+                  </td>
+                  <td class="px-6 py-4 text-center font-semibold text-blue-900">
+                    R$ 200
+                  </td>
+                  <td class="px-6 py-4 text-center text-gray-600">120 min</td>
+                  <td class="px-6 py-4 text-center">
+                    <div class="star-rating">
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                      <i class="fas fa-star"></i>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Haircuts Section -->
+    <section id="cortes" class="py-20 bg-gray-50">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16 fade-in">
+          <h2
+            class="font-playfair text-4xl md:text-5xl font-bold text-blue-900 mb-4"
+          >
+            Estilos de Cortes
+          </h2>
+          <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+            Descubra os cortes mais modernos e clássicos, executados com
+            perfeição
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden slide-in-left"
+          >
+            <div
+              class="h-64 bg-gradient-to-br from-blue-900 to-blue-700 flex items-center justify-center"
+            >
+              <i class="fas fa-cut text-white text-6xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="font-playfair text-2xl font-bold text-blue-900 mb-3">
+                Fade Clássico
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Corte degradê tradicional com transições suaves, perfeito para o
+                homem moderno que busca elegância.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-blue-900 font-semibold"
+                  >A partir de R$ 45</span
+                >
+                <button
+                  class="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors"
+                >
+                  Agendar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden fade-in"
+          >
+            <div
+              class="h-64 bg-gradient-to-br from-blue-800 to-blue-600 flex items-center justify-center"
+            >
+              <i class="fas fa-user-tie text-white text-6xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="font-playfair text-2xl font-bold text-blue-900 mb-3">
+                Executivo
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Corte social refinado, ideal para ambientes corporativos.
+                Sofisticação e praticidade em um só estilo.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-blue-900 font-semibold"
+                  >A partir de R$ 50</span
+                >
+                <button
+                  class="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors"
+                >
+                  Agendar
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden slide-in-right"
+          >
+            <div
+              class="h-64 bg-gradient-to-br from-blue-700 to-blue-500 flex items-center justify-center"
+            >
+              <i class="fas fa-fire text-white text-6xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="font-playfair text-2xl font-bold text-blue-900 mb-3">
+                Moderno
+              </h3>
+              <p class="text-gray-600 mb-4">
+                Cortes contemporâneos com técnicas avançadas. Para quem quer
+                estar sempre na vanguarda do estilo.
+              </p>
+              <div class="flex justify-between items-center">
+                <span class="text-blue-900 font-semibold"
+                  >A partir de R$ 60</span
+                >
+                <button
+                  class="bg-blue-900 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors"
+                >
+                  Agendar
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="equipe" class="py-20 bg-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16 fade-in">
+          <h2
+            class="font-playfair text-4xl md:text-5xl font-bold text-blue-900 mb-4"
+          >
+            Nossa Equipe
+          </h2>
+          <p class="text-gray-600 text-lg max-w-2xl mx-auto">
+            Profissionais experientes e apaixonados pela arte da barbearia
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div
+            class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden text-center slide-in-left"
+          >
+            <div
+              class="h-64 bg-gradient-to-br from-blue-900 to-blue-700 flex items-center justify-center"
+            >
+              <i class="fas fa-user-circle text-white text-8xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="font-playfair text-2xl font-bold text-blue-900 mb-2">
+                Carlos Silva
+              </h3>
+              <p class="text-blue-600 font-semibold mb-3">Mestre Barbeiro</p>
+              <p class="text-gray-600 mb-4">
+                25 anos de experiência. Especialista em cortes clássicos e
+                modernos. Fundador da Barbearia Elite.
+              </p>
+              <div class="star-rating text-center">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden text-center fade-in"
+          >
+            <div
+              class="h-64 bg-gradient-to-br from-blue-800 to-blue-600 flex items-center justify-center"
+            >
+              <i class="fas fa-user-circle text-white text-8xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="font-playfair text-2xl font-bold text-blue-900 mb-2">
+                Rafael Santos
+              </h3>
+              <p class="text-blue-600 font-semibold mb-3">
+                Barbeiro Especialista
+              </p>
+              <p class="text-gray-600 mb-4">
+                15 anos de carreira. Expert em design de barba e cortes degradê.
+                Técnicas modernas e precisão.
+              </p>
+              <div class="star-rating text-center">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="card-hover bg-white rounded-2xl shadow-lg overflow-hidden text-center slide-in-right"
+          >
+            <div
+              class="h-64 bg-gradient-to-br from-blue-700 to-blue-500 flex items-center justify-center"
+            >
+              <i class="fas fa-user-circle text-white text-8xl"></i>
+            </div>
+            <div class="p-6">
+              <h3 class="font-playfair text-2xl font-bold text-blue-900 mb-2">
+                Lucas Oliveira
+              </h3>
+              <p class="text-blue-600 font-semibold mb-3">
+                Barbeiro Jovem Talento
+              </p>
+              <p class="text-gray-600 mb-4">
+                8 anos de experiência. Especialista em cortes modernos e
+                tratamentos capilares. Inovação e estilo.
+              </p>
+              <div class="star-rating text-center">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contato" class="py-20 bg-blue-900 text-white">
+      <div class="container mx-auto px-4">
+        <div class="text-center mb-16 fade-in">
+          <h2 class="font-playfair text-4xl md:text-5xl font-bold mb-4">
+            Entre em Contato
+          </h2>
+          <p class="text-blue-100 text-lg max-w-2xl mx-auto">
+            Agende seu horário e venha viver a experiência Elite
+          </p>
+        </div>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="text-center slide-in-left">
+            <div
+              class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-map-marker-alt text-blue-900 text-2xl"></i>
+            </div>
+            <h3 class="font-semibold text-xl mb-2">Endereço</h3>
+            <p class="text-blue-100">
+              Rua das Flores, 123<br />Centro - São Paulo/SP<br />CEP: 01234-567
+            </p>
+          </div>
+
+          <div class="text-center fade-in">
+            <div
+              class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-phone text-blue-900 text-2xl"></i>
+            </div>
+            <h3 class="font-semibold text-xl mb-2">Telefone</h3>
+            <p class="text-blue-100">
+              (11) 9999-8888<br />Segunda a Sábado<br />8h às 20h
+            </p>
+          </div>
+
+          <div class="text-center fade-in">
+            <div
+              class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fab fa-whatsapp text-blue-900 text-2xl"></i>
+            </div>
+            <h3 class="font-semibold text-xl mb-2">WhatsApp</h3>
+            <p class="text-blue-100">
+              (11) 99999-8888<br />Agendamentos<br />24h online
+            </p>
+          </div>
+
+          <div class="text-center slide-in-right">
+            <div
+              class="w-16 h-16 bg-white rounded-full flex items-center justify-center mx-auto mb-4"
+            >
+              <i class="fas fa-share-alt text-blue-900 text-2xl"></i>
+            </div>
+            <h3 class="font-semibold text-xl mb-2">Redes Sociais</h3>
+            <div class="flex justify-center space-x-4 mt-4">
+              <a
+                href="#"
+                class="text-blue-100 hover:text-white text-2xl transition-colors"
+              >
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a
+                href="#"
+                class="text-blue-100 hover:text-white text-2xl transition-colors"
+              >
+                <i class="fab fa-facebook"></i>
+              </a>
+              <a
+                href="#"
+                class="text-blue-100 hover:text-white text-2xl transition-colors"
+              >
+                <i class="fab fa-youtube"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+      <div class="container mx-auto px-4 text-center">
+        <div class="flex items-center justify-center space-x-3 mb-4">
+          <div
+            class="w-8 h-8 bg-blue-600 rounded-full flex items-center justify-center"
+          >
+            <i class="fas fa-cut text-white"></i>
+          </div>
+          <span class="font-playfair text-xl font-bold">Barbearia Elite</span>
+        </div>
+        <p class="text-gray-400">
+          © 2024 Barbearia Elite. Todos os direitos reservados.
+        </p>
+        <p class="text-gray-400 mt-2">
+          Tradição, qualidade e excelência há mais de 20 anos.
+        </p>
+      </div>
+    </footer>
+
+    <!-- WhatsApp Float Button -->
+    <a
+      href="https://wa.me/5511999998888"
+      class="whatsapp-float"
+      target="_blank"
+    >
+      <i class="fab fa-whatsapp" style="margin-top: 16px"></i>
+    </a>
+
+    <script>
+      // Scroll animations
+      const observerOptions = {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px",
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+          }
+        });
+      }, observerOptions);
+
+      // Observe all animation elements
+      document
+        .querySelectorAll(".fade-in, .slide-in-left, .slide-in-right")
+        .forEach((el) => {
+          observer.observe(el);
+        });
+
+      // Smooth scrolling for navigation links
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({
+              behavior: "smooth",
+              block: "start",
+            });
+          }
+        });
+      });
+
+      // Mobile menu toggle (if needed)
+      const mobileMenuToggle = () => {
+        // Add mobile menu functionality here if needed
+      };
+
+      // Add scroll effect to navigation
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector(".nav-fixed");
+        if (window.scrollY > 100) {
+          nav.style.background = "rgba(30, 58, 138, 0.98)";
+        } else {
+          nav.style.background = "rgba(30, 58, 138, 0.95)";
+        }
+      });
+
+      // Service booking functionality
+      document.querySelectorAll("button").forEach((button) => {
+        if (button.textContent.includes("Agendar")) {
+          button.addEventListener("click", () => {
+            const service = button
+              .closest(".card-hover, tr")
+              .querySelector("h3, .font-semibold").textContent;
+            const message = `Olá! Gostaria de agendar um horário para: ${service}`;
+            const whatsappUrl = `https://wa.me/5511999998888?text=${encodeURIComponent(
+              message
+            )}`;
+            window.open(whatsappUrl, "_blank");
+          });
+        }
+      });
+
+      // Login button functionality
+      document
+        .querySelector("button:has(i.fa-user)")
+        .addEventListener("click", () => {
+          alert(
+            "Funcionalidade de login em desenvolvimento. Entre em contato pelo WhatsApp para agendamentos!"
+          );
+        });
+    </script>
+    <script>
+      (function () {
+        function c() {
+          var b = a.contentDocument || a.contentWindow.document;
+          if (b) {
+            var d = b.createElement("script");
+            d.innerHTML =
+              "window.__CF$cv$params={r:'973dc84c47680357',t:'MTc1NTk4NTM3NC4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";
+            b.getElementsByTagName("head")[0].appendChild(d);
+          }
+        }
+        if (document.body) {
+          var a = document.createElement("iframe");
+          a.height = 1;
+          a.width = 1;
+          a.style.position = "absolute";
+          a.style.top = 0;
+          a.style.left = 0;
+          a.style.border = "none";
+          a.style.visibility = "hidden";
+          document.body.appendChild(a);
+          if ("loading" !== document.readyState) c();
+          else if (window.addEventListener)
+            document.addEventListener("DOMContentLoaded", c);
+          else {
+            var e = document.onreadystatechange || function () {};
+            document.onreadystatechange = function (b) {
+              e(b);
+              "loading" !== document.readyState &&
+                ((document.onreadystatechange = e), c());
+            };
+          }
+        }
+      })();
+    </script>
+  </body>
+</html>
