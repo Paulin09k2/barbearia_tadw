@@ -3,9 +3,9 @@ require_once "conexao.php";
 require_once "funcoes.php";
 
 $nome = "Kaio";
-$email = "kaio@gmail.com";
-$telefone = "645165651";
-$cpf = "11122233394";
+$email = "kaiio@gmail.com";
+$telefone = "629932932028";
+$cpf = "11122233345";
 $data_nascimento = "2000-01-01";
 $data_admissao = "2000-01-02";
 $id_barbeiro = 6;

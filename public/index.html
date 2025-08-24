@@ -20,52 +20,42 @@
           extend: {
             colors: {
               navy: {
-                900: "#0D1B2A",
-                800: "#11233A",
-                700: "#132237",
+                900: '#0D1B2A',
+                800: '#11233A',
+                700: '#132237',
               },
-              platinum: "#E6EAF2",
-              softgray: "#F4F6FA",
+              platinum: '#E6EAF2',
+              softgray: '#F4F6FA',
             },
             boxShadow: {
-              "xl-soft": "0 20px 35px -15px rgba(0,0,0,0.35)",
+              'xl-soft': '0 20px 35px -15px rgba(0,0,0,0.35)',
             },
             fontFamily: {
-              sans: [
-                "Outfit",
-                "system-ui",
-                "Segoe UI",
-                "Roboto",
-                "Helvetica",
-                "Arial",
-              ],
+              sans: ['Outfit', 'system-ui', 'Segoe UI', 'Roboto', 'Helvetica', 'Arial'],
             },
             keyframes: {
               fadeInUp: {
-                "0%": { opacity: 0, transform: "translateY(16px)" },
-                "100%": { opacity: 1, transform: "translateY(0)" },
+                '0%': { opacity: 0, transform: 'translateY(16px)' },
+                '100%': { opacity: 1, transform: 'translateY(0)' },
               },
               floaty: {
-                "0%, 100%": { transform: "translateY(0)" },
-                "50%": { transform: "translateY(-6px)" },
+                '0%, 100%': { transform: 'translateY(0)' },
+                '50%': { transform: 'translateY(-6px)' },
               },
             },
             animation: {
-              fadeInUp: "fadeInUp 700ms ease-out forwards",
-              floaty: "floaty 6s ease-in-out infinite",
+              fadeInUp: 'fadeInUp 700ms ease-out forwards',
+              floaty: 'floaty 6s ease-in-out infinite',
             },
           },
         },
-      };
+      }
     </script>
     <style>
       /* Parallax banner */
       .hero-parallax {
-        background-image: linear-gradient(
-            rgba(13, 27, 42, 0.6),
-            rgba(13, 27, 42, 0.8)
-          ),
-          url("./img/barbeiro.jpg");
+        background-image: linear-gradient(rgba(13, 27, 42, 0.6), rgba(13, 27, 42, 0.8)),
+          url('./img/barbeiro.jpg');
         background-size: cover;
         background-position: center;
         background-attachment: fixed;
@@ -81,9 +71,7 @@
       }
     </style>
   </head>
-  <body
-    class="bg-softgray text-slate-100 selection:bg-navy-700 selection:text-white"
-  >
+  <body class="bg-softgray text-slate-100 selection:bg-navy-700 selection:text-white">
     <!-- NAVBAR FIXA -->
     <header
       class="fixed inset-x-0 top-0 z-50 backdrop-blur supports-[backdrop-filter]:bg-white/50 bg-white/70 border-b border-slate-200"
@@ -93,46 +81,26 @@
           <!-- Logo + Nome -->
           <a href="#topo" class="flex items-center gap-3 group">
             <span
-              class="inline-flex h-9 w-9 items-center justify-center rounded-2xl bg-navy-900 text-white shadow-xl group-hover:scale-105 transition"
+              class="inline-flex h-9 w-9 items-center justify-center overflow-hidden rounded-2xl bg-white shadow-xl group-hover:scale-105 transition"
             >
-              <!-- Tesoura (ícone) -->
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-5 w-5"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.8"
-              >
-                <path
-                  d="M4 7a3 3 0 1 0 0 6 3 3 0 0 0 0-6Zm16 0a3 3 0 1 0 0 6 3 3 0 0 0 0-6Z"
-                />
-                <path d="M7 9l10 6M7 15l10-6" />
-              </svg>
+              <img
+                src="./img/logo.png"
+                alt="Logo Barbearia Elite"
+                class="h-full w-full object-contain"
+              />
             </span>
             <div class="leading-tight">
-              <span class="block text-sm font-semibold text-navy-900"
-                >Barbearia Elite</span
-              >
-              <span class="block text-xs text-slate-600"
-                >Elegância & Tradição</span
-              >
+              <span class="block text-sm font-semibold text-navy-900"> Barbearia Elite </span>
+              <span class="block text-xs text-slate-600"> Elegância & Tradição </span>
             </div>
           </a>
+
           <!-- Links -->
-          <nav
-            class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700"
-          >
-            <a href="#apresentacao" class="nav-link hover:text-navy-900"
-              >Apresentação</a
-            >
-            <a href="#contatos" class="nav-link hover:text-navy-900"
-              >Contatos</a
-            >
+          <nav class="hidden md:flex items-center gap-6 text-sm font-medium text-slate-700">
+            <a href="#apresentacao" class="nav-link hover:text-navy-900">Apresentação</a>
+            <a href="#contatos" class="nav-link hover:text-navy-900">Contatos</a>
             <a href="#cortes" class="nav-link hover:text-navy-900">Estilos</a>
-            <a href="#servicos" class="nav-link hover:text-navy-900"
-              >Serviços</a
-            >
+            <a href="#servicos" class="nav-link hover:text-navy-900">Serviços</a>
             <a href="#equipe" class="nav-link hover:text-navy-900">Equipe</a>
           </nav>
           <!-- Ações -->
@@ -166,10 +134,7 @@
         </div>
       </div>
       <!-- Menu mobile -->
-      <div
-        id="mobileMenu"
-        class="md:hidden hidden border-t border-slate-200 bg-white"
-      >
+      <div id="mobileMenu" class="md:hidden hidden border-t border-slate-200 bg-white">
         <div class="mx-auto max-w-7xl px-4 py-3 grid gap-2 text-slate-700">
           <a href="#apresentacao" class="py-2">Apresentação</a>
           <a href="#contatos" class="py-2">Contatos</a>
@@ -190,13 +155,10 @@
         <div class="relative mx-auto max-w-7xl px-6 py-24 sm:py-28 lg:py-32">
           <div class="grid lg:grid-cols-2 gap-10 items-center">
             <div class="reveal text-white">
-              <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">
-                Barbearia Elite
-              </h1>
+              <h1 class="text-4xl sm:text-5xl font-extrabold leading-tight">Barbearia Elite</h1>
               <p class="mt-4 text-lg text-slate-100/90 max-w-prose">
-                Cortes clássicos e modernos, atendimento premium e experiência
-                autêntica. Tradição, técnica e estilo em um ambiente pensado
-                para você.
+                Cortes clássicos e modernos, atendimento premium e experiência autêntica. Tradição,
+                técnica e estilo em um ambiente pensado para você.
               </p>
               <div class="mt-8 flex flex-wrap gap-3">
                 <a
@@ -217,9 +179,7 @@
                 <div
                   class="absolute -inset-3 rounded-[2rem] bg-gradient-to-tr from-platinum to-white/70 blur-xl opacity-60"
                 ></div>
-                <div
-                  class="relative rounded-[2rem] bg-white p-8 text-center shadow-2xl"
-                >
+                <div class="relative rounded-[2rem] bg-white p-8 text-center shadow-2xl">
                   <div
                     class="mx-auto mb-5 h-24 w-24 rounded-3xl bg-navy-900 text-white grid place-items-center shadow-xl animate-floaty"
                   >
@@ -234,55 +194,33 @@
                     aria-label="Avaliação média 4.9 de 5"
                   >
                     <!-- Estrelas -->
-                    <svg
-                      class="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                       <path
                         d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.802 2.035a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.802-2.035a1 1 0 00-1.175 0l-2.802 2.035c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.88 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                       />
                     </svg>
-                    <svg
-                      class="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                       <path
                         d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.802 2.035a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.802-2.035a1 1 0 00-1.175 0l-2.802 2.035c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.88 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                       />
                     </svg>
-                    <svg
-                      class="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                       <path
                         d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.802 2.035a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.802-2.035a1 1 0 00-1.175 0l-2.802 2.035c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.88 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                       />
                     </svg>
-                    <svg
-                      class="h-5 w-5"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
+                    <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                       <path
                         d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.802 2.035a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.802-2.035a1 1 0 00-1.175 0l-2.802 2.035c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.88 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                       />
                     </svg>
-                    <svg
-                      class="h-5 w-5 text-amber-300"
-                      viewBox="0 0 20 20"
-                      fill="currentColor"
-                    >
+                    <svg class="h-5 w-5 text-amber-300" viewBox="0 0 20 20" fill="currentColor">
                       <path
                         d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.802 2.035a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.802-2.035a1 1 0 00-1.175 0l-2.802 2.035c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.88 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"
                       />
                     </svg>
                   </div>
-                  <span class="mt-1 block text-xs text-slate-500"
-                    >avaliação média 4.9/5</span
-                  >
+                  <span class="mt-1 block text-xs text-slate-500">avaliação média 4.9/5</span>
                 </div>
               </div>
             </div>
@@ -292,27 +230,20 @@
 
       <!-- CONTATOS -->
       <section id="contatos" class="relative bg-white">
-        <div
-          class="absolute inset-0 bg-gradient-to-b from-white to-slate-50"
-        ></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-white to-slate-50"></div>
         <div class="relative mx-auto max-w-7xl px-6 py-16">
           <div class="reveal grid md:grid-cols-2 gap-10 items-center">
             <div>
-              <h2 class="text-2xl sm:text-3xl font-semibold text-navy-900">
-                Contatos
-              </h2>
+              <h2 class="text-2xl sm:text-3xl font-semibold text-navy-900">Contatos</h2>
               <p class="mt-2 text-slate-600">
-                Fale com a nossa equipe para agendamentos, dúvidas e
-                informações.
+                Fale com a nossa equipe para agendamentos, dúvidas e informações.
               </p>
               <dl class="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div
                   class="rounded-2xl border border-slate-200 p-5 hover:shadow-xl-soft transition"
                 >
                   <dt class="text-sm font-semibold text-slate-700">Endereço</dt>
-                  <dd class="mt-1 text-slate-600">
-                    Rua Exemplo, 123 — Centro, Sua Cidade
-                  </dd>
+                  <dd class="mt-1 text-slate-600">Rua Exemplo, 123 — Centro, Sua Cidade</dd>
                 </div>
                 <div
                   class="rounded-2xl border border-slate-200 p-5 hover:shadow-xl-soft transition"
@@ -336,36 +267,20 @@
                 <div
                   class="rounded-2xl border border-slate-200 p-5 hover:shadow-xl-soft transition"
                 >
-                  <dt class="text-sm font-semibold text-slate-700">
-                    Redes sociais
-                  </dt>
+                  <dt class="text-sm font-semibold text-slate-700">Redes sociais</dt>
                   <dd class="mt-1 flex gap-3 text-slate-600">
-                    <a
-                      href="#"
-                      aria-label="Instagram"
-                      class="hover:text-navy-900"
-                      >Instagram</a
-                    >
-                    <a
-                      href="#"
-                      aria-label="Facebook"
-                      class="hover:text-navy-900"
-                      >Facebook</a
-                    >
-                    <a href="#" aria-label="TikTok" class="hover:text-navy-900"
-                      >TikTok</a
-                    >
+                    <a href="#" aria-label="Instagram" class="hover:text-navy-900">Instagram</a>
+                    <a href="#" aria-label="Facebook" class="hover:text-navy-900">Facebook</a>
+                    <a href="#" aria-label="TikTok" class="hover:text-navy-900">TikTok</a>
                   </dd>
                 </div>
               </dl>
             </div>
             <div>
-              <div
-                class="rounded-3xl overflow-hidden shadow-2xl border border-slate-200"
-              >
+              <div class="rounded-3xl overflow-hidden shadow-2xl border border-slate-200">
                 <!-- Mapa estático (ilustrativo) -->
                 <img
-                  src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?q=80&w=1200&auto=format&fit=crop"
+                  src="./img/fundo_barbearia.jpeg"
                   alt="Mapa ilustrativo"
                   class="w-full h-72 object-cover"
                 />
@@ -377,17 +292,12 @@
 
       <!-- ESTILOS DE CORTES (CARDS) -->
       <section id="cortes" class="relative">
-        <div
-          class="absolute inset-0 bg-gradient-to-b from-slate-50 to-white"
-        ></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-50 to-white"></div>
         <div class="relative mx-auto max-w-7xl px-6 py-16">
           <div class="reveal text-center">
-            <h2 class="text-2xl sm:text-3xl font-semibold text-navy-900">
-              Estilos de cortes
-            </h2>
+            <h2 class="text-2xl sm:text-3xl font-semibold text-navy-900">Estilos de cortes</h2>
             <p class="mt-2 text-slate-600">
-              Seleção dos cortes mais pedidos — passe o mouse para visualizar
-              detalhes.
+              Seleção dos cortes mais pedidos — passe o mouse para visualizar detalhes.
             </p>
           </div>
           <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -407,12 +317,9 @@
                 >
               </div>
               <div class="p-5">
-                <h3 class="text-lg font-semibold text-navy-900">
-                  Fade Clássico
-                </h3>
+                <h3 class="text-lg font-semibold text-navy-900">Fade Clássico</h3>
                 <p class="mt-1 text-sm text-slate-600">
-                  Transição suave nas laterais com topo definido. Combina com
-                  todos os estilos.
+                  Transição suave nas laterais com topo definido. Combina com todos os estilos.
                 </p>
               </div>
             </article>
@@ -432,12 +339,9 @@
                 >
               </div>
               <div class="p-5">
-                <h3 class="text-lg font-semibold text-navy-900">
-                  Navalhado com Texto
-                </h3>
+                <h3 class="text-lg font-semibold text-navy-900">Navalhado com Texto</h3>
                 <p class="mt-1 text-sm text-slate-600">
-                  Linhas precisas e acabamento refinado para um visual de
-                  impacto.
+                  Linhas precisas e acabamento refinado para um visual de impacto.
                 </p>
               </div>
             </article>
@@ -457,12 +361,9 @@
                 >
               </div>
               <div class="p-5">
-                <h3 class="text-lg font-semibold text-navy-900">
-                  Undercut Modelado
-                </h3>
+                <h3 class="text-lg font-semibold text-navy-900">Undercut Modelado</h3>
                 <p class="mt-1 text-sm text-slate-600">
-                  Laterais baixas, topo longo e texturizado. Fácil de estilizar
-                  no dia a dia.
+                  Laterais baixas, topo longo e texturizado. Fácil de estilizar no dia a dia.
                 </p>
               </div>
             </article>
@@ -507,8 +408,7 @@
               <div class="p-5">
                 <h3 class="text-lg font-semibold text-navy-900">Pompadour</h3>
                 <p class="mt-1 text-sm text-slate-600">
-                  Volume no topo com laterais polidas. Um clássico que nunca sai
-                  de moda.
+                  Volume no topo com laterais polidas. Um clássico que nunca sai de moda.
                 </p>
               </div>
             </article>
@@ -540,90 +440,56 @@
 
       <!-- TABELA DE SERVIÇOS -->
       <section id="servicos" class="relative bg-white">
-        <div
-          class="absolute inset-0 bg-gradient-to-b from-white to-slate-50"
-        ></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-white to-slate-50"></div>
         <div class="relative mx-auto max-w-7xl px-6 py-16">
           <div class="reveal text-center">
             <h2 class="text-2xl sm:text-3xl font-semibold text-navy-900">
               Serviços, preços e avaliações
             </h2>
-            <p class="mt-2 text-slate-600">
-              Transparência e excelência em cada atendimento.
-            </p>
+            <p class="mt-2 text-slate-600">Transparência e excelência em cada atendimento.</p>
           </div>
-          <div
-            class="mt-8 overflow-hidden rounded-3xl border border-slate-200 shadow-xl-soft"
-          >
+          <div class="mt-8 overflow-hidden rounded-3xl border border-slate-200 shadow-xl-soft">
             <div class="overflow-x-auto">
               <table class="min-w-full bg-white">
                 <thead class="bg-slate-100/70 text-slate-700 text-sm">
                   <tr>
-                    <th scope="col" class="px-6 py-4 text-left font-semibold">
-                      Serviço
-                    </th>
-                    <th scope="col" class="px-6 py-4 text-left font-semibold">
-                      Preço
-                    </th>
-                    <th scope="col" class="px-6 py-4 text-left font-semibold">
-                      Duração
-                    </th>
-                    <th scope="col" class="px-6 py-4 text-left font-semibold">
-                      Avaliação
-                    </th>
+                    <th scope="col" class="px-6 py-4 text-left font-semibold">Serviço</th>
+                    <th scope="col" class="px-6 py-4 text-left font-semibold">Preço</th>
+                    <th scope="col" class="px-6 py-4 text-left font-semibold">Duração</th>
+                    <th scope="col" class="px-6 py-4 text-left font-semibold">Avaliação</th>
                   </tr>
                 </thead>
                 <tbody class="text-slate-700">
-                  <tr
-                    class="border-t border-slate-200 hover:bg-slate-50/60 transition"
-                  >
+                  <tr class="border-t border-slate-200 hover:bg-slate-50/60 transition">
                     <td class="px-6 py-4">Corte masculino</td>
                     <td class="px-6 py-4">R$ 45</td>
                     <td class="px-6 py-4">40 min</td>
                     <td class="px-6 py-4" aria-label="4.9 de 5">
-                      <span
-                        class="inline-flex items-center gap-1 text-amber-500"
-                        >★★★★★</span
-                      >
+                      <span class="inline-flex items-center gap-1 text-amber-500">★★★★★</span>
                     </td>
                   </tr>
-                  <tr
-                    class="border-t border-slate-200 hover:bg-slate-50/60 transition"
-                  >
+                  <tr class="border-t border-slate-200 hover:bg-slate-50/60 transition">
                     <td class="px-6 py-4">Barba completa</td>
                     <td class="px-6 py-4">R$ 35</td>
                     <td class="px-6 py-4">30 min</td>
                     <td class="px-6 py-4" aria-label="4.8 de 5">
-                      <span
-                        class="inline-flex items-center gap-1 text-amber-500"
-                        >★★★★★</span
-                      >
+                      <span class="inline-flex items-center gap-1 text-amber-500">★★★★★</span>
                     </td>
                   </tr>
-                  <tr
-                    class="border-t border-slate-200 hover:bg-slate-50/60 transition"
-                  >
+                  <tr class="border-t border-slate-200 hover:bg-slate-50/60 transition">
                     <td class="px-6 py-4">Corte + Barba</td>
                     <td class="px-6 py-4">R$ 70</td>
                     <td class="px-6 py-4">60 min</td>
                     <td class="px-6 py-4" aria-label="5 de 5">
-                      <span
-                        class="inline-flex items-center gap-1 text-amber-500"
-                        >★★★★★</span
-                      >
+                      <span class="inline-flex items-center gap-1 text-amber-500">★★★★★</span>
                     </td>
                   </tr>
-                  <tr
-                    class="border-t border-slate-200 hover:bg-slate-50/60 transition"
-                  >
+                  <tr class="border-t border-slate-200 hover:bg-slate-50/60 transition">
                     <td class="px-6 py-4">Corte infantil</td>
                     <td class="px-6 py-4">R$ 35</td>
                     <td class="px-6 py-4">30 min</td>
                     <td class="px-6 py-4" aria-label="4.7 de 5">
-                      <span
-                        class="inline-flex items-center gap-1 text-amber-500"
-                        >★★★★★</span
-                      >
+                      <span class="inline-flex items-center gap-1 text-amber-500">★★★★★</span>
                     </td>
                   </tr>
                 </tbody>
@@ -635,14 +501,10 @@
 
       <!-- EQUIPE -->
       <section id="equipe" class="relative">
-        <div
-          class="absolute inset-0 bg-gradient-to-b from-slate-50 to-white"
-        ></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-slate-50 to-white"></div>
         <div class="relative mx-auto max-w-7xl px-6 py-16">
           <div class="reveal text-center">
-            <h2 class="text-2xl sm:text-3xl font-semibold text-navy-900">
-              Nossa equipe
-            </h2>
+            <h2 class="text-2xl sm:text-3xl font-semibold text-navy-900">Nossa equipe</h2>
             <p class="mt-2 text-slate-600">
               Profissionais especializados, apaixonados pelo que fazem.
             </p>
@@ -658,12 +520,8 @@
                 class="h-60 w-full object-cover group-hover:scale-105 transition duration-700"
               />
               <div class="p-5">
-                <h3 class="text-lg font-semibold text-navy-900">
-                  Carlos Andrade
-                </h3>
-                <p class="text-sm text-slate-600">
-                  Especialista em fade e barbas
-                </p>
+                <h3 class="text-lg font-semibold text-navy-900">Carlos Andrade</h3>
+                <p class="text-sm text-slate-600">Especialista em fade e barbas</p>
               </div>
             </article>
             <!-- Membro 2 -->
@@ -690,9 +548,7 @@
                 class="h-60 w-full object-cover group-hover:scale-105 transition duration-700"
               />
               <div class="p-5">
-                <h3 class="text-lg font-semibold text-navy-900">
-                  Marcos Freire
-                </h3>
+                <h3 class="text-lg font-semibold text-navy-900">Marcos Freire</h3>
                 <p class="text-sm text-slate-600">Undercut e texturização</p>
               </div>
             </article>
@@ -706,9 +562,7 @@
                 class="h-60 w-full object-cover group-hover:scale-105 transition duration-700"
               />
               <div class="p-5">
-                <h3 class="text-lg font-semibold text-navy-900">
-                  Thiago Lopes
-                </h3>
+                <h3 class="text-lg font-semibold text-navy-900">Thiago Lopes</h3>
                 <p class="text-sm text-slate-600">Pompadour & styling</p>
               </div>
             </article>
@@ -722,9 +576,7 @@
           <div
             class="reveal max-w-xl mx-auto rounded-3xl border border-slate-200 bg-white p-8 shadow-xl-soft"
           >
-            <h2 class="text-2xl font-semibold text-navy-900">
-              Área do cliente
-            </h2>
+            <h2 class="text-2xl font-semibold text-navy-900">Área do cliente</h2>
             <p class="mt-2 text-slate-600">
               Faça login para acompanhar seus agendamentos e preferências.
             </p>
@@ -764,8 +616,7 @@
         class="mx-auto max-w-7xl px-6 py-10 flex flex-col sm:flex-row items-center justify-between gap-4"
       >
         <p class="text-sm text-slate-600">
-          © <span id="year"></span> Barbearia Elite. Todos os direitos
-          reservados.
+          © <span id="year"></span> Barbearia Elite. Todos os direitos reservados.
         </p>
         <div class="flex items-center gap-4 text-sm text-slate-600">
           <a href="#contatos" class="hover:text-navy-900">Contato</a>
@@ -799,71 +650,60 @@
 
     <script>
       // Ano dinâmico
-      document.getElementById("year").textContent = new Date().getFullYear();
+      document.getElementById('year').textContent = new Date().getFullYear()
 
       // Menu mobile
-      const menuBtn = document.getElementById("menuBtn");
-      const mobileMenu = document.getElementById("mobileMenu");
-      menuBtn?.addEventListener("click", () => {
-        mobileMenu.classList.toggle("hidden");
-      });
+      const menuBtn = document.getElementById('menuBtn')
+      const mobileMenu = document.getElementById('mobileMenu')
+      menuBtn?.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden')
+      })
 
       // Scroll suave (navegação fixa)
       document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-        anchor.addEventListener("click", function (e) {
-          const id = this.getAttribute("href");
+        anchor.addEventListener('click', function (e) {
+          const id = this.getAttribute('href')
           if (id.length > 1) {
-            e.preventDefault();
-            document
-              .querySelector(id)
-              ?.scrollIntoView({ behavior: "smooth", block: "start" });
-            if (!mobileMenu.classList.contains("hidden"))
-              mobileMenu.classList.add("hidden");
+            e.preventDefault()
+            document.querySelector(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+            if (!mobileMenu.classList.contains('hidden')) mobileMenu.classList.add('hidden')
           }
-        });
-      });
+        })
+      })
 
       // Reveal on scroll
       const io = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (entry.isIntersecting) entry.target.classList.add("show");
-          });
+            if (entry.isIntersecting) entry.target.classList.add('show')
+          })
         },
         { threshold: 0.12 }
-      );
-      document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+      )
+      document.querySelectorAll('.reveal').forEach((el) => io.observe(el))
 
       // Scrollspy (destacar link ativo)
-      const sections = [
-        "#apresentacao",
-        "#contatos",
-        "#cortes",
-        "#servicos",
-        "#equipe",
-      ];
-      const navLinks = Array.from(document.querySelectorAll(".nav-link"));
+      const sections = ['#apresentacao', '#contatos', '#cortes', '#servicos', '#equipe']
+      const navLinks = Array.from(document.querySelectorAll('.nav-link'))
       const spy = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            const idx = sections.indexOf("#" + entry.target.id);
+            const idx = sections.indexOf('#' + entry.target.id)
             if (idx >= 0) {
-              const link = navLinks[idx];
+              const link = navLinks[idx]
               if (entry.isIntersecting) {
-                navLinks.forEach((l) =>
-                  l.classList.remove("text-navy-900", "font-semibold")
-                );
-                link.classList.add("text-navy-900", "font-semibold");
+                navLinks.forEach((l) => l.classList.remove('text-navy-900', 'font-semibold'))
+                link.classList.add('text-navy-900', 'font-semibold')
               }
             }
-          });
+          })
         },
-        { rootMargin: "-40% 0px -55% 0px", threshold: 0.01 }
-      );
+        { rootMargin: '-40% 0px -55% 0px', threshold: 0.01 }
+      )
       sections.forEach((id) => {
-        const el = document.querySelector(id);
-        if (el) spy.observe(el);
-      });
+        const el = document.querySelector(id)
+        if (el) spy.observe(el)
+      })
     </script>
   </body>
 </html>
