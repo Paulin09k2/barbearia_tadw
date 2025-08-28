@@ -1,7 +1,6 @@
 <?php
 require_once "conexao.php";
 require_once "funcoes.php";
-?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -177,3 +176,4 @@ require_once "funcoes.php";
     </form>
 </body>
 </html>
+?>
