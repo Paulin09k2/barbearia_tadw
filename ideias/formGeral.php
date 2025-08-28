@@ -1,5 +1,6 @@
 <?php
-include 'seu_arquivo_funcoes.php'; // Substitua pelo nome real do arquivo onde estão as funções
+require_once "conexao.php";
+require_once "funcoes.php";
 ?>
 
 <!DOCTYPE html>
