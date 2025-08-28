@@ -11,5 +11,5 @@
     $senha_cliente = "senha123";
     $endereco = "Rua 1";
 
-    salvarCliente($conexao, $nome, $cpf, $endereco);
+    salvarCliente($conexao, $nome, $cpf, $endereco, $telefone, $email, $data_nascimento, $data_cadastro, $senha_cliente);
 ?>
