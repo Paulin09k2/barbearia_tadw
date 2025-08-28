@@ -1,4 +1,7 @@
-
+<?php
+require_once "conexao.php";
+require_once "funcoes.php";
+?>
 
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -8,9 +11,7 @@
 </head>
 <body>
     <h1>Formulários da Barbearia</h1>
-<?php
-require_once "conexao.php";
-require_once "funcoes.php";
+
     <!-- CLIENTE -->
     <h2>Cadastrar Cliente</h2>
     <form method="post" action="acoes.php">
@@ -176,4 +177,3 @@ require_once "funcoes.php";
     </form>
 </body>
 </html>
-?>
