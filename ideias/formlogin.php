@@ -4,10 +4,9 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login</title>
-  
 </head>
 <body>
-  <form action="#" method="POST">
+  <form action="" method="POST">
     <h2>Login</h2>
     <label for="usuario">Usuário</label>
     <input type="text" id="usuario" name="usuario" required />
@@ -15,7 +14,7 @@
     <label for="senha">Senha</label>
     <input type="password" id="senha" name="senha" required />
     
-  <a href="formulario.html" class="link-agendamento">Entrar</button>
+    <button type="submit">Entrar</button>
   </form>
 </body>
 </html>
