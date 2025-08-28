@@ -99,7 +99,6 @@ function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nasc
     mysqli_stmt_close($comando);
 
 }
-
 function deletarAvaliacao($conexao, $id_avaliacao)
 {
     $sql = "DELETE FROM avaliacao WHERE id_avaliacao = ?";
