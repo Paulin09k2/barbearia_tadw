@@ -1,6 +1,6 @@
 <?php
-require_once "../conexao.php";
-require_once "../funcoes.php";
+require_once "conexao.php";
+require_once "funcoes.php";
 ?>
 
 <!DOCTYPE html>
@@ -12,168 +12,114 @@ require_once "../funcoes.php";
 <body>
     <h1>Formulários da Barbearia</h1>
 
-    <!-- CLIENTE -->
+    <!-- =================== CLIENTE =================== -->
     <h2>Cadastrar Cliente</h2>
-    <form method="post" action="acoes.php">
+    <form method="post" action="processa.php">
         <input type="hidden" name="acao" value="salvarCliente">
-        Nome: <input type="text" name="nome"><br>
-        Email: <input type="email" name="email"><br>
-        Telefone: <input type="text" name="telefone"><br>
-        Endereço: <input type="text" name="endereco"><br>
-        Data de Nascimento: <input type="date" name="data_nascimento"><br>
-        Data de Cadastro: <input type="date" name="data_cadastro"><br>
-        Senha: <input type="password" name="senha_cliente"><br>
+        Nome: <input type="text" name="nome" required><br>
+        Email: <input type="email" name="email" required><br>
+        Telefone: <input type="text" name="telefone" required><br>
+        Endereço: <input type="text" name="endereco" required><br>
+        Data de Nascimento: <input type="date" name="data_nascimento" required><br>
+        Data de Cadastro: <input type="date" name="data_cadastro" required><br>
+        Senha: <input type="password" name="senha_cliente" required><br>
         <button type="submit">Salvar Cliente</button>
     </form>
 
-    <h2>Editar Cliente</h2>
-    <form method="post" action="acoes.php">
-        <input type="hidden" name="acao" value="editarCliente">
-        ID: <input type="number" name="id_cliente"><br>
-        Nome: <input type="text" name="nome"><br>
-        Email: <input type="email" name="email"><br>
-        Telefone: <input type="text" name="telefone"><br>
-        Endereço: <input type="text" name="endereco"><br>
-        Data de Nascimento: <input type="date" name="data_nascimento"><br>
-        Senha: <input type="password" name="senha_cliente"><br>
-        <button type="submit">Editar Cliente</button>
-    </form>
-
-    <h2>Deletar Cliente</h2>
-    <form method="post" action="acoes.php">
-        <input type="hidden" name="acao" value="deletarCliente">
-        ID: <input type="number" name="id_cliente"><br>
-        <button type="submit">Deletar Cliente</button>
-    </form>
+    <h3>Clientes cadastrados</h3>
+    <ul>
+        <?php
+        $clientes = listarCliente($conexao);
+        foreach($clientes as $c){
+            echo "<li>ID: {$c['id_cliente']} | Nome: {$c['nome']} | Email: {$c['email']}</li>";
+        }
+        ?>
+    </ul>
 
     <hr>
 
-    <!-- BARBEIRO -->
+    <!-- =================== BARBEIRO =================== -->
     <h2>Cadastrar Barbeiro</h2>
-    <form method="post" action="acoes.php">
+    <form method="post" action="processa.php">
         <input type="hidden" name="acao" value="salvarBarbeiro">
-        Nome: <input type="text" name="nome"><br>
-        Email: <input type="email" name="email"><br>
-        Telefone: <input type="text" name="telefone"><br>
-        CPF: <input type="text" name="cpf"><br>
-        Data de Nascimento: <input type="date" name="data_nascimento"><br>
-        Data de Admissão: <input type="date" name="data_admissao"><br>
-        Senha: <input type="password" name="senha_barbeiro"><br>
+        Nome: <input type="text" name="nome" required><br>
+        Email: <input type="email" name="email" required><br>
+        Telefone: <input type="text" name="telefone" required><br>
+        CPF: <input type="text" name="cpf" required><br>
+        Data de Nascimento: <input type="date" name="data_nascimento" required><br>
+        Data de Admissão: <input type="date" name="data_admissao" required><br>
+        Senha: <input type="password" name="senha_barbeiro" required><br>
         <button type="submit">Salvar Barbeiro</button>
     </form>
 
-    <h2>Editar Barbeiro</h2>
-    <form method="post" action="acoes.php">
-        <input type="hidden" name="acao" value="editarBarbeiro">
-        ID: <input type="number" name="id_barbeiro"><br>
-        Nome: <input type="text" name="nome"><br>
-        Email: <input type="email" name="email"><br>
-        Telefone: <input type="text" name="telefone"><br>
-        CPF: <input type="text" name="cpf"><br>
-        Data de Nascimento: <input type="date" name="data_nascimento"><br>
-        <button type="submit">Editar Barbeiro</button>
-    </form>
-
-    <h2>Deletar Barbeiro</h2>
-    <form method="post" action="acoes.php">
-        <input type="hidden" name="acao" value="deletarBarbeiro">
-        ID: <input type="number" name="id_barbeiro"><br>
-        <button type="submit">Deletar Barbeiro</button>
-    </form>
+    <h3>Barbeiros cadastrados</h3>
+    <ul>
+        <?php
+        $barbeiros = listarBarbeiro($conexao);
+        foreach($barbeiros as $b){
+            echo "<li>ID: {$b['id_barbeiro']} | Nome: {$b['nome']} | Email: {$b['email']}</li>";
+        }
+        ?>
+    </ul>
 
     <hr>
 
-    <!-- AGENDAMENTO -->
-    <h2>Cadastrar Agendamento</h2>
-    <form method="post" action="acoes.php">
-        <input type="hidden" name="acao" value="salvarAgendamento">
-        Data Agendamento: <input type="datetime-local" name="data_agendamento"><br>
-        Status: <input type="text" name="status"><br>
-        ID Barbeiro: <input type="number" name="barbeiro_id_barbeiro"><br>
-        ID Cliente: <input type="number" name="cliente_id_cliente"><br>
-        <button type="submit">Salvar Agendamento</button>
-    </form>
-
-    <h2>Editar Agendamento</h2>
-    <form method="post" action="acoes.php">
-        <input type="hidden" name="acao" value="editarAgendamento">
-        ID: <input type="number" name="id_agendamento"><br>
-        Data Agendamento: <input type="datetime-local" name="data_agendamento"><br>
-        Status: <input type="text" name="status"><br>
-        ID Barbeiro: <input type="number" name="barbeiro_id_barbeiro"><br>
-        ID Cliente: <input type="number" name="cliente_id_cliente"><br>
-        <button type="submit">Editar Agendamento</button>
-    </form>
-
-    <h2>Deletar Agendamento</h2>
-    <form method="post" action="acoes.php">
-        <input type="hidden" name="acao" value="deletarAgendamento">
-        ID: <input type="number" name="id_agendamento"><br>
-        ID Barbeiro: <input type="number" name="barbeiro_id_barbeiro"><br>
-        ID Cliente: <input type="number" name="cliente_id_cliente"><br>
-        <button type="submit">Deletar Agendamento</button>
-    </form>
-
-    <hr>
-
-    <!-- SERVIÇO -->
+    <!-- =================== SERVIÇOS =================== -->
     <h2>Cadastrar Serviço</h2>
-    <form method="post" action="acoes.php">
+    <form method="post" action="processa.php">
         <input type="hidden" name="acao" value="salvarServico">
-        Nome Serviço: <input type="text" name="nome_servico"><br>
-        Descrição: <input type="text" name="descricao"><br>
-        Preço: <input type="text" name="preco"><br>
-        Tempo Estimado: <input type="text" name="tempo_estimado"><br>
+        Nome Serviço: <input type="text" name="nome_servico" required><br>
+        Descrição: <input type="text" name="descricao" required><br>
+        Preço: <input type="text" name="preco" required><br>
+        Tempo Estimado: <input type="text" name="tempo_estimado" required><br>
         <button type="submit">Salvar Serviço</button>
     </form>
 
-    <h2>Editar Serviço</h2>
-    <form method="post" action="acoes.php">
-        <input type="hidden" name="acao" value="editarServico">
-        ID: <input type="number" name="id_servico"><br>
-        Nome Serviço: <input type="text" name="nome_servico"><br>
-        Descrição: <input type="text" name="descricao"><br>
-        Preço: <input type="text" name="preco"><br>
-        Tempo Estimado: <input type="text" name="tempo_estimado"><br>
-        <button type="submit">Editar Serviço</button>
-    </form>
+    <h3>Serviços cadastrados</h3>
+    <ul>
+        <?php
+        $servicos = listaServico($conexao);
+        foreach($servicos as $s){
+            echo "<li>ID: {$s['id_servico']} | Nome: {$s['nome_servico']} | Preço: {$s['preco']}</li>";
+        }
+        ?>
+    </ul>
 
-    <h2>Deletar Serviço</h2>
-    <form method="post" action="acoes.php">
-        <input type="hidden" name="acao" value="deletarServico">
-        ID: <input type="number" name="id_servico"><br>
-        <button type="submit">Deletar Serviço</button>
+    <hr>
+
+    <!-- =================== AGENDAMENTO =================== -->
+    <h2>Cadastrar Agendamento</h2>
+    <form method="post" action="processa.php">
+        <input type="hidden" name="acao" value="salvarAgendamento">
+        Data: <input type="datetime-local" name="data_agendamento" required><br>
+        Status: <input type="text" name="status" required><br>
+        ID Barbeiro: <input type="number" name="barbeiro_id_barbeiro" required><br>
+        ID Cliente: <input type="number" name="cliente_id_cliente" required><br>
+        <button type="submit">Salvar Agendamento</button>
     </form>
 
     <hr>
 
-    <!-- AVALIAÇÃO -->
+    <!-- =================== AVALIAÇÃO =================== -->
     <h2>Cadastrar Avaliação</h2>
-    <form method="post" action="acoes.php">
+    <form method="post" action="processa.php">
         <input type="hidden" name="acao" value="salvarAvaliacao">
-        Estrelas: <input type="number" name="estrela"><br>
-        Comentário: <input type="text" name="comentario"><br>
-        ID Barbeiro: <input type="number" name="barbeiro_id_barbeiro"><br>
-        ID Serviço: <input type="number" name="servico_id_servico"><br>
+        Estrelas: <input type="number" name="estrela" min="1" max="5" required><br>
+        Comentário: <input type="text" name="comentario" required><br>
+        ID Barbeiro: <input type="number" name="barbeiro_id_barbeiro" required><br>
+        ID Serviço: <input type="number" name="servico_id_servico" required><br>
         <button type="submit">Salvar Avaliação</button>
     </form>
 
-    <h2>Editar Avaliação</h2>
-    <form method="post" action="acoes.php">
-        <input type="hidden" name="acao" value="editarAvaliacao">
-        ID: <input type="number" name="id"><br>
-        Estrelas: <input type="number" name="estrela"><br>
-        Comentário: <input type="text" name="comentario"><br>
-        ID Barbeiro: <input type="number" name="barbeiro_id_barbeiro"><br>
-        ID Serviço: <input type="number" name="servico_id_servico"><br>
-        <button type="submit">Editar Avaliação</button>
-    </form>
+    <h3>Avaliações cadastradas</h3>
+    <ul>
+        <?php
+        $avaliacoes = listarAvaliacao($conexao);
+        foreach($avaliacoes as $a){
+            echo "<li>ID: {$a['idavaliacao']} | Estrelas: {$a['estrela']} | Comentário: {$a['comentario']}</li>";
+        }
+        ?>
+    </ul>
 
-    <h2>Deletar Avaliação</h2>
-    <form method="post" action="acoes.php">
-        <input type="hidden" name="acao" value="deletarAvaliacao">
-        ID: <input type="number" name="id_avaliacao"><br>
-        <button type="submit">Deletar Avaliação</button>
-    </form>
 </body>
 </html>
