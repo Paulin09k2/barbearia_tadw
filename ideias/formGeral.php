@@ -1,4 +1,4 @@
-<?php
+3<?php
 require_once "../tests/conexao.php";
 require_once "../tests/funcoes.php";
 ?>
