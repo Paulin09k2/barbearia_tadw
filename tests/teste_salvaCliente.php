@@ -11,9 +11,5 @@
     $senha_cliente = "senha123";
     $endereco = "Rua 1";
 
-<<<<<<< HEAD
     salvarCliente($conexao, $nome, $cpf, $endereco, $telefone, $email, $data_nascimento, $data_cadastro, $senha_cliente);
-=======
-    salvarCliente($conexao,$nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente);
->>>>>>> 482088502678d101ae870a7e6e0c25727af45d03
 ?>
