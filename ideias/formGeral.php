@@ -1,6 +1,6 @@
 <?php
-require_once "conexao.php";
-require_once "funcoes.php";
+require_once "../tests/conexao.php";
+require_once "../tests/funcoes.php";
 ?>
 
 <!DOCTYPE html>
