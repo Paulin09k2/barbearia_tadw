@@ -9,7 +9,6 @@
   <h1>Barbearia do Elite</h1>
 
   <!-- Menu horizontal à direita -->
-  <div style="text-align: right; margin-bottom: 20px;">
     <h3 style="display: inline; margin-right: 10px;">Menu</h3>
     <a href="formCliente.php">Cliente</a> |
     <a href="formAgendamento.php">Agendamento</a> |
