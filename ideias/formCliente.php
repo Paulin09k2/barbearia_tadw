@@ -23,7 +23,7 @@ require_once "../tests/funcoes.php";
         Senha: <input type="password" name="senha_cliente" required><br>
         <button type="submit">Salvar Cliente</button>
     </form>
-
+        <a href="index.php"><button>Sair</button></a>
     <h3>Clientes cadastrados</h3>
     <ul>
         <?php

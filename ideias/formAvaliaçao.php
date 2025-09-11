@@ -20,7 +20,7 @@ require_once "../tests/funcoes.php";
         ID Serviço: <input type="number" name="servico_id_servico" required><br>
         <button type="submit">Salvar Avaliação</button>
     </form>
-
+        <a href="index.php"><button>Sair</button></a>
     <h3>Avaliações cadastradas</h3>
     <ul>
         <?php

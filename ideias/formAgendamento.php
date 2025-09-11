@@ -19,8 +19,9 @@ require_once "../tests/funcoes.php";
         ID Barbeiro: <input type="number" name="barbeiro_id_barbeiro" required><br>
         ID Cliente: <input type="number" name="cliente_id_cliente" required><br>
         <button type="submit">Salvar Agendamento</button>
-    </form>
-
+      </form>
+      <a href="index.php"><button>Sair</button></a>
+        
     <hr>
 </body>
 </html>

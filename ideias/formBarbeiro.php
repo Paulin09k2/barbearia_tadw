@@ -23,7 +23,7 @@ require_once "../tests/funcoes.php";
         Senha: <input type="password" name="senha_barbeiro" required><br>
         <button type="submit">Salvar Barbeiro</button>
     </form>
-
+        <a href="index.php"><button>Sair</button></a>
     <h3>Barbeiros cadastrados</h3>
     <ul>
         <?php

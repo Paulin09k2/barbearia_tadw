@@ -39,5 +39,6 @@
 
     <br><button type="submit">Confirmar Agendamento</button>
   </form>
+  <a href="index.php"><button>Sair</button></a>
 </body>
 </html>

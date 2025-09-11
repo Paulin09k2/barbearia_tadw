@@ -20,7 +20,7 @@ require_once "../tests/funcoes.php";
         Tempo Estimado: <input type="text" name="tempo_estimado" required><br>
         <button type="submit">Salvar Serviço</button>
     </form>
-
+        <a href="index.php"><button>Sair</button></a>
     <h3>Serviços cadastrados</h3>
     <ul>
         <?php
