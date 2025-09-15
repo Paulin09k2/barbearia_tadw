@@ -32,5 +32,6 @@ require_once "../tests/funcoes.php";
     </ul>
 
     <hr>
+    <link rel="stylesheet" href="desing.css">
 </body>
 </html>

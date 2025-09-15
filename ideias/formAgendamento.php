@@ -21,6 +21,7 @@ require_once "../tests/funcoes.php";
         <button type="submit">Salvar Agendamento</button>
       </form>
       <a href="index.php"><button>Sair</button></a>
+      <link rel="stylesheet" href="desing.css">
         
     <hr>
 </body>

@@ -40,5 +40,6 @@
     <br><button type="submit">Confirmar Agendamento</button>
   </form>
   <a href="index.php"><button>Sair</button></a>
+  <link rel="stylesheet" href="desing.css">
 </body>
 </html>
