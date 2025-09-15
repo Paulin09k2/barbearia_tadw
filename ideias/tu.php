@@ -62,10 +62,11 @@
         <h1 class="text-2xl font-bold">Barbearia Elite</h1>
       </div>
       <nav class="hidden md:flex space-x-6">
+        <a href="login.php">login</a>
         <a href="servicosdisponiveis.php">Serviços</a>
         <a href="formAvaliaçao.php">Avaliações</a>
         <a href="formAgendar.php">Agendar</a>
-        <button onclick="showLoginModal()" class="bg-white text-navy px-4 py-2 rounded-lg hover:bg-gray-100 transition-colors">Área do Barbeiro</button>
+        
       </nav>
       <button onclick="toggleMobileMenu()" class="md:hidden">
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
