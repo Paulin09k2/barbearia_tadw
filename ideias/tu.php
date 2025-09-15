@@ -53,7 +53,7 @@
 
 <body class="bg-light-gray min-h-screen">
   <!-- Header -->
-  <header class="bg-navy  shadow-lg">
+  <header class="bg-navy text-white  shadow-lg">
     <div class="container mx-auto px-4 py-4 flex justify-between items-center">
       <div class="flex items-center space-x-3">
         <div class="w-10 h-10 bg-white rounded-full flex items-center justify-center">
@@ -62,7 +62,7 @@
         <h1 class="text-2xl font-bold">Barbearia Elite</h1>
       </div>
       <nav class="hidden md:flex space-x-6">
-        <a href="login.php">login</a>
+        <a href="login.php">Login</a>
         <a href="servicosdisponiveis.php">Serviços</a>
         <a href="formAvaliaçao.php">Avaliações</a>
         <a href="formAgendar.php">Agendar</a>
