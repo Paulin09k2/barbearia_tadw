@@ -63,7 +63,6 @@
       </div>
       <nav class="hidden md:flex space-x-6">
         <a href="login.php">Login</a>
-        <a href="servicosdisponiveis.php">Serviços</a>
         <a href="formAvaliaçao.php">Avaliações</a>
         <a href="formAgendar.php">Agendar</a>
         
@@ -87,29 +86,45 @@
         </button>
       </div>
     </section>
-
-    <section class="py-16">
-      <div class="container mx-auto px-4">
-        <h3 class="text-3xl font-bold text-center text-navy mb-12">Por que escolher a Elite?</h3>
-        <div class="grid md:grid-cols-3 gap-8">
-          <div class="text-center p-6 bg-white rounded-lg shadow-lg">
-            <div class="text-4xl mb-4">👨‍💼</div>
-            <h4 class="text-xl font-semibold text-navy mb-2">Profissionais Experientes</h4>
-            <p class="text-gray-600">Barbeiros com mais de 10 anos de experiência</p>
-          </div>
-          <div class="text-center p-6 bg-white rounded-lg shadow-lg">
-            <div class="text-4xl mb-4">⭐</div>
-            <h4 class="text-xl font-semibold text-navy mb-2">Atendimento Premium</h4>
-            <p class="text-gray-600">Serviço personalizado e de alta qualidade</p>
-          </div>
-          <div class="text-center p-6 bg-white rounded-lg shadow-lg">
-            <div class="text-4xl mb-4">🕐</div>
-            <h4 class="text-xl font-semibold text-navy mb-2">Horários Flexíveis</h4>
-            <p class="text-gray-600">Aberto de segunda a sábado das 8h às 20h</p>
-          </div>
+<table>
+  <tr>
+    <td><img src="../public/img/curly.jpg" width="750"></td>
+    <td><img src="../public/img/Buzzcut.jpg" width="650"></td>
+    <td><img src="../public/img/Undercut.jpg" width="550"></td>
+  </tr>
+</table>
+    <div class="container mx-auto px-4 py-10">
+      <h2 class="text-3xl font-bold mb-6 text-center">Nossos Serviços</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <div class="bg-white p-6 rounded-lg shadow-lg fade-in">
+          <h3 class="text-xl font-semibold mb-4">Corte de Cabelo</h3>
+          <p>Estilos modernos e clássicos para todas as ocasiões.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg fade-in" style="animation-delay: 0.2s;">
+          <h3 class="text-xl font-semibold mb-4">Barba</h3>
+          <p>Modelagem e cuidados para uma barba impecável.</p>
+        </div>
+        <div class="bg-white p-6 rounded-lg shadow-lg fade-in" style="animation-delay: 0.4s;">
+          <h3 class="text-xl font-semibold mb-4">Tratamentos Capilares</h3>
+          <p>Hidratação, cauterização e outros tratamentos para manter seu cabelo saudável.</p>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div id="mobileMenu" class="fixed inset-0 bg-navy text-white transform -translate-x-full transition-transform duration-300 ease-in-out z-50">
+    <div class="p-6 space-y-6 slide-in">
+      <button onclick="toggleMobileMenu()" class="mb-4">
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+        </svg>
+      </button>
+      <nav class="flex flex-col space-y-4">
+        <a href="login.php" class="text-lg">Login</a>
+        <a href="servicosdisponiveis.php" class="text-lg">Serviços</a>
+        <a href="formAvaliaçao.php" class="text-lg">Aval
+</div>
   </div>
 </body>
 
