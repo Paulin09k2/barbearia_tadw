@@ -28,9 +28,9 @@
     <br><label for="servico">Serviço</label>
     <select id="servico" name="servico" required>
       <option value="">Selecione um serviço</option>
-      <option value="consulta">CoDnsulta</option>
-      <option value="retorno">Retorno</option>
-      <option value="exame">Exame</option>
+      <option value="Corte de cabelo">CoDnsulta</option>
+      <option value="Barba">Retorno</option>
+      <option value="Corte e Barba">Exame</option>
       <option value="outro">Outro</option>
     </select>
 
