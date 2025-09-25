@@ -9,8 +9,14 @@
         
         $cliente = pesquisarClienteId($conexao, $id);
         $nome = $cliente['nome'];
-        $cpf = $cliente['cpf'];
+        $email = $cliente['cpf'];
+        $telefone = $cliente['endereco'];
         $endereco = $cliente['endereco'];
+        $data_nascimento = $cliente['data_nascimento'];
+        $data_cadastro = $cliente['data_cadastro'];
+        $senha_cliente = $cliente['senha_cliente'];
+
+
 
         $botao = "Atualizar";
     }
@@ -29,7 +35,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="login" href="logo2.png">
+    <title>Cadastro</title>
 </head>
 <body>
     <h1>Cadastro de Cliente</h1>
@@ -37,13 +44,24 @@
 
 
         Nome: <br>
-        <input type="text" name="nome" value="<?php echo $nome; ?>"> <br><br>
-        CPF: <br>
-        <input type="text" name="cpf" value="<?php echo $cpf; ?>"> <br><br>
-        Endereço: <br>
-        <input type="text" name="endereco" value="<?php echo $endereco; ?>"> <br><br>
+        <input type="text" name="nome" value="<?php echo $nome; ?>" required> <br><br>
 
+        Email: <br>
+        <input type="email" name="email" value="<?php echo isset($cliente['email']) ? $cliente['email'] : ''; ?>" required> <br><br>
+        
+        Telefone: <br>
+        <input type="text" name="telefone" value="<?php echo isset($cliente['telefone']) ? $cliente['telefone'] : ''; ?>" required> <br><br>
+
+        Endereço: <br>
+        <input type="text" name="endereco" value="<?php echo $endereco; ?>" required> <br><br>
+        CPF: <br>
+        <input type="text" name="cpf" value="<?php echo isset($cliente['cpf']) ? $cliente['cpf'] : ''; ?>" required> <br><br>
+
+        Data de Nascimento: <br>
+        <input type="date" name="data_nascimento" value="<?php echo isset($cliente['data_nascimento']) ? $cliente['data_nascimento'] : ''; ?>" required> <br><br>
+
+        Senha: <br>
+        <input type="password" name="senha_cliente" value="<?php echo isset($cliente['senha_cliente']) ? $cliente['senha_cliente'] : ''; ?>" required> <br><br>
         <input type="submit" value="<?php echo $botao; ?>">
-    </form>
 </body>
 </html>

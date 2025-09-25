@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Barbearia Elite - Sistema Completo</title>
+  <link rel="icon" type="login" href="logo.png">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
