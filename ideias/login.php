@@ -1,20 +1,22 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 </head>
 <body>
-  <form action="" method="POST">
-    <h2>Login</h2>
-    <label for="usuario">Usuário</label>
-    <input type="text" id="usuario" name="usuario" required /><br>
-    <br>
-    <label for="senha">Senha</label>
-    <input type="password" id="senha" name="senha" required /><br><br>
-    
-    <button type="submit">Entrar</button><br>
-  </form>
+    <h1>Acesso ao sistema</h1>
+
+    <form action="verificarLogin.php" method="post">
+        E-mail: <br>
+        <input type="text" name="email"> <br><br>
+        Senha: <br>
+        <input type="text" name="senha"> <br><br>
+
+        <a href="formCliente.php">Primeiro acesso</a> <br><br>
+
+        <input type="submit" value="Acessar">
+    </form>
 </body>
 </html>

@@ -198,3 +198,40 @@ function listaServico($conexao)
     return $lista_servico;
 }
 ?>
+
+<?php
+function verificarLogin($conexao, $email, $senha) {
+    $sql = "SELECT id_cliente, senha_cliente FROM cliente WHERE email = ?";
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 's', $email);
+    mysqli_stmt_execute($comando);
+    $resultado = mysqli_stmt_get_result($comando);
+
+    if ($cliente = mysqli_fetch_assoc($resultado)) {
+        if (password_verify($senha, $cliente['senha_cliente'])) {
+            return $cliente['id_cliente'];
+        }
+    }
+
+
+    return false;
+}
+?>
+<?php
+function pegarDadosUsuario($conexao, $idcliente) {
+    $sql = "SELECT * FROM cliente WHERE idcliente = ?";
+
+    $comando = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($comando, 'i', $idcliente);
+
+    mysqli_stmt_execute($comando);
+    
+    $resultado = mysqli_stmt_get_result($comando);
+    $quantidade = mysqli_num_rows($resultado);
+    
+    $usuario = 0;
+    if ($quantidade != 0) {
+        $usuario = mysqli_fetch_assoc($resultado);
+    }
+    return $usuario;
+}
