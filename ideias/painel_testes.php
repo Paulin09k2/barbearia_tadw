@@ -2,7 +2,6 @@
 require_once "../tests/conexao.php";
 require_once "../tests/funcoes.php";
 
-// Processamento geral
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $acao = $_POST['acao'];
 
@@ -35,7 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         salvarAvaliacao($conexao, $_POST['estrela'], $_POST['comentario'], $_POST['barbeiro_id_barbeiro'], $_POST['servico_id_servico']);
     }
     if ($acao == "deletarAvaliacao") {
-        deletarAvaliacao($conexao, $_POST['id_avaliacao']);
+        deletarAvaliacao($conexao, $_POST['idavaliacao']);
     }
 
     // AGENDAMENTO
@@ -46,8 +45,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         deletarAgendamento($conexao, $_POST['id_agendamento'], $_POST['barbeiro_id_barbeiro'], $_POST['cliente_id_cliente']);
     }
 
-    header("Location: index.php");
-    exit;
 }
 ?>
 
@@ -173,13 +170,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <tr><th>ID</th><th>Estrela</th><th>Comentário</th><th>Ações</th></tr>
     <?php foreach(listarAvaliacao($conexao) as $a){ ?>
       <tr>
-        <td><?= $a['id_avaliacao'] ?></td>
+        <td><?= $a['idavaliacao'] ?></td>
         <td><?= $a['estrela'] ?></td>
         <td><?= $a['comentario'] ?></td>
         <td>
           <form method="post" style="display:inline">
             <input type="hidden" name="acao" value="deletarAvaliacao">
-            <input type="hidden" name="id_avaliacao" value="<?= $a['id_avaliacao'] ?>">
+            <input type="hidden" name="idavaliacao" value="<?= $a['idavaliacao'] ?>">
             <button>Excluir</button>
           </form>
         </td>
