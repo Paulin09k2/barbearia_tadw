@@ -45,6 +45,7 @@ function salvarAgendamento($conexao, $data_agendamento, $status, $barbeiro_id_ba
     mysqli_stmt_close($comando);
     return $funcionou;
 }
+
 function salvarBarbeiro($conexao, $nome, $email, $telefone, $cpf, $data_nascimento, $data_admissao, $senha_barbeiro )
 {
     $sql = "INSERT INTO barbeiro (nome, email, telefone, cpf, data_nascimento, data_admissao, senha_barbeiro) VALUES (?, ?, ?, ?, ?, ?, ?)";
