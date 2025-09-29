@@ -54,13 +54,16 @@
 
         Endereço: <br>
         <input type="text" name="endereco" value="<?php echo $endereco; ?>" required> <br><br>
-        CPF: <br>
-        <input type="text" name="cpf" value="<?php echo isset($cliente['cpf']) ? $cliente['cpf'] : ''; ?>" required> <br><br>
+        
+         CPF: <br>
+        <input type="text" name="cpf" value="<?php echo isset($cliente['cpf']) ? $cliente['cpf'] : ''; ?>" required pattern="\d{11}" maxlength="11" title="Digite apenas números, 11 dígitos"> <br><br>
 
         Data de Nascimento: <br>
-        <input type="date" name="data_nascimento" value="<?php echo isset($cliente['data_nascimento']) ? $cliente['data_nascimento'] : ''; ?>" required> <br><br>
+        <input type="date" name="data_nascimento" value="<?php echo isset($cliente['data_nascimento']) ? $cliente['data_nascimento'] : ''; ?>"> <br><br>
+        Data de Cadastro: <br>
+        <input type="date" name="data_cadastro" value="<?php echo isset($cliente['data_cadastro']) ? $cliente['data_cadastro']  : ''; ?>"> <br><br>
 
-        Senha: <br>
+        <br>Senha: <br>
         <input type="password" name="senha_cliente" value="<?php echo isset($cliente['senha_cliente']) ? $cliente['senha_cliente'] : ''; ?>" required> <br><br>
         <input type="submit" value="<?php echo $botao; ?>">
 </body>
