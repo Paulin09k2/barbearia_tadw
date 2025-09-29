@@ -101,7 +101,7 @@ function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nasc
 }
 function deletarAvaliacao($conexao, $id_avaliacao)
 {
-    $sql = "DELETE FROM avaliacao WHERE id_avaliacao = ?";
+    $sql = "DELETE FROM avaliacao WHERE idavaliacao = ?";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $id_avaliacao);
     $funcionou = mysqli_stmt_execute($comando);
@@ -173,16 +173,15 @@ function editarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estim
 }
 function deletarServico($conexao, $id_servico)
 {
-    $sql = "DELETE FROM cliente WHERE idcliente = ?";
     $sql = "DELETE FROM servico WHERE id_servico = ?";
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'i', $id_servico);
-    mysqli_stmt_bind_param($comando, 'i', $servico_id_servico);
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
 
     return $funcionou;
 }
+
 function listaServico($conexao)
 {
     $sql = "SELECT * FROM tb_servico";
