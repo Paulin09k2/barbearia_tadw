@@ -181,7 +181,6 @@ function deletarServico($conexao, $id_servico)
 
     return $funcionou;
 }
-
 function listaServico($conexao)
 {
     $sql = "SELECT * FROM tb_servico";
@@ -196,8 +195,6 @@ function listaServico($conexao)
     mysqli_stmt_close($comando);
     return $lista_servico;
 }
-?>
-<?php
 function verificarLogin($conexao, $email, $senha) {
     $sql = "SELECT id_cliente, senha_cliente FROM cliente WHERE email = ?";
     $comando = mysqli_prepare($conexao, $sql);
@@ -214,8 +211,6 @@ function verificarLogin($conexao, $email, $senha) {
 
     return false;
 }
-?>
-<?php
 function pegarDadosUsuario($conexao, $idcliente) {
     $sql = "SELECT * FROM cliente WHERE idcliente = ?";
 
@@ -233,8 +228,6 @@ function pegarDadosUsuario($conexao, $idcliente) {
     }
     return $usuario;
 }
-?>
-<?php
 function pesquisarClienteId($conexao, $idcliente) {
     $sql = "SELECT * FROM tb_cliente WHERE idcliente = ?";
     $comando = mysqli_prepare($conexao, $sql);
