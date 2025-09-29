@@ -20,7 +20,7 @@
             } else {
                 session_start();
                 $_SESSION['u'] = $usuario;
-                header("Location: in.php");
+                header("Location: index.php");
                 exit;
             }
         }
