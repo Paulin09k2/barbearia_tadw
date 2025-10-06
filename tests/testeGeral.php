@@ -1,114 +1,100 @@
 <?php
+require_once "conexao.php"; // Ajuste o caminho se necessário
 require_once "funcoes.php";
-require_once "conexao.php";
-// Função auxiliar para mostrar resultado
-function resultado($acao, $ok)
-{
-    echo $ok ? "✅ $acao<br>" : "❌ $acao<br>";
+
+// Função auxiliar para mostrar resultados
+function mostrarResultado($acao, $ok) {
+    echo "<p>$acao: " . ($ok ? "✅ Sucesso" : "❌ Falha") . "</p>";
 }
 
-// ====================== CLIENTE ======================
-echo "<h3>Cliente</h3>";
-$ok1 = salvarCliente($conexao, "Cliente Teste", "teste@teste.com", "62999999999", "Rua Teste 123", "2000-01-01", date("Y-m-d H:i:s"));
-resultado("Salvar Cliente", $ok1);
+// --- TESTE CLIENTE ---
+echo "<h2>TESTE CLIENTE</h2>";
+$ok = salvarCliente($conexao, "Teste Cliente", "teste@teste.com", "11999999999", "Rua Teste, 123", "1990-01-01", date('Y-m-d'), "123456");
+mostrarResultado("Salvar Cliente", $ok);
 
 $clientes = listarCliente($conexao);
-$id_cliente = end($clientes)['id_cliente'] ?? 0;
-resultado("Listar Cliente", !empty($clientes));
+echo "<pre>Lista de Clientes:\n"; print_r($clientes); echo "</pre>";
 
-$ok2 = editarCliente($conexao, "Cliente Editado", "62999999999", "Rua Editada 456", "1999-12-31", $id_cliente);
-resultado("Editar Cliente", $ok2);
+if (!empty($clientes)) {
+    $id_cliente = $clientes[0]['id_cliente'];
+    $ok = editarCliente($conexao, "Cliente Editado", "editado@teste.com", "11988888888", "Rua Editada, 456", "1991-02-02", "654321", $id_cliente);
+    mostrarResultado("Editar Cliente", $ok);
 
-$ok3 = deletarCliente($conexao, $id_cliente);
-resultado("Deletar Cliente", $ok3);
+    $ok = deletarCliente($conexao, $id_cliente);
+    mostrarResultado("Deletar Cliente", $ok);
+}
 
-
-// ====================== BARBEIRO ======================
-echo "<h3>Barbeiro</h3>";
-$ok4 = salvarBarbeiro($conexao, "Barbeiro Teste", "62988888888", "12345678900", "1990-05-10", date("Y-m-d"), 1);
-resultado("Salvar Barbeiro", $ok4);
+// --- TESTE BARBEIRO ---
+echo "<h2>TESTE BARBEIRO</h2>";
+$ok = salvarBarbeiro($conexao, "Barbeiro Teste", "11977777777", "12345678900", "1985-05-05", "2020-01-01", 1);
+mostrarResultado("Salvar Barbeiro", $ok);
 
 $barbeiros = listarBarbeiro($conexao);
-$id_barbeiro = end($barbeiros)['id_barbeiro'] ?? 0;
-resultado("Listar Barbeiro", !empty($barbeiros));
+echo "<pre>Lista de Barbeiros:\n"; print_r($barbeiros); echo "</pre>";
 
-$ok5 = editarBarbeiro($conexao, "Barbeiro Editado", "62977777777", "12345678900", "1991-06-11", date("Y-m-d"), $id_barbeiro);
-resultado("Editar Barbeiro", $ok5);
+if (!empty($barbeiros)) {
+    $id_barbeiro = $barbeiros[0]['id_barbeiro'];
+    $ok = editarBarbeiro($conexao, "Barbeiro Editado", "11966666666", "98765432100", "1986-06-06", "2021-02-02", 1, $id_barbeiro);
+    mostrarResultado("Editar Barbeiro", $ok);
 
-$ok6 = deletarBarbeiro($conexao, $id_barbeiro);
-resultado("Deletar Barbeiro", $ok6);
+    $ok = deletarBarbeiro($conexao, $id_barbeiro);
+    mostrarResultado("Deletar Barbeiro", $ok);
+}
 
-
-// ====================== SERVIÇO ======================
-echo "<h3>Serviço</h3>";
-$ok7 = salvarServico($conexao, "Corte Teste", "Corte padrão masculino", 50.00, 30);
-resultado("Salvar Serviço", $ok7);
+// --- TESTE SERVIÇO ---
+echo "<h2>TESTE SERVIÇO</h2>";
+$ok = salvarServico($conexao, "Corte Simples", "Corte de cabelo padrão", 50.00, 30);
+mostrarResultado("Salvar Serviço", $ok);
 
 $servicos = listarServico($conexao);
-$id_servico = end($servicos)['id_servico'] ?? 0;
-resultado("Listar Serviço", !empty($servicos));
+echo "<pre>Lista de Serviços:\n"; print_r($servicos); echo "</pre>";
 
-$ok8 = editarServico($conexao, "Corte Atualizado", "Corte com navalha", 60.00, 40, $id_servico);
-resultado("Editar Serviço", $ok8);
+if (!empty($servicos)) {
+    $id_servico = $servicos[0]['id_servico'];
+    $ok = editarServico($conexao, "Corte Especial", "Corte com estilo", 80.00, 45, $id_servico);
+    mostrarResultado("Editar Serviço", $ok);
 
-$ok9 = deletarServico($conexao, $id_servico);
-resultado("Deletar Serviço", $ok9);
+    $ok = deletarServico($conexao, $id_servico);
+    mostrarResultado("Deletar Serviço", $ok);
+}
 
+// --- TESTE AGENDAMENTO ---
+echo "<h2>TESTE AGENDAMENTO</h2>";
+if (!empty($barbeiros) && !empty($clientes)) {
+    $ok = salvarAgendamento($conexao, date('Y-m-d H:i:s'), "Pendente", $barbeiros[0]['id_barbeiro'], $clientes[0]['id_cliente']);
+    mostrarResultado("Salvar Agendamento", $ok);
 
-// ====================== AGENDAMENTO ======================
-echo "<h3>Agendamento</h3>";
-// Criar cliente e barbeiro temporários para o agendamento
-salvarCliente($conexao, "Cliente Temp", "temp@teste.com", "62999999999", "Rua Temp", "2000-01-01", date("Y-m-d H:i:s"));
-$clienteTemp = end(listarCliente($conexao))['id_cliente'];
+    $agendamentos = listarAgendamento($conexao);
+    echo "<pre>Lista de Agendamentos:\n"; print_r($agendamentos); echo "</pre>";
 
-salvarBarbeiro($conexao, "Barbeiro Temp", "62988888888", "12345678900", "1990-05-10", date("Y-m-d"), 1);
-$barbeiroTemp = end(listarBarbeiro($conexao))['id_barbeiro'];
+    if (!empty($agendamentos)) {
+        $id_agendamento = $agendamentos[0]['id_agendamento'];
+        $ok = editarAgendamento($conexao, date('Y-m-d H:i:s'), "Confirmado", $barbeiros[0]['id_barbeiro'], $clientes[0]['id_cliente'], $id_agendamento);
+        mostrarResultado("Editar Agendamento", $ok);
 
-$ok10 = salvarAgendamento($conexao, date("Y-m-d H:i:s"), "pendente", $barbeiroTemp, $clienteTemp);
-resultado("Salvar Agendamento", $ok10);
+        $ok = deletarAgendamento($conexao, $id_agendamento, $barbeiros[0]['id_barbeiro'], $clientes[0]['id_cliente']);
+        mostrarResultado("Deletar Agendamento", $ok);
+    }
+}
 
-$agendamentos = listarAgendamento($conexao);
-$id_agendamento = end($agendamentos)['id_agendamento'] ?? 0;
-resultado("Listar Agendamento", !empty($agendamentos));
+// --- TESTE AVALIAÇÃO ---
+echo "<h2>TESTE AVALIAÇÃO</h2>";
+if (!empty($barbeiros) && !empty($servicos)) {
+    $ok = salvarAvaliacao($conexao, 5, "Ótimo serviço!", $barbeiros[0]['id_barbeiro'], $servicos[0]['id_servico'], "foto.jpg");
+    mostrarResultado("Salvar Avaliação", $ok);
 
-$ok11 = editarAgendamento($conexao, date("Y-m-d H:i:s", strtotime("+1 day")), "concluido", $barbeiroTemp, $clienteTemp, $id_agendamento);
-resultado("Editar Agendamento", $ok11);
+    $avaliacoes = listarAvaliacao($conexao);
+    echo "<pre>Lista de Avaliações:\n"; print_r($avaliacoes); echo "</pre>";
 
-$ok12 = deletarAgendamento($conexao, $id_agendamento, $barbeiroTemp, $clienteTemp);
-resultado("Deletar Agendamento", $ok12);
+    if (!empty($avaliacoes)) {
+        $id_avaliacao = $avaliacoes[0]['idavaliacao'];
+        $ok = editarAvaliacao($conexao, 4, "Bom serviço!", $barbeiros[0]['id_barbeiro'], $servicos[0]['id_servico'], "foto2.jpg", $id_avaliacao);
+        mostrarResultado("Editar Avaliação", $ok);
 
-// Limpeza de registros temporários
-deletarCliente($conexao, $clienteTemp);
-deletarBarbeiro($conexao, $barbeiroTemp);
+        $ok = deletarAvaliacao($conexao, $id_avaliacao);
+        mostrarResultado("Deletar Avaliação", $ok);
+    }
+}
 
-
-// ====================== AVALIAÇÃO ======================
-echo "<h3>Avaliação</h3>";
-// Criar registros necessários
-salvarBarbeiro($conexao, "Barbeiro Aval", "62999999999", "12345678911", "1992-07-10", date("Y-m-d"), 1);
-$id_barb = end(listarBarbeiro($conexao))['id_barbeiro'];
-
-salvarServico($conexao, "Barba", "Feita na navalha", 40.00, 25);
-$id_serv = end(listarServico($conexao))['id_servico'];
-
-$ok13 = salvarAvaliacao($conexao, 5, "Excelente serviço!", $id_barb, $id_serv, "foto.jpg");
-resultado("Salvar Avaliação", $ok13);
-
-$avaliacoes = listarAvaliacao($conexao);
-$id_avaliacao = end($avaliacoes)['idavaliacao'] ?? 0;
-resultado("Listar Avaliação", !empty($avaliacoes));
-
-$ok14 = editarAvaliacao($conexao, 4, "Bom, mas pode melhorar", $id_barb, $id_serv, "foto2.jpg", $id_avaliacao);
-resultado("Editar Avaliação", $ok14);
-
-$ok15 = deletarAvaliacao($conexao, $id_avaliacao);
-resultado("Deletar Avaliação", $ok15);
-
-// Limpeza final
-deletarBarbeiro($conexao, $id_barb);
-deletarServico($conexao, $id_serv);
-
-echo "<br><b>✅ Testes concluídos.</b>";
-
-$conexao->close();
+echo "<h2>TESTES FINALIZADOS</h2>";
 ?>
