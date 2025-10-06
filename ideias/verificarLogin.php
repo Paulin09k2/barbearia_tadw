@@ -1,5 +1,5 @@
 <?php
-    require_once  "../tests/conexao.php";
+    require_once "../tests/conexao.php";
     require_once "../tests/funcoes.php";
 
     $email = $_POST['email'];
