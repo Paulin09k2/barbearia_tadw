@@ -1,14 +1,6 @@
 <?php
 require_once "funcoes.php";
-
-// === CONEXÃO COM O BANCO ===
-$conexao = new mysqli("localhost", "root", "", "barbearia");
-if ($conexao->connect_error) {
-    die("Erro de conexão: " . $conexao->connect_error);
-}
-
-echo "<h2>🚀 Teste Geral de Funções</h2>";
-
+require_once "conexao.php";
 // Função auxiliar para mostrar resultado
 function resultado($acao, $ok)
 {

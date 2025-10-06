@@ -138,12 +138,12 @@ function listarCliente($conexao)
     return $lista;
 }
 
-function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro)
+function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente)
 {
-    $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro)
-            VALUES (?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro, senha_cliente)
+            VALUES (?, ?, ?, ?, ?, ?, ?)";
     $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, "ssssss", $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro);
+    mysqli_stmt_bind_param($comando, "sssssss", $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente);
     $funcionou = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
     return $funcionou;
