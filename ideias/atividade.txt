@@ -2,6 +2,6 @@ trabalho
 
 Kaio: login 
 
-Andre: cadastra cliente 
+Andre: 
 
-Paulo: Pagina do Barbeiro
+Paulo:  cadastra cliente 

@@ -75,17 +75,7 @@ require_once "../tests/funcoes.php";
         <button type="submit">Salvar Serviço</button>
     </form>
 
-    <h3>Serviços cadastrados</h3>
-    <ul>
-        <?php
-        $servicos = listaServico($conexao);
-        foreach($servicos as $s){
-            echo "<li>ID: {$s['id_servico']} | Nome: {$s['nome_servico']} | Preço: {$s['preco']}</li>";
-        }
-        ?>
-    </ul>
 
-    <hr>
 
     <!-- =================== AGENDAMENTO =================== -->
     <h2>Cadastrar Agendamento</h2>
