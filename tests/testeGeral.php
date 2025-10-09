@@ -1,100 +1,113 @@
 <?php
-require_once "conexao.php"; // Ajuste o caminho se necessário
+require_once "conexao.php";
 require_once "funcoes.php";
 
-// Função auxiliar para mostrar resultados
-function mostrarResultado($acao, $ok) {
-    echo "<p>$acao: " . ($ok ? "✅ Sucesso" : "❌ Falha") . "</p>";
-}
+echo "<h2>=== TESTE GERAL DAS FUNÇÕES ===</h2>";
 
-// --- TESTE CLIENTE ---
-echo "<h2>TESTE CLIENTE</h2>";
-$ok = salvarCliente($conexao, "Teste Cliente", "teste@teste.com", "11999999999", "Rua Teste, 123", "1990-01-01", date('Y-m-d'), "123456");
-mostrarResultado("Salvar Cliente", $ok);
+// ===== CLIENTE =====
+echo "<h3>Cliente</h3>";
+$clienteOk = salvarCliente($conexao, "Teste Cliente", "teste@teste.com", "62999999999", "Rua Teste 123", "2000-01-01", date('Y-m-d'), password_hash("123456", PASSWORD_DEFAULT));
+if ($clienteOk) echo "✅ Cliente salvo<br>";
 
 $clientes = listarCliente($conexao);
-echo "<pre>Lista de Clientes:\n"; print_r($clientes); echo "</pre>";
+echo "📋 Total de clientes: " . count($clientes) . "<br>";
+$ultimoCliente = end($clientes);
+$id_cliente = $ultimoCliente['id_cliente'] ?? null;
 
-if (!empty($clientes)) {
-    $id_cliente = $clientes[0]['id_cliente'];
-    $ok = editarCliente($conexao, "Cliente Editado", "editado@teste.com", "11988888888", "Rua Editada, 456", "1991-02-02", "654321", $id_cliente);
-    mostrarResultado("Editar Cliente", $ok);
-
-    $ok = deletarCliente($conexao, $id_cliente);
-    mostrarResultado("Deletar Cliente", $ok);
+if ($id_cliente) {
+    editarCliente($conexao, "Cliente Editado", "editado@teste.com", "62000000000", "Rua Editada", "1990-10-10", password_hash("nova", PASSWORD_DEFAULT), $id_cliente);
+    echo "✏️ Cliente editado<br>";
 }
 
-// --- TESTE BARBEIRO ---
-echo "<h2>TESTE BARBEIRO</h2>";
-$ok = salvarBarbeiro($conexao, "Barbeiro Teste", "11977777777", "12345678900", "1985-05-05", "2020-01-01", 1);
-mostrarResultado("Salvar Barbeiro", $ok);
+$clienteDados = pesquisarClienteId($conexao, $id_cliente);
+echo "🔎 Cliente encontrado: " . ($clienteDados['nome'] ?? 'erro') . "<br>";
+
+verificarLogin($conexao, "editado@teste.com", "nova") ? print("🔐 Login ok<br>") : print("❌ Falha login<br>");
+
+deletarCliente($conexao, $id_cliente);
+echo "🗑️ Cliente deletado<br>";
+
+// ===== BARBEIRO =====
+echo "<h3>Barbeiro</h3>";
+$barbeiroOk = salvarBarbeiro($conexao, "Barbeiro Teste", "barbeiro@teste.com", "62911111111", "12345678900", "1995-05-05", date('Y-m-d'), password_hash("abc123", PASSWORD_DEFAULT));
+if ($barbeiroOk) echo "✅ Barbeiro salvo<br>";
 
 $barbeiros = listarBarbeiro($conexao);
-echo "<pre>Lista de Barbeiros:\n"; print_r($barbeiros); echo "</pre>";
+$id_barbeiro = end($barbeiros)['id_barbeiro'] ?? null;
 
-if (!empty($barbeiros)) {
-    $id_barbeiro = $barbeiros[0]['id_barbeiro'];
-    $ok = editarBarbeiro($conexao, "Barbeiro Editado", "11966666666", "98765432100", "1986-06-06", "2021-02-02", 1, $id_barbeiro);
-    mostrarResultado("Editar Barbeiro", $ok);
-
-    $ok = deletarBarbeiro($conexao, $id_barbeiro);
-    mostrarResultado("Deletar Barbeiro", $ok);
+if ($id_barbeiro) {
+    editarBarbeiro($conexao, "Barbeiro Editado", "editado@teste.com", "62988888888", "09876543211", "1990-02-02", $id_barbeiro);
+    echo "✏️ Barbeiro editado<br>";
+    deletarBarbeiro($conexao, $id_barbeiro);
+    echo "🗑️ Barbeiro deletado<br>";
 }
 
-// --- TESTE SERVIÇO ---
-echo "<h2>TESTE SERVIÇO</h2>";
-$ok = salvarServico($conexao, "Corte Simples", "Corte de cabelo padrão", 50.00, 30);
-mostrarResultado("Salvar Serviço", $ok);
+// ===== SERVIÇO =====
+echo "<h3>Serviço</h3>";
+salvarServico($conexao, "Corte Degrade", "Corte moderno", "40.00", "00:30");
+echo "✅ Serviço salvo<br>";
 
-$servicos = listarServico($conexao);
-echo "<pre>Lista de Serviços:\n"; print_r($servicos); echo "</pre>";
+$servicos = listaServico($conexao);
+$id_servico = end($servicos)['id_servico'] ?? null;
 
-if (!empty($servicos)) {
-    $id_servico = $servicos[0]['id_servico'];
-    $ok = editarServico($conexao, "Corte Especial", "Corte com estilo", 80.00, 45, $id_servico);
-    mostrarResultado("Editar Serviço", $ok);
-
-    $ok = deletarServico($conexao, $id_servico);
-    mostrarResultado("Deletar Serviço", $ok);
+if ($id_servico) {
+    editarServico($conexao, "Corte Social", "Atualizado", "35.00", "00:25", $id_servico);
+    echo "✏️ Serviço editado<br>";
+    deletarServico($conexao, $id_servico);
+    echo "🗑️ Serviço deletado<br>";
 }
 
-// --- TESTE AGENDAMENTO ---
-echo "<h2>TESTE AGENDAMENTO</h2>";
-if (!empty($barbeiros) && !empty($clientes)) {
-    $ok = salvarAgendamento($conexao, date('Y-m-d H:i:s'), "Pendente", $barbeiros[0]['id_barbeiro'], $clientes[0]['id_cliente']);
-    mostrarResultado("Salvar Agendamento", $ok);
+// ===== AVALIAÇÃO =====
+echo "<h3>Avaliação</h3>";
+// Criar barbeiro e serviço para relacionamento
+$barbeiroOk = salvarBarbeiro($conexao, "Barbeiro Aval", "aval@teste.com", "62999999999", "12345678900", "1990-01-01", date('Y-m-d'), "senha");
+$servicoOk = salvarServico($conexao, "Corte Aval", "Avaliação de serviço", "50.00", "00:30");
 
-    $agendamentos = listarAgendamento($conexao);
-    echo "<pre>Lista de Agendamentos:\n"; print_r($agendamentos); echo "</pre>";
+$barbeiro = end(listarBarbeiro($conexao));
+$servico = end(listaServico($conexao));
 
-    if (!empty($agendamentos)) {
-        $id_agendamento = $agendamentos[0]['id_agendamento'];
-        $ok = editarAgendamento($conexao, date('Y-m-d H:i:s'), "Confirmado", $barbeiros[0]['id_barbeiro'], $clientes[0]['id_cliente'], $id_agendamento);
-        mostrarResultado("Editar Agendamento", $ok);
+$id_barbeiro = $barbeiro['id_barbeiro'] ?? null;
+$id_servico = $servico['id_servico'] ?? null;
 
-        $ok = deletarAgendamento($conexao, $id_agendamento, $barbeiros[0]['id_barbeiro'], $clientes[0]['id_cliente']);
-        mostrarResultado("Deletar Agendamento", $ok);
-    }
-}
-
-// --- TESTE AVALIAÇÃO ---
-echo "<h2>TESTE AVALIAÇÃO</h2>";
-if (!empty($barbeiros) && !empty($servicos)) {
-    $ok = salvarAvaliacao($conexao, 5, "Ótimo serviço!", $barbeiros[0]['id_barbeiro'], $servicos[0]['id_servico'], "foto.jpg");
-    mostrarResultado("Salvar Avaliação", $ok);
+if ($id_barbeiro && $id_servico) {
+    salvarAvaliacao($conexao, 5, "Excelente!", $id_barbeiro, $id_servico);
+    echo "✅ Avaliação salva<br>";
 
     $avaliacoes = listarAvaliacao($conexao);
-    echo "<pre>Lista de Avaliações:\n"; print_r($avaliacoes); echo "</pre>";
+    $id_avaliacao = end($avaliacoes)['idavaliacao'] ?? null;
 
-    if (!empty($avaliacoes)) {
-        $id_avaliacao = $avaliacoes[0]['idavaliacao'];
-        $ok = editarAvaliacao($conexao, 4, "Bom serviço!", $barbeiros[0]['id_barbeiro'], $servicos[0]['id_servico'], "foto2.jpg", $id_avaliacao);
-        mostrarResultado("Editar Avaliação", $ok);
-
-        $ok = deletarAvaliacao($conexao, $id_avaliacao);
-        mostrarResultado("Deletar Avaliação", $ok);
+    if ($id_avaliacao) {
+        editarAvaliacao($conexao, 4, "Muito bom", $id_barbeiro, $id_servico, $id_avaliacao);
+        echo "✏️ Avaliação editada<br>";
+        deletarAvaliacao($conexao, $id_avaliacao);
+        echo "🗑️ Avaliação deletada<br>";
     }
 }
 
-echo "<h2>TESTES FINALIZADOS</h2>";
+// ===== AGENDAMENTO =====
+echo "<h3>Agendamento</h3>";
+$cliente = salvarCliente($conexao, "Agendamento Cliente", "agendamento@teste.com", "62922222222", "Rua Agendamento", "2000-10-10", date('Y-m-d'), password_hash("123", PASSWORD_DEFAULT));
+$barbeiro = salvarBarbeiro($conexao, "Agendamento Barbeiro", "agendamento@teste.com", "62933333333", "98765432100", "1995-05-05", date('Y-m-d'), password_hash("123", PASSWORD_DEFAULT));
+
+$cliente_id = end(listarCliente($conexao))['id_cliente'] ?? null;
+$barbeiro_id = end(listarBarbeiro($conexao))['id_barbeiro'] ?? null;
+
+if ($cliente_id && $barbeiro_id) {
+    salvarAgendamento($conexao, date('Y-m-d H:i:s'), "pendente", $barbeiro_id, $cliente_id);
+    echo "✅ Agendamento salvo<br>";
+
+    $result = mysqli_query($conexao, "SELECT * FROM agendamento ORDER BY id_agendamento DESC LIMIT 1");
+    $agendamento = mysqli_fetch_assoc($result);
+    $id_agendamento = $agendamento['id_agendamento'] ?? null;
+
+    if ($id_agendamento) {
+        editarAgendamento($conexao, date('Y-m-d H:i:s', strtotime('+1 day')), "concluido", $barbeiro_id, $cliente_id, $id_agendamento);
+        echo "✏️ Agendamento editado<br>";
+
+        deletarAgendamento($conexao, $id_agendamento, $barbeiro_id, $cliente_id);
+        echo "🗑️ Agendamento deletado<br>";
+    }
+}
+
+echo "<hr><strong>✅ Todos os testes foram executados.</strong>";
 ?>
