@@ -6,36 +6,20 @@ require_once "../tests/funcoes.php";
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="login" href="logo3.png">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
 </head>
 <body>
-   <h2>Cadastrar Barbeiro</h2>
+      <h2>Cadastrar Serviço</h2>
     <form method="post" action="processa.php">
-        <input type="hidden" name="acao" value="salvarBarbeiro">
-        Nome: <input type="text" name="nome" required><br>
-        Email: <input type="email" name="email" required><br>
-        Telefone: <input type="text" name="telefone" required><br>
-        CPF: <input type="text" name="cpf" required><br>
-        Data de Nascimento: <input type="date" name="data_nascimento" required><br>
-        Data de Admissão: <input type="date" name="data_admissao" required><br>
-        Senha: <input type="password" name="senha_barbeiro" required><br>
-        <button type="submit">Salvar Barbeiro</button>
+        <input type="hidden" name="acao" value="salvarServico">
+        Nome Serviço: <input type="text" name="nome_servico" required><br>
+        Descrição: <input type="text" name="descricao" required><br>
+        Preço: <input type="text" name="preco" required><br>
+        Tempo Estimado: <input type="text" name="tempo_estimado" required><br>
+        <button type="submit">Salvar Serviço</button>
     </form>
-        <a href="index.php"><button>Sair</button></a>
-    <h3>Barbeiros cadastrados</h3>
-    <ul>
-        <?php
-        $barbeiros = listarBarbeiro($conexao);
-        foreach($barbeiros as $b){
-            echo "<li>ID: {$b['id_barbeiro']} | Nome: {$b['nome']} | Email: {$b['email']}</li>";
-        }
-        ?>
-    </ul>
 
-    <hr>
-    <link rel="stylesheet" href="desing.css">
 </body>
 </html>
