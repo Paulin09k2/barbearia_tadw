@@ -131,7 +131,7 @@ function cadastrarCliente($conexao, $nome, $email, $telefone, $endereco, $data_n
 }
 function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente)
 {
-    $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro, senha_cliente) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $sql = "INSERT INTO cliente (nome, telefone, endereco, data_nascimento, data_cadastro,) VALUES (?, ?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($stmt, 'sssssss', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente);
     $ok = mysqli_stmt_execute($stmt);

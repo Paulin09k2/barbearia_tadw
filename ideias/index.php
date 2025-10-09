@@ -66,7 +66,7 @@
         <a href="login.php">Login</a>
         <a href="formAvaliaçao.php">Avaliações</a>
         <a href="formAgendar.php">Agendar</a>
-        <a href="formBarbeiro.php">Serviços</a>
+        <a href="formServico.php">Serviços</a>
         
       </nav>
       <button onclick="toggleMobileMenu()" class="md:hidden">
