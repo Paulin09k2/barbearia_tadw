@@ -1,5 +1,7 @@
 trabalho 
 
-Kaio: login
-Andre: cadastra um corte que o cliente vai querer
-Paulo: 
+Kaio: login 
+
+Andre: cadastra cliente 
+
+Paulo: Pagina do Barbeiro
