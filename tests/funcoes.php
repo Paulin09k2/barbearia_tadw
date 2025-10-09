@@ -141,6 +141,9 @@ function salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro,
     mysqli_stmt_close($comando);
     return $funcionou;
 }
+<<<<<<< HEAD
+
+=======
 //-----------int = 1 -- decimal = d -- varchar = s -- date = s --text = s----------------------------------------------------------------------------------------------------Andre:
 
 function listarBarbeiro($conexao) {
@@ -229,6 +232,7 @@ function pegarDadosUsuario($conexao, $idcliente) {
     }
     return $usuario;
 }
+>>>>>>> 04b512f5f9451ba856991a7bc05a06bd8f2aab27
 function pesquisarClienteId($conexao, $id_cliente) {
     $sql = "SELECT * FROM cliente WHERE id_cliente = ?";
     $comando = mysqli_prepare($conexao, $sql);
@@ -238,4 +242,11 @@ function pesquisarClienteId($conexao, $id_cliente) {
     $cliente = mysqli_fetch_assoc($resultado);
     mysqli_stmt_close($comando);
     return $cliente;
+<<<<<<< HEAD
 }
+?>
+
+
+=======
+}
+>>>>>>> 04b512f5f9451ba856991a7bc05a06bd8f2aab27
