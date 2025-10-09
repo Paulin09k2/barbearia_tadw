@@ -9,7 +9,7 @@ $listaClientes = listarCliente($conexao);
 $listaBarbeiros = listarBarbeiro($conexao);
 
 // Buscar serviços
-$listaServicos = listaServico($conexao);
+$listaServicos = listarServico($conexao);
 
 $erro = "";     // Para mensagens de erro
 $sucesso = "";  // Para mensagens de sucesso
