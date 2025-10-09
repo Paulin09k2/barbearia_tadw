@@ -11,27 +11,25 @@ require_once "../tests/funcoes.php";
   <title>Document</title>
 </head>
 <body>
-      <h2>Cadastrar Serviço</h2>
-    <form method="post" action="processa.php">
-        <input type="hidden" name="acao" value="salvarServico">
-        Nome Serviço: <input type="text" name="nome_servico" required><br>
-        Descrição: <input type="text" name="descricao" required><br>
-        Preço: <input type="text" name="preco" required><br>
-        Tempo Estimado: <input type="text" name="tempo_estimado" required><br>
-        <button type="submit">Salvar Serviço</button>
-    </form>
-        <a href="index.php"><button>Sair</button></a>
-    <h3>Serviços cadastrados</h3>
-    <ul>
-        <?php
-        $servicos = listaServico($conexao);
-        foreach($servicos as $s){
-            echo "<li>ID: {$s['id_servico']} | Nome: {$s['nome_servico']} | Preço: {$s['preco']}</li>";
-        }
-        ?>
-    </ul>
-
-    <hr>
-    <link rel="stylesheet" href="desing.css">
+    <h1>Serviços da Barbearia</h1>
+    <div style="max-width:400px;margin:auto;">
+        <div style="border:1px solid #ccc;padding:20px;margin-bottom:20px;border-radius:10px;">
+            <h2>Corte de Cabelo</h2>
+            <p>Preço: R$ 30,00</p>
+        </div>
+        <div style="border:1px solid #ccc;padding:20px;margin-bottom:20px;border-radius:10px;">
+            <h2>Cabelo e Barba</h2>
+            <p>Preço: R$ 50,00</p>
+        </div>
+        <div style="border:1px solid #ccc;padding:20px;margin-bottom:20px;border-radius:10px;">
+            <h2>Barba</h2>
+            <p>Preço: R$ 25,00</p>
+        </div>
+        <a href="formAgendar.php">
+            <button style="width:100%;padding:15px;font-size:18px;background:#1a237e;color:#fff;border:none;border-radius:8px;cursor:pointer;">
+                Agende aqui
+            </button>
+        </a>
+    </div>
 </body>
 </html>

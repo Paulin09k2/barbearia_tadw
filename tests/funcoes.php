@@ -119,7 +119,16 @@ function listarCliente($conexao)
     mysqli_stmt_close($stmt);
     return $lista;
 }
-
+function cadastrarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente)
+{
+    $senha_hash = password_hash($senha_cliente, PASSWORD_DEFAULT);
+    $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro, senha_cliente) VALUES (?, ?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($stmt, 'sssssss', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_hash);
+    $ok = mysqli_stmt_execute($stmt);
+    mysqli_stmt_close($stmt);
+    return $ok;
+}
 function salvarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente)
 {
     $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro, senha_cliente) VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -247,13 +256,4 @@ function hashPassword($senha)
 {
     return password_hash($senha, PASSWORD_DEFAULT);
 }
-function cadastrarCliente($conexao, $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_cliente)
-{
-    $senha_hash = password_hash($senha_cliente, PASSWORD_DEFAULT);
-    $sql = "INSERT INTO cliente (nome, email, telefone, endereco, data_nascimento, data_cadastro, senha_cliente) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    $stmt = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($stmt, 'sssssss', $nome, $email, $telefone, $endereco, $data_nascimento, $data_cadastro, $senha_hash);
-    $ok = mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-    return $ok;
-}
+?>
