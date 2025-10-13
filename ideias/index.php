@@ -84,7 +84,7 @@
         <h2 class="text-5xl font-bold mb-6 fade-in">Barbearia Elite</h2>
         <p class="text-xl mb-8 fade-in">O melhor corte para o homem moderno</p>
         <button onclick="showPage('booking')" class="bg-white text-navy px-8 py-3 rounded-lg text-lg font-semibold hover:bg-gray-100 transition-colors fade-in">
-          Agendar Horário
+          <a href="formAgendar.php">Agendar Horário</a>
         </button>
       </div>
     </section>

@@ -236,24 +236,49 @@ function pesquisarClienteId($conexao, $id_cliente)
     mysqli_stmt_close($stmt);
     return $cliente ? $cliente : null;
 }
+
 function verificarLogin($conexao, $email, $senha)
 {
-    $sql = "SELECT id_cliente, senha_cliente FROM cliente WHERE email = ?";
+    // Busca o usuário pelo email
+    $sql = "SELECT * FROM usuario WHERE email = ?";
     $stmt = mysqli_prepare($conexao, $sql);
+
+    if (!$stmt) {
+        die("Erro ao preparar consulta: " . mysqli_error($conexao));
+    }
+
     mysqli_stmt_bind_param($stmt, 's', $email);
     mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-    $usuario = mysqli_fetch_assoc($result);
+    $resultado = mysqli_stmt_get_result($stmt);
+    $usuario = mysqli_fetch_assoc($resultado);
     mysqli_stmt_close($stmt);
 
-    if ($usuario && password_verify($senha, $usuario['senha_cliente'])) {
-        return $usuario['id_cliente'];
-    } else {
-        return false;
+    // ⚠️ Como as senhas não estão criptografadas no banco:
+    // usa comparação direta (pode mudar depois para password_verify)
+    if ($usuario && $senha === $usuario['senha']) {
+
+        // tipo_usuario: 1 = cliente, 2 = barbeiro
+        if ($usuario['tipo_usuario'] == 1) {
+            $sql = "SELECT * FROM cliente WHERE usuario_idusuario = ?";
+        } elseif ($usuario['tipo_usuario'] == 2) {
+            $sql = "SELECT * FROM barbeiro WHERE usuario_idusuario = ?";
+        } else {
+            return $usuario; // Ex: admin ou outro tipo
+        }
+
+        $stmt = mysqli_prepare($conexao, $sql);
+        mysqli_stmt_bind_param($stmt, 'i', $usuario['idusuario']);
+        mysqli_stmt_execute($stmt);
+        $result = mysqli_stmt_get_result($stmt);
+        $dadosExtra = mysqli_fetch_assoc($result);
+        mysqli_stmt_close($stmt);
+
+        // Retorna tudo junto
+        return array_merge($usuario, $dadosExtra ?: []);
     }
+
+    return null; // Login inválido
 }
-function hashPassword($senha)
-{
-    return password_hash($senha, PASSWORD_DEFAULT);
-}
+
+
 ?>

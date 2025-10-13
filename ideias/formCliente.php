@@ -1,54 +1,54 @@
 <?php
-    if (isset($_GET['id'])) {
-        require_once "../tests/conexao.php";
-        require_once "../tests/funcoes.php";
+require_once "../tests/conexao.php";
+require_once "../tests/funcoes.php";
 
-        $id = $_GET['id'];
-        $cliente = pesquisarClienteId($conexao, $id);
+if (isset($_GET['id'])) {
+    $id = $_GET['id'];
+    $cliente = pesquisarClienteId($conexao, $id);
 
-        $nome = $cliente['nome'];
-        $email = $cliente['email'];
-        $telefone = $cliente['telefone'];
-        $endereco = $cliente['endereco'];
-        $cpf = $cliente['cpf'];
-        $data_nascimento = $cliente['data_nascimento'];
-        $data_cadastro = $cliente['data_cadastro'];
-        $senha_cliente = $cliente['senha_cliente'];
-
-        $botao = "Atualizar";
-    }
-    else {
-        $id = 0;
-        $nome = "";
-        $email = "";
-        $telefone = "";
-        $endereco = "";
-        $cpf = "";
-        $data_nascimento = "";
-        $data_cadastro = "";
-        $senha_cliente = "";
-
-        $botao = "Cadastrar";
-    }
+    $nome = $cliente['nome'];
+    $email = $cliente['email'];
+    $telefone = $cliente['telefone'];
+    $endereco = $cliente['endereco'];
+    $cpf = $cliente['cpf'];
+    $data_nascimento = $cliente['data_nascimento'];
+    $data_cadastro = $cliente['data_cadastro'];
+    $senha_cliente = ""; // Nunca exibe a senha real
+    $botao = "Atualizar";
+} else {
+    $id = 0;
+    $nome = "";
+    $email = "";
+    $telefone = "";
+    $endereco = "";
+    $cpf = "";
+    $data_nascimento = "";
+    $data_cadastro = date('Y-m-d');
+    $senha_cliente = "";
+    $botao = "Cadastrar";
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="login" href="logo2.png">
+    <link rel="icon" type="image/png" href="logo2.png">
     <title>Cadastro</title>
 </head>
+
 <body>
     <h1>Cadastro de Cliente</h1>
-    <form action="index.php" method="post" enctype="multipart/form-data">
+    <form action="salvarCliente.php" method="post" enctype="multipart/form-data">
+        <input type="hidden" name="id" value="<?php echo $id; ?>">
 
         Nome: <br>
         <input type="text" name="nome" value="<?php echo $nome; ?>" required> <br><br>
 
         Email: <br>
         <input type="email" name="email" value="<?php echo $email; ?>" required> <br><br>
-        
+
         Telefone: <br>
         <input type="text" name="telefone" value="<?php echo $telefone; ?>" required> <br><br>
 
@@ -61,15 +61,14 @@
         Data de Nascimento: <br>
         <input type="date" name="data_nascimento" value="<?php echo $data_nascimento; ?>" required max="<?= date('Y-m-d') ?>"> <br><br>
 
-        
         Data de Cadastro: <br>
-        <input type="date" id="data" name="data" required min="<?= date('Y-m-d') ?>" max="<?= date('Y-m-d') ?>"> <br><br>
+        <input type="date" name="data_cadastro" value="<?php echo $data_cadastro; ?>" required min="<?= date('Y-m-d') ?>" max="<?= date('Y-m-d') ?>"> <br><br>
 
         Senha: <br>
-        <input type="password" name="senha_cliente" value="<?php echo $senha_cliente; ?>" required> <br><br>
-
+        <input type="password" name="senha_cliente" value="" required> <br><br>
 
         <input type="submit" value="<?php echo $botao; ?>">
     </form>
 </body>
+
 </html>

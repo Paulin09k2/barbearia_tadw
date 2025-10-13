@@ -1,38 +1,40 @@
 <?php
-    require_once "../tests/conexao.php";
-    require_once "../tests/funcoes.php";
+require_once "../tests/conexao.php";
+require_once "../tests/funcoes.php";
+session_start();
 
-    $email = $_POST['email'];
-    $senha = $_POST['senha'];
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $email = trim($_POST['email']);
+    $senha = trim($_POST['senha']);
 
-    $idusuario = verificarLogin($conexao, $email, $senha);
+    // Verifica o login com a função aprimorada
+    $usuario = verificarLogin($conexao, $email, $senha);
 
-        if ($idusuario === false) {
-            header("Location: login.php");
-            exit;
+    if ($usuario === null) {
+        echo "<script>alert('E-mail ou senha incorretos!'); window.location='login.php';</script>";
+        exit;
+    } else {
+        // Armazena os dados do usuário na sessão
+        $_SESSION['idusuario'] = $usuario['idusuario'];
+        $_SESSION['tipo_usuario'] = $usuario['tipo_usuario'];
+        $_SESSION['email'] = $usuario['email'];
+
+        // Redireciona de acordo com o tipo de usuário
+        if ($usuario['tipo_usuario'] === 'cliente') {
+            $_SESSION['id_cliente'] = $usuario['id_cliente']; // vem da tabela cliente
+            header("Location: index.php");
+        } elseif ($usuario['tipo_usuario'] === 'barbeiro') {
+            $_SESSION['id_barbeiro'] = $usuario['id_barbeiro']; // vem da tabela barbeiro
+            header("Location: ../barbeiro/index.php");
         } else {
-            // Busca os dados do cliente
-            $usuario = pegarDadosCliente($conexao, $idusuario);
-    
-            if ($usuario == 0) {
-                header("Location: login.php");
-                exit;
-            } else {
-                session_start();
-                $_SESSION['u'] = $usuario;
-                header("Location: index.php");
-                exit;
-            }
+            // caso seja outro tipo (ex: admin)
+            header("Location: ../admin/index.php");
         }
-    // Nova função para buscar dados do cliente
-    function pegarDadosCliente($conexao, $id_cliente) {
-        $sql = "SELECT * FROM cliente WHERE id_cliente = ?";
-        $comando = mysqli_prepare($conexao, $sql);
-        mysqli_stmt_bind_param($comando, 'i', $id_cliente);
-        mysqli_stmt_execute($comando);
-        $resultado = mysqli_stmt_get_result($comando);
-        $usuario = mysqli_fetch_assoc($resultado);
-        mysqli_stmt_close($comando);
-        return $usuario ? $usuario : 0;
+        exit;
     }
+} else {
+    header("Location: login.php");
+    exit;
+}
 ?>
+

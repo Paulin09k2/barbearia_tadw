@@ -1,3 +1,4 @@
+
 USE `barbearia` ;
 INSERT INTO usuario (senha, email, tipo_usuario) VALUES
 ('1234', 'joao@elite.com', '2'),
