@@ -3,7 +3,7 @@ USE `barbearia`;
 -- 🔹 1. Inserir o Admin Supremo
 INSERT INTO usuario (senha, email, tipo_usuario)
 VALUES ("$2y$10$HSwrRIyAbu8vWGkmrq6DJeBi98hi5DCo1QkjxFajk6RPKModnYXSK", 'admin@barbearia.com', '2');
-
+-- senha : admin123
 SET @id_admin := LAST_INSERT_ID();
 
 INSERT INTO barbeiro (nome, telefone, cpf, data_nascimento, data_admissao, usuario_idusuario)

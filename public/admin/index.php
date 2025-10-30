@@ -31,7 +31,7 @@ $barbeiro = pesquisarBarbeiroId($conexao, $idusuario);
     </ul>
   </nav>
 
-<h1>Bem-vindo, <?php echo htmlspecialchars($barbeiro['nome']); ?>!</h1>
+  <h1>Bem-vindo, <?php echo htmlspecialchars($barbeiro['nome']); ?>!</h1>
 
 <section>
   <?php
