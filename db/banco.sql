@@ -49,8 +49,8 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`barbeiro` (
   CONSTRAINT `fk_barbeiro_usuario1`
     FOREIGN KEY (`usuario_idusuario`)
     REFERENCES `barbearia`.`usuario` (`idusuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 ,DEFAULT CHARACTER SET = utf8mb4;
 
@@ -71,8 +71,8 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`cliente` (
   CONSTRAINT `fk_cliente_usuario1`
     FOREIGN KEY (`usuario_idusuario`)
     REFERENCES `barbearia`.`usuario` (`idusuario`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8mb4;
 
@@ -147,12 +147,14 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`avaliacao` (
   `idavaliacao` INT(11) NOT NULL AUTO_INCREMENT,
   `estrela` TINYINT(4) NOT NULL,
   `comentario` VARCHAR(256) NULL DEFAULT NULL,
+  `foto` VARCHAR(255) NULL DEFAULT NULL,
   `barbeiro_id_barbeiro` INT(11) NOT NULL,
   `servico_id_servico` INT(11) NOT NULL,
-  `foto` VARCHAR(255) NULL DEFAULT NULL,
+  `cliente_id_cliente` INT(11) NOT NULL,
   PRIMARY KEY (`idavaliacao`),
   INDEX `fk_avaliacao_barbeiro1_idx` (`barbeiro_id_barbeiro` ASC) VISIBLE,
   INDEX `fk_avaliacao_servico1_idx` (`servico_id_servico` ASC) VISIBLE,
+  INDEX `fk_avaliacao_cliente1_idx` (`cliente_id_cliente` ASC) VISIBLE,
   CONSTRAINT `fk_avaliacao_barbeiro1`
     FOREIGN KEY (`barbeiro_id_barbeiro`)
     REFERENCES `barbearia`.`barbeiro` (`id_barbeiro`)
@@ -162,10 +164,15 @@ CREATE TABLE IF NOT EXISTS `barbearia`.`avaliacao` (
     FOREIGN KEY (`servico_id_servico`)
     REFERENCES `barbearia`.`servico` (`id_servico`)
     ON DELETE CASCADE
-    ON UPDATE CASCADE)
+    ON UPDATE CASCADE,
+  CONSTRAINT `fk_avaliacao_cliente1`
+    FOREIGN KEY (`cliente_id_cliente`)
+    REFERENCES `barbearia`.`cliente` (`id_cliente`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+)
 ENGINE = InnoDB
-,DEFAULT CHARACTER SET = utf8mb4;
-
+DEFAULT CHARACTER SET = utf8mb4;
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
