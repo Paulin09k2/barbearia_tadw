@@ -6,3 +6,4 @@ Andre:
 
 Paulo:  cadastra cliente 
 
+ <link rel="shortcut icon" href="logo.png" type="image/png">
