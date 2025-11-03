@@ -94,7 +94,7 @@
   </style>
 </head>
 <body>
-  <form action="salvar_avaliacao.php" method="post" enctype="multipart/form-data">
+  <form action="../salvar_avaliacao.php" method="post" enctype="multipart/form-data">
     <h1>Deixe sua Avaliação</h1>
 
     <div class="rating">
