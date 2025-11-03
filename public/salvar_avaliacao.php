@@ -1,7 +1,9 @@
 <?php
-require_once "./conexao.php";
-require_once "./funcoes.php";
+require_once "conexao.php";
+require_once "funcoes.php";
 session_start();
+
+
 
 $avaliacoes = $_POST['avaliacao'];
 $comentario = $_POST['comentario'];

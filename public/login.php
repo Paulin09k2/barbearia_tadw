@@ -21,9 +21,8 @@ require_once "./funcoes.php";
       Senha: <br>
       <input type="password" name="senha" required> <br><br>
 
-      <a href="formCliente.php">Primeiro acesso</a> <br><br>
       <input type="submit" value="Acessar">
-      <br><br>
+      <br><br> <a href="formCliente.php">Primeiro acesso</a> <br><br>
       <a href="index.php">Sair</a>
   </form>
 </body>

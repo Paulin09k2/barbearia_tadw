@@ -120,11 +120,9 @@
     </div>
 
     <nav>
-      <a href="#">Início</a>
-      <a href="#">Agendamento</a>
-      <a href="avaliacaocliente.php">Avaliação</a>
-      <a href="servicoscliente.php">Serviços</a>
       <a href="login.php">Login</a>
+      <a href="avaliacaocliente.php">Avaliaçãoes</a>
+      <a href="servicoscliente.php">Serviços</a>
     </nav>
   </header>
 
