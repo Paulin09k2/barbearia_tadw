@@ -3,8 +3,6 @@ require_once "conexao.php";
 require_once "funcoes.php";
 session_start();
 
-
-
 $avaliacoes = $_POST['avaliacao'];
 $comentario = $_POST['comentario'];
 $idusuario = $_POST['idusuario'];
@@ -19,7 +17,7 @@ $extensao = pathinfo($nome_arquivo, PATHINFO_EXTENSION);
 $novo_nome = uniqid() . "." . $extensao;
 
 // lembre-se de criar a pasta e de ajustar as permissões.
-$caminho_destino = "../img/avaliacao/" . $novo_nome;
+$caminho_destino = "./img/avaliacao/" . $novo_nome;
 
 // move a foto para o servidor
 move_uploaded_file($caminho_temporario, $caminho_destino);
