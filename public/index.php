@@ -13,7 +13,7 @@
   <p>Escolha uma das opções para continuar.</p>
 
   <a href="login.php">Login</a> |
-  <a href="#">Agende aqui !</a> |
+  <a href="login.php">Agende aqui !</a> |
   <a href="servicoscliente.php">Serviços que temos</a>
 
 </body>
