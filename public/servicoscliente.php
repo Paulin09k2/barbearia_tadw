@@ -98,6 +98,6 @@
       </tr>
     </tbody>
   </table>
-  <a href="servicoscliente.php">Serviços que temos</a>
+  <a href="index.php">Sair</a>
 </body>
 </html>
