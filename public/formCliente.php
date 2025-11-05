@@ -72,8 +72,17 @@ if ($cliente && $usuario) {
         <input type="hidden" name="data_cadastro" value="<?php echo $data_cadastro; ?>" required min="<?= date('Y-m-d') ?>" max="<?= date('Y-m-d') ?>">
 
         Senha: <br>
-        <input type="password" name="senha_cliente" value="" required> <br><br>
-
+<input 
+  type="password" 
+  name="senha_cliente" 
+  id="senha_cliente"
+  placeholder="Senha"
+  required
+  onclick="
+    this.type = this.type === 'password' ? 'text' : 'password';
+  "
+>
+<br>
         <input type="submit" value="<?php echo $botao; ?>">
     </form>
 </body>
