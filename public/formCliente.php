@@ -61,7 +61,7 @@ if ($cliente && $usuario) {
         <input type="email" name="email" value="<?php echo $email; ?>" required> <br><br>
 
         Telefone: <br>
-        <input type="text" name="telefone" value="<?php echo $telefone; ?>" required> <br><br>
+        <input type="text" name="telefone" value="<?php echo $telefone; ?>"  required> <br><br>
 
         Endereço: <br>
         <input type="text" name="endereco" value="<?php echo $endereco; ?>" required> <br><br>
