@@ -18,7 +18,7 @@ $mediaGeral = calcularMediaAvaliacoes($conexao);
       margin: 0;
       padding: 0;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0a0a14, #1b1b2f);
+      background-color: #0a0a0a; /* fundo preto uniforme */
       color: #fff;
       min-height: 100vh;
       display: flex;
@@ -27,23 +27,27 @@ $mediaGeral = calcularMediaAvaliacoes($conexao);
     }
 
     h1 {
-      color: #f5b100;
+      color: #fff;
       margin-top: 40px;
       text-transform: uppercase;
       letter-spacing: 2px;
     }
 
     a {
-      color: #f5b100;
+      color: #fff;
       text-decoration: none;
       margin-top: 20px;
       display: inline-block;
+      background-color: transparent;
+      border: 1px solid #fff;
+      padding: 8px 16px;
+      border-radius: 6px;
       transition: 0.3s;
     }
 
     a:hover {
-      color: #fff;
-      text-decoration: underline;
+      background-color: #fff;
+      color: #000;
     }
 
     p {
@@ -56,10 +60,10 @@ $mediaGeral = calcularMediaAvaliacoes($conexao);
       border-collapse: collapse;
       width: 90%;
       max-width: 1000px;
-      background: #111827;
+      background: #121212; /* fundo da tabela mais claro que o fundo */
       border-radius: 10px;
       overflow: hidden;
-      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 0 25px rgba(255, 255, 255, 0.05);
       margin-bottom: 40px;
     }
 
@@ -69,19 +73,23 @@ $mediaGeral = calcularMediaAvaliacoes($conexao);
     }
 
     th {
-      background-color: #f5b100;
-      color: #111;
+      background-color: #1f1f1f;
+      color: #fff;
       text-transform: uppercase;
       font-weight: bold;
       letter-spacing: 1px;
     }
 
     tr:nth-child(even) {
-      background-color: #1e293b;
+      background-color: #181818;
+    }
+
+    tr:nth-child(odd) {
+      background-color: #121212;
     }
 
     tr:hover {
-      background-color: #334155;
+      background-color: #2a2a2a;
       transition: 0.3s;
     }
 
@@ -91,7 +99,7 @@ $mediaGeral = calcularMediaAvaliacoes($conexao);
 
     /* ====== BOTÃO EXCLUIR ====== */
     button {
-      background-color: #f5b100;
+      background-color: #fff;
       border: none;
       padding: 8px 15px;
       border-radius: 5px;
@@ -102,8 +110,8 @@ $mediaGeral = calcularMediaAvaliacoes($conexao);
     }
 
     button:hover {
-      background-color: #fff;
-      color: #111;
+      background-color: #ccc;
+      color: #000;
     }
 
     /* ====== RESPONSIVIDADE ====== */

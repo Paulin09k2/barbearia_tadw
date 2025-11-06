@@ -40,7 +40,7 @@ if (isset($_SESSION['mensagem'])) {
         }
 
         a {
-            color: #f5b100;
+            color: #fff;
             text-decoration: none;
             margin: 20px 0;
             display: inline-block;
@@ -48,7 +48,7 @@ if (isset($_SESSION['mensagem'])) {
         }
 
         a:hover {
-            color: #fff;
+            color: #ccc;
             text-decoration: underline;
         }
 
@@ -64,7 +64,7 @@ if (isset($_SESSION['mensagem'])) {
 
         h1 {
             text-align: center;
-            color: #f5b100;
+            color: #fff;
             letter-spacing: 1px;
             text-transform: uppercase;
             margin-bottom: 25px;
@@ -98,7 +98,7 @@ if (isset($_SESSION['mensagem'])) {
         }
 
         button {
-            background-color: #f5b100;
+            background-color: #fff;
             color: #111;
             font-weight: bold;
             border: none;
@@ -107,8 +107,8 @@ if (isset($_SESSION['mensagem'])) {
         }
 
         button:hover {
-            background-color: #fff;
-            color: #111;
+            background-color: #ccc;
+            color: #000;
         }
 
         /* ======= TABELA ======= */
@@ -126,7 +126,7 @@ if (isset($_SESSION['mensagem'])) {
         }
 
         th {
-            background-color: #f5b100;
+            background-color: #fff;
             color: #111;
             font-weight: bold;
             text-transform: uppercase;
