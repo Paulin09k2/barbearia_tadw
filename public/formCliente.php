@@ -172,11 +172,11 @@ if ($cliente && $usuario) {
                 id="senha_cliente"
                 placeholder="Senha"
                 required
-                onclick="this.type = this.type === 'password' ? 'text' : 'password';">
+                onclick="this.type = this.type === 'password' ? 'text' : 'password';"
+            >
 
             <input type="submit" value="<?php echo $botao; ?>">
         </form>
     </div>
 </body>
-
 </html>
