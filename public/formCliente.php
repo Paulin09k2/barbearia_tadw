@@ -36,6 +36,8 @@ if ($cliente && $usuario) {
 }
 ?>
 
+<<<<<<< HEAD
+=======
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -180,3 +182,4 @@ if ($cliente && $usuario) {
     </div>
 </body>
 </html>
+>>>>>>> 22710eed3b055638467f69fc724b4f321c80a27c
