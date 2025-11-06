@@ -25,6 +25,7 @@
       background: linear-gradient(90deg, #ffffff );
       background-size: 200% 200%;
       animation: shine 3s infinite linear;
+      -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     @keyframes shine {
