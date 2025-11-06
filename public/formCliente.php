@@ -88,7 +88,7 @@ if ($cliente && $usuario) {
         input[type="email"],
         input[type="password"],
         input[type="date"] {
-            width: 100%;
+            width: 90%;
             padding: 12px 18px;
             border-radius: 30px;
             border: none;
