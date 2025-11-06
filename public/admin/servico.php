@@ -27,14 +27,14 @@ $idusuario = $_SESSION['idusuario'];
 
     h1 {
       margin-top: 40px;
-      color: #f5b100;
+      color: #fff;
       text-transform: uppercase;
       letter-spacing: 2px;
       text-align: center;
     }
 
     a {
-      color: #f5b100;
+      color: #fff;
       text-decoration: none;
       margin: 20px 0;
       display: inline-block;
@@ -42,7 +42,7 @@ $idusuario = $_SESSION['idusuario'];
     }
 
     a:hover {
-      color: #fff;
+      color: #ccc;
       text-decoration: underline;
     }
 
@@ -74,7 +74,7 @@ $idusuario = $_SESSION['idusuario'];
     }
 
     th {
-      background-color: #f5b100;
+      background-color: #fff;
       color: #111;
       font-weight: bold;
       text-transform: uppercase;
