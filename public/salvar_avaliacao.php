@@ -85,11 +85,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Passa as informações necessárias (nota, comentário, barbeiro, serviço, etc.)
     salvarAvaliacao(
         $conexao,
-        $estrela,
+        $avaliacoes,
         $comentario,
-        $barbeiro_id_barbeiro,
-        $servico_id_servico,
-        $foto
+        $_POST['barbeiro_id_barbeiro'] ?? null,
+        $_POST['servico_id_servico'] ?? null,
+        $caminho_destino,
+        $idusuario
     );
 
     // Redireciona o usuário de volta para a página principal após salvar
@@ -97,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     exit;
 
 } else {
-    // Caso o acesso ao arquivo não seja feito por POST, exibe mensagem de erro
+    // Caso o acesso ao arquivo não seja feito por POST, exibe mensagem de erro 
     die("Acesso inválido.");
 }
+?>
