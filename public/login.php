@@ -3,7 +3,6 @@ require_once "./conexao.php";
 require_once "./funcoes.php";
 ?>
 
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -116,9 +115,8 @@ require_once "./funcoes.php";
             class="w-full px-12 py-3 rounded-full bg-gray-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300" />
         </div>
 
-<<<<<<< HEAD
         <!-- Botão -->
-=======
+
         <!-- Checkbox "Lembrar-me" -->
         <label class="flex items-center gap-2 text-sm text-gray-300">
           <input type="checkbox" class="accent-yellow-500 w-4 h-4 rounded" />
@@ -126,7 +124,7 @@ require_once "./funcoes.php";
         </label>
 
         <!-- Botão de envio -->
->>>>>>> 12c2b9653c8f9c89302a194e3b62d90ce25d1bdf
+
         <button type="submit"
           class="mt-2 py-3 rounded-full bg-gradient-to-r from-yellow-600 to-yellow-400 text-[#0f1f33] font-bold text-lg shadow-md hover:from-yellow-500 hover:to-yellow-300 transition-transform transform hover:-translate-y-0.5 hover:shadow-yellow-500/40">
           Entrar
