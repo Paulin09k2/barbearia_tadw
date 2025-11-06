@@ -11,26 +11,18 @@ session_start();
 // Verifica se o formulário foi enviado via método POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-<<<<<<< HEAD
-    $avaliacao = $_POST['avaliacao'] ?? null;
-=======
     // Captura a avaliação enviada pelo formulário (quantidade de estrelas, por exemplo)
     $avaliacoes = $_POST['avaliacao'] ?? null;
 
     // Captura o comentário textual do formulário
->>>>>>> 8e0ffcdcf479f346d5dad6dfa24826127bcf702b
     $comentario = $_POST['comentario'] ?? '';
 
     // Captura o ID do usuário que fez a avaliação
     $idusuario = $_POST['idusuario'] ?? null;
 
-<<<<<<< HEAD
-    if (!$avaliacao || !$idusuario) {
-=======
     // Verifica se os campos obrigatórios foram preenchidos
     if (!$avaliacoes || !$idusuario) {
         // Interrompe a execução se faltar algum dado essencial
->>>>>>> 8e0ffcdcf479f346d5dad6dfa24826127bcf702b
         die("Avaliação ou usuário não informado.");
     }
 
