@@ -6,11 +6,11 @@ session_start();
 // Verifica se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $avaliacoes = $_POST['avaliacao'] ?? null;
+    $avaliacao = $_POST['avaliacao'] ?? null;
     $comentario = $_POST['comentario'] ?? '';
     $idusuario = $_POST['idusuario'] ?? null;
 
-    if (!$avaliacoes || !$idusuario) {
+    if (!$avaliacao || !$idusuario) {
         die("Avaliação ou usuário não informado.");
     }
 
