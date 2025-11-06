@@ -28,6 +28,16 @@ if ($cliente && $usuario) {
     $data_cadastro = $cliente['data_cadastro'];     // Data de cadastro original
     $senha_cliente = "";                 // A senha não é exibida por segurança
     $botao = "Editar";                   // Define o texto do botão
+    $id = $cliente['id_cliente'];
+    $idusuario = $usuario['idusuario'];
+    $nome = $cliente['nome'];
+    $email = $usuario['email'];
+    $telefone = $cliente['telefone'];
+    $endereco = $cliente['endereco'];
+    $data_nascimento = $cliente['data_nascimento'];
+    $data_cadastro = $cliente['data_cadastro'];
+    $senha_cliente = "";
+    $botao = "Editar";
 } else {
     // Se não existir cadastro, define valores padrão (modo cadastro)
     $id = 0;
