@@ -70,7 +70,7 @@ try {
     // --- Avaliação ---
     $ok = salvarAvaliacao($conexao, 5, "Excelente atendimento!", $barbeiro_id, $servico_id, "foto.jpg");
     resultado("Salvar Avaliação", $ok);
-    $avaliacoes = listarAvaliacao($conexao);
+    $avaliacoes = listarAvaliacoes($conexao);
     resultado("Listar Avaliações", count($avaliacoes) > 0);
 
     // --- Limpeza de teste ---
