@@ -91,7 +91,11 @@ if ($cliente && $usuario) {
         input[type="password"],
         input[type="date"] {
             width: 90%;
+<<<<<<< Updated upstream
             padding: 12px 18px;
+=======
+            padding: 13px 18px;
+>>>>>>> Stashed changes
             border-radius: 30px;
             border: none;
             background-color: #e8ebf0;
