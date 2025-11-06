@@ -41,3 +41,4 @@ if ($cliente && $usuario) {
     $botao = "Cadastrar";            // Define o texto do botão
 }
 ?>
+
