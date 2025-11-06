@@ -1,19 +1,26 @@
 <?php
 //----------- int = i -- decimal = d -- varchar/text/date = s -----------------------------
+// Mapeamento dos tipos usados no bind_param: i = inteiro, d = decimal, s = string
 
 // === AGENDAMENTO ===
+
+// Função para excluir um agendamento específico
 function deletarAgendamento($conexao, $id_agendamento, $barbeiro_id_barbeiro, $cliente_id_cliente)
 {
+    // SQL para deletar o agendamento pelo ID e IDs relacionados
     $sql = "DELETE FROM agendamento WHERE id_agendamento = ? AND barbeiro_id_barbeiro = ? AND cliente_id_cliente = ?";
-    $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'iii', $id_agendamento, $barbeiro_id_barbeiro, $cliente_id_cliente);
-    $ok = mysqli_stmt_execute($comando);
-    mysqli_stmt_close($comando);
-    return $ok;
+    $comando = mysqli_prepare($conexao, $sql); // prepara o comando SQL
+    mysqli_stmt_bind_param($comando, 'iii', $id_agendamento, $barbeiro_id_barbeiro, $cliente_id_cliente); // vincula os parâmetros
+    $ok = mysqli_stmt_execute($comando); // executa a query
+    mysqli_stmt_close($comando); // fecha o comando
+    return $ok; // retorna se deu certo ou não
 }
 
+// Lista todos os agendamentos com filtros opcionais (status, data, cliente)
 function listarAgendamento($conexao, $filtros = [])
-{    $sql = "SELECT 
+{
+    // Query principal com joins para cliente e serviços
+    $sql = "SELECT 
                 a.id_agendamento,
                 a.data_agendamento,
                 a.status,
@@ -25,33 +32,46 @@ function listarAgendamento($conexao, $filtros = [])
             INNER JOIN cliente c ON a.cliente_id_cliente = c.id_cliente
             LEFT JOIN agenda_servico ags ON ags.agendamento_id_agendamento = a.id_agendamento
             LEFT JOIN servico s ON ags.servico_id_servico = s.id_servico
-            WHERE 1=1";
+            WHERE 1=1"; // condição base para facilitar filtros
 
-    $params = [];
-    $tipos  = "";
+    $params = []; // valores dos filtros
+    $tipos  = ""; // tipos dos parâmetros
+
+    // Filtro por status
     if (!empty($filtros['status'])) {
         $sql .= " AND a.status = ?";
         $tipos .= "s";
         $params[] = $filtros['status'];
     }
+
+    // Filtro por data
     if (!empty($filtros['data'])) {
         $sql .= " AND DATE(a.data_agendamento) = ?";
         $tipos .= "s";
         $params[] = $filtros['data'];
     }
+
+    // Filtro por nome do cliente
     if (!empty($filtros['cliente'])) {
         $sql .= " AND c.nome LIKE ?";
         $tipos .= "s";
         $params[] = '%' . $filtros['cliente'] . '%';
     }
+
+    // Agrupa e ordena os resultados
     $sql .= " GROUP BY a.id_agendamento ORDER BY a.data_agendamento DESC";
-    $comando = mysqli_prepare($conexao, $sql);
+
+    $comando = mysqli_prepare($conexao, $sql); // prepara o comando
+
+    // Aplica os filtros se existirem
     if (!empty($params)) {
         mysqli_stmt_bind_param($comando, $tipos, ...$params);
     }
-    mysqli_stmt_execute($comando);
-    $resultado = mysqli_stmt_get_result($comando);
 
+    mysqli_stmt_execute($comando); // executa
+    $resultado = mysqli_stmt_get_result($comando); // obtém o resultado
+
+    // Monta o array de retorno
     $lista = [];
     while ($linha = mysqli_fetch_assoc($resultado)) {
         $lista[] = $linha;
@@ -61,12 +81,13 @@ function listarAgendamento($conexao, $filtros = [])
     return $lista;
 }
 
+// Lista agendamentos de um cliente específico
 function listarAgendamentoPorCliente($conexao, $id_cliente)
 {
     $sql = "SELECT * FROM agendamento WHERE cliente_id_cliente = ? ORDER BY data_agendamento DESC";
     $comando = mysqli_prepare($conexao, $sql);
     if ($comando === false) {
-        return []; // prepare falhou
+        return []; // falha no prepare
     }
 
     mysqli_stmt_bind_param($comando, 'i', $id_cliente);
@@ -82,6 +103,7 @@ function listarAgendamentoPorCliente($conexao, $id_cliente)
     return $lista;
 }
 
+// Salva um novo agendamento
 function salvarAgendamento($conexao, $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente)
 {
     $sql = "INSERT INTO agendamento (data_agendamento, status, barbeiro_id_barbeiro, cliente_id_cliente) 
@@ -91,15 +113,17 @@ function salvarAgendamento($conexao, $data_agendamento, $status, $barbeiro_id_ba
 
     $ok = mysqli_stmt_execute($comando);
 
+    // Registra erro no log caso falhe
     if (!$ok) {
         error_log("Erro ao salvar agendamento: " . mysqli_error($conexao));
     }
 
-    $id = mysqli_insert_id($conexao); // retorna o ID do novo agendamento
+    $id = mysqli_insert_id($conexao); // retorna o ID do novo registro
     mysqli_stmt_close($comando);
     return $id;
 }
 
+// Edita um agendamento existente
 function editarAgendamento($conexao, $data_agendamento, $status, $barbeiro_id_barbeiro, $cliente_id_cliente, $id_agendamento)
 {
     $sql = "UPDATE agendamento 
@@ -118,8 +142,9 @@ function editarAgendamento($conexao, $data_agendamento, $status, $barbeiro_id_ba
     return $ok;
 }
 
-
 // === BARBEIRO ===
+
+// Deleta barbeiro
 function deletarBarbeiro($conexao, $id_barbeiro)
 {
     $sql = "DELETE FROM barbeiro WHERE id_barbeiro = ?";
@@ -130,9 +155,10 @@ function deletarBarbeiro($conexao, $id_barbeiro)
     return $ok;
 }
 
+// Edita dados de barbeiro existente
 function editarBarbeiro($conexao, $nome, $telefone, $cpf, $data_nascimento, $data_admissao, $usuario_idusuario, $id_barbeiro): bool
 {
-    // 🔒 Garantir formato de data YYYY-MM-DD
+    // Garante formato de data correto
     if (!preg_match('/^\d{4}-\d{2}-\d{2}$/', $data_admissao)) {
         $data_admissao = date('Y-m-d', strtotime($data_admissao));
     }
@@ -150,7 +176,7 @@ function editarBarbeiro($conexao, $nome, $telefone, $cpf, $data_nascimento, $dat
     return $ok;
 }
 
-
+// Insere novo barbeiro
 function salvarBarbeiro($conexao, $nome, $telefone, $cpf, $data_nascimento, $data_admissao, $usuario_idusuario)
 {
     $sql = "INSERT INTO barbeiro (nome, telefone, cpf, data_nascimento, data_admissao, usuario_idusuario) VALUES (?, ?, ?, ?, ?, ?)";
@@ -161,6 +187,7 @@ function salvarBarbeiro($conexao, $nome, $telefone, $cpf, $data_nascimento, $dat
     return $ok;
 }
 
+// Lista todos os barbeiros
 function listarBarbeiro($conexao)
 {
     $sql = "SELECT * FROM barbeiro";
@@ -174,6 +201,8 @@ function listarBarbeiro($conexao)
 }
 
 // === CLIENTE ===
+
+// Deleta cliente
 function deletarCliente($conexao, $id_cliente)
 {
     $sql = "DELETE FROM cliente WHERE id_cliente = ?";
@@ -184,6 +213,7 @@ function deletarCliente($conexao, $id_cliente)
     return $ok;
 }
 
+// Edita dados do cliente
 function editarCliente($conexao, $nome, $telefone, $endereco, $data_nascimento, $id_cliente)
 {
     $sql = "UPDATE cliente SET nome=?, telefone=?, endereco=?, data_nascimento=? WHERE id_cliente=?";
@@ -194,6 +224,7 @@ function editarCliente($conexao, $nome, $telefone, $endereco, $data_nascimento, 
     return $ok;
 }
 
+// Lista todos os clientes
 function listarCliente($conexao)
 {
     $sql = "SELECT * FROM cliente";
@@ -206,6 +237,7 @@ function listarCliente($conexao)
     return $lista;
 }
 
+// Insere novo cliente
 function salvarCliente($conexao, $nome, $telefone, $endereco, $data_nascimento, $data_cadastro, $idusuario)
 {
     $sql = "INSERT INTO cliente (nome, telefone, endereco, data_nascimento, data_cadastro, usuario_idusuario) VALUES (?, ?, ?, ?, ?, ?)";
@@ -217,6 +249,8 @@ function salvarCliente($conexao, $nome, $telefone, $endereco, $data_nascimento, 
 }
 
 // === SERVIÇO ===
+
+// Insere novo serviço
 function salvarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estimado)
 {
     $sql = "INSERT INTO servico (nome_servico, descricao, preco, tempo_estimado) VALUES (?, ?, ?, ?)";
@@ -227,6 +261,7 @@ function salvarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estim
     return $ok;
 }
 
+// Edita serviço existente
 function editarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estimado, $id_servico)
 {
     $sql = "UPDATE servico SET nome_servico=?, descricao=?, preco=?, tempo_estimado=? WHERE id_servico=?";
@@ -237,6 +272,7 @@ function editarServico($conexao, $nome_servico, $descricao, $preco, $tempo_estim
     return $ok;
 }
 
+// Deleta um serviço
 function deletarServico($conexao, $id_servico)
 {
     $sql = "DELETE FROM servico WHERE id_servico=?";
@@ -246,6 +282,8 @@ function deletarServico($conexao, $id_servico)
     mysqli_stmt_close($comando);
     return $ok;
 }
+
+// Lista serviços disponíveis (ordenados por nome)
 function listarServicosDisponiveis($conexao)
 {
     $sql = "SELECT * FROM servico ORDER BY nome_servico ASC";
@@ -266,6 +304,7 @@ function listarServicosDisponiveis($conexao)
     return $servicos;
 }
 
+// Lista todos os serviços
 function listarServico($conexao)
 {
     $sql = "SELECT * FROM servico";
@@ -277,6 +316,7 @@ function listarServico($conexao)
     mysqli_stmt_close($comando);
     return $lista;
 }
+
 
 // === AVALIAÇÃO ===
 function deletarAvaliacao($conexao, $idavaliacao)
