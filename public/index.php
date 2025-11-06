@@ -25,7 +25,6 @@
       background: linear-gradient(90deg, #ffffff );
       background-size: 200% 200%;
       animation: shine 3s infinite linear;
-      -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     @keyframes shine {
@@ -67,7 +66,7 @@
     <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
       Na Barbearia Elite, cada corte é uma obra de arte. Experimente o cuidado, o estilo e a precisão que definem os verdadeiros mestres da barba e cabelo.
     </p>
-    <a href="login.php" class="mt-10 inline-block bg-[#ffffff] text-black font-semibold px-8 py-3 rounded-xl shadow-lg hover:bg-[#04165c] transition-transform transform hover:scale-105">
+    <a href="login.php" class="mt-10 inline-block bg-[#ffffff] text-black font-semibold px-8 py-3 rounded-xl shadow-lg hover:bg-[#ffffff] transition-transform transform hover:scale-105">
       Agende seu Horário
     </a>
   </section>
@@ -201,4 +200,3 @@
 
 </body>
 </html>
-jpg

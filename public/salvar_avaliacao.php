@@ -1,77 +1,110 @@
 <?php
+// Importa o arquivo de conexão com o banco de dados
 require_once "conexao.php";
+
+// Importa o arquivo com as funções auxiliares
 require_once "funcoes.php";
+
+// Inicia a sessão para usar variáveis globais de sessão
 session_start();
 
-// Verifica se o formulário foi enviado
+// Verifica se o formulário foi enviado via método POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
+<<<<<<< HEAD
     $avaliacao = $_POST['avaliacao'] ?? null;
+=======
+    // Captura a avaliação enviada pelo formulário (quantidade de estrelas, por exemplo)
+    $avaliacoes = $_POST['avaliacao'] ?? null;
+
+    // Captura o comentário textual do formulário
+>>>>>>> 8e0ffcdcf479f346d5dad6dfa24826127bcf702b
     $comentario = $_POST['comentario'] ?? '';
+
+    // Captura o ID do usuário que fez a avaliação
     $idusuario = $_POST['idusuario'] ?? null;
 
+<<<<<<< HEAD
     if (!$avaliacao || !$idusuario) {
+=======
+    // Verifica se os campos obrigatórios foram preenchidos
+    if (!$avaliacoes || !$idusuario) {
+        // Interrompe a execução se faltar algum dado essencial
+>>>>>>> 8e0ffcdcf479f346d5dad6dfa24826127bcf702b
         die("Avaliação ou usuário não informado.");
     }
 
-    // Verifica se um arquivo foi enviado
+    // Verifica se um arquivo de imagem foi enviado junto com o formulário
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
+        // Armazena o nome original do arquivo
         $nome_arquivo = $_FILES['foto']['name'];
+
+        // Armazena o caminho temporário onde o PHP guarda o arquivo até ser movido
         $caminho_temporario = $_FILES['foto']['tmp_name'];
 
-        // pegar a extensão do arquivo e validar
+        // Extrai a extensão do arquivo (por exemplo, jpg, png, gif)
         $extensao = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION));
+
+        // Lista de extensões de imagem permitidas
         $extensoes_validas = ['jpg', 'jpeg', 'png', 'gif'];
 
+        // Verifica se a extensão do arquivo é válida
         if (!in_array($extensao, $extensoes_validas)) {
+            // Interrompe a execução se o tipo de arquivo for inválido
             die("Extensão de arquivo inválida. Apenas JPG, PNG e GIF são permitidos.");
         }
 
-        // gerar um novo nome único
+        // Cria um novo nome único para o arquivo para evitar conflitos
         $novo_nome = uniqid() . "." . $extensao;
 
-        // pasta de destino
+        // Define a pasta onde o arquivo será salvo
         $caminho_pasta = "./img/avaliacao/";
 
-        // Verifica se a pasta existe, se não, cria
+        // Verifica se a pasta de destino existe
         if (!is_dir($caminho_pasta)) {
+            // Cria a pasta se ela não existir, com permissões adequadas
             if (!mkdir($caminho_pasta, 0755, true)) {
+                // Interrompe caso ocorra erro ao criar a pasta
                 die("Erro ao criar a pasta de destino.");
             }
         }
 
-        // verifica se a pasta tem permissão de escrita
+        // Verifica se a pasta tem permissão de escrita
         if (!is_writable($caminho_pasta)) {
+            // Interrompe se a pasta não permitir salvar arquivos
             die("A pasta '$caminho_pasta' não tem permissão de escrita.");
         }
 
+        // Define o caminho completo onde o arquivo será armazenado
         $caminho_destino = $caminho_pasta . $novo_nome;
 
-        // Move o arquivo para a pasta de destino
+        // Move o arquivo da pasta temporária para a pasta de destino
         if (!move_uploaded_file($caminho_temporario, $caminho_destino)) {
+            // Interrompe se ocorrer erro ao mover o arquivo
             die("Erro ao mover o arquivo para a pasta de destino.");
         }
 
     } else {
-        // Se nenhum arquivo enviado, define como NULL
+        // Caso nenhum arquivo tenha sido enviado, define o caminho como nulo
         $caminho_destino = null;
     }
 
-    // Salva a avaliação no banco
-    // Aqui você deve ajustar os parâmetros de acordo com sua função
+    // Chama a função responsável por salvar a avaliação no banco de dados
+    // Passa as informações necessárias (nota, comentário, barbeiro, serviço, etc.)
     salvarAvaliacao(
-    $conexao,
-    $estrela,
-    $comentario,
-    $barbeiro_id_barbeiro,
-    $servico_id_servico,
-    $foto
-);
+        $conexao,
+        $estrela,
+        $comentario,
+        $barbeiro_id_barbeiro,
+        $servico_id_servico,
+        $foto
+    );
 
-    // Redireciona após salvar
+    // Redireciona o usuário de volta para a página principal após salvar
     header("Location: ./cliente/index.php");
     exit;
 
 } else {
+    // Caso o acesso ao arquivo não seja feito por POST, exibe mensagem de erro
     die("Acesso inválido.");
 }

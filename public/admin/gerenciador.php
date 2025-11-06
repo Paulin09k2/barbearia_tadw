@@ -4,7 +4,7 @@ require_once '../funcoes.php';
 session_start();
 $id_agendamento = $_POST['id_agendamento'] ?? 0;
 $id_cliente = $_POST['id_cliente'] ?? 0;
-// --- FILTROS ---
+
 $filtros = [
     'status'  => $_GET['status'] ?? '',
     'data'    => $_GET['data'] ?? '',
@@ -12,41 +12,190 @@ $filtros = [
 ];
 
 $resposta = excluirAgendamento($conexao,  $id_cliente, $id_agendamento);
-// --- LISTAGEM ---
 $agendamentos = listarAgendamento($conexao, $filtros);
 
 if (isset($_SESSION['mensagem'])) {
     echo "<script>alert('{$_SESSION['mensagem']}');</script>";
     unset($_SESSION['mensagem']);
 }
-// echo "<pre>;";
-// print_r($agendamentos);
-// echo "</pre>;"
 ?>
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Gerenciar Agendamentos</title>
-    <!-- <style>
-        body { font-family: Arial, sans-serif; background: #f9f9f9; margin: 0; padding: 0; }
-        .container { width: 90%; margin: 40px auto; background: #fff; padding: 20px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1 { text-align: center; color: #333; }
-        form.filtros { display: flex; justify-content: center; gap: 10px; margin-bottom: 20px; }
-        input, select, button { padding: 8px 10px; border-radius: 5px; border: 1px solid #ccc; }
-        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
-        th, td { padding: 10px; border-bottom: 1px solid #ddd; text-align: center; }
-        th { background: #eee; }
-        tr:hover { background: #f3f3f3; }
-        .acoes button { margin: 0 4px; padding: 6px 12px; border: none; border-radius: 5px; cursor: pointer; }
-        .editar { background-color: #007bff; color: #fff; }
-        .cancelar { background-color: #dc3545; color: #fff; }
-    </style> -->
+    <title>Gerenciar Agendamentos - Barbearia Elite</title>
+    <style>
+        /* ======= ESTILO GERAL ======= */
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, #0a0a14, #1b1b2f);
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        a {
+            color: #f5b100;
+            text-decoration: none;
+            margin: 20px 0;
+            display: inline-block;
+            transition: 0.3s;
+        }
+
+        a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1100px;
+            background-color: #111827;
+            border-radius: 10px;
+            box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #f5b100;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 25px;
+        }
+
+        /* ======= FILTROS ======= */
+        form.filtros {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        input, select, button {
+            padding: 10px 12px;
+            border-radius: 6px;
+            border: 1px solid #333;
+            background-color: #1e293b;
+            color: #fff;
+            font-size: 0.95em;
+        }
+
+        input::placeholder {
+            color: #aaa;
+        }
+
+        select option {
+            background: #111827;
+            color: #fff;
+        }
+
+        button {
+            background-color: #f5b100;
+            color: #111;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background-color: #fff;
+            color: #111;
+        }
+
+        /* ======= TABELA ======= */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(0,0,0,0.4);
+        }
+
+        th, td {
+            padding: 14px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #f5b100;
+            color: #111;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #1e293b;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #111827;
+        }
+
+        tr:hover {
+            background-color: #334155;
+            transition: 0.3s;
+        }
+
+        td {
+            color: #ddd;
+        }
+
+        /* ======= BOTÕES DE AÇÃO ======= */
+        .acoes {
+            display: flex;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .editar {
+            background-color: #3b82f6;
+            color: #fff;
+        }
+
+        .cancelar {
+            background-color: #dc2626;
+            color: #fff;
+        }
+
+        .editar:hover {
+            background-color: #60a5fa;
+        }
+
+        .cancelar:hover {
+            background-color: #ef4444;
+        }
+
+        /* ======= RESPONSIVO ======= */
+        @media (max-width: 768px) {
+            form.filtros {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            table {
+                font-size: 13px;
+            }
+
+            th, td {
+                padding: 10px;
+            }
+        }
+    </style>
 </head>
 <body>
     
-  <a href="index.php">Voltar para a pagina inicial</a>
+  <a href="index.php">← Voltar para a página inicial</a>
+
     <div class="container">
         <h1>Gerenciar Agendamentos</h1>
 
@@ -89,13 +238,11 @@ if (isset($_SESSION['mensagem'])) {
                                 <form action='../formAgendamento.php' method='GET' style='display:inline;'>
                                     <input type='hidden' name='id_agendamento' value='{$ag['id_agendamento']}'>
                                     <input type='hidden' name='id_servico' value='{$ag['id_servico']}'>
-
                                     <button type='submit' class='editar'>Editar</button>
                                 </form>
                                 <form action='' method='POST' style='display:inline;' onsubmit=\"return confirm('Tem certeza que deseja cancelar este agendamento?');\">
                                     <input type='hidden' name='id_agendamento' value='{$ag['id_agendamento']}'>
                                     <input type='hidden' name='id_cliente' value='{$ag['id_cliente']}'>
-
                                     <button type='submit' class='cancelar'>Cancelar</button>
                                 </form>
                               </td>";
