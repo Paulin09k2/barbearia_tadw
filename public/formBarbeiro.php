@@ -58,7 +58,7 @@ if ($barbeiro && $usuario) {
 
     h1 {
       margin-top: 40px;
-      color: #f5b100;
+      color: #fff;
       text-transform: uppercase;
       letter-spacing: 2px;
       text-align: center;
@@ -78,7 +78,7 @@ if ($barbeiro && $usuario) {
 
     label {
       font-weight: bold;
-      color: #f5b100;
+      color: #fff;
       margin-bottom: 5px;
     }
 
@@ -101,12 +101,12 @@ if ($barbeiro && $usuario) {
     input[type="email"]:focus,
     input[type="password"]:focus,
     input[type="date"]:focus {
-      border-color: #f5b100;
-      box-shadow: 0 0 8px #f5b100;
+      border-color: #fff;
+      box-shadow: 0 0 8px #ccc;
     }
 
     input[type="submit"] {
-      background-color: #f5b100;
+      background-color: #fff;
       color: #111;
       font-weight: bold;
       font-size: 1em;
@@ -118,19 +118,19 @@ if ($barbeiro && $usuario) {
     }
 
     input[type="submit"]:hover {
-      background-color: #fff;
+      background-color: #ccc;
       color: #111;
     }
 
     a {
-      color: #f5b100;
+      color: #fff;
       text-decoration: none;
       margin-top: 20px;
       transition: 0.3s;
     }
 
     a:hover {
-      color: #fff;
+      color: #ccc;
       text-decoration: underline;
     }
 
