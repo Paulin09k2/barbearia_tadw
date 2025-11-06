@@ -36,8 +36,8 @@ if ($cliente && $usuario) {
 }
 ?>
 
-<<<<<<< HEAD
-=======
+
+
 <!DOCTYPE html>
 <html lang="pt-br">
 
@@ -91,11 +91,11 @@ if ($cliente && $usuario) {
         input[type="password"],
         input[type="date"] {
             width: 90%;
-<<<<<<< Updated upstream
+
             padding: 12px 18px;
-=======
+
             padding: 13px 18px;
->>>>>>> Stashed changes
+
             border-radius: 30px;
             border: none;
             background-color: #e8ebf0;
@@ -186,4 +186,3 @@ if ($cliente && $usuario) {
     </div>
 </body>
 </html>
->>>>>>> 22710eed3b055638467f69fc724b4f321c80a27c
