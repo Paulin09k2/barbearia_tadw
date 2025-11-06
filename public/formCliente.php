@@ -176,7 +176,6 @@ if ($cliente && $usuario) {
             >
 
             <input type="submit" value="<?php echo $botao; ?>">
-            <a href="login.php">Já possui uma conta? Faça login</a>
         </form>
     </div>
 </body>
