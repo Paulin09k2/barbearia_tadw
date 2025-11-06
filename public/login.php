@@ -3,6 +3,50 @@ require_once "./conexao.php";
 require_once "./funcoes.php";
 ?>
 
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login - Barbearia Elite</title>
+  <link rel="icon" type="image/png" href="logo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <style>
+    body {
+      background: radial-gradient(circle at top left, #0b1220, #02050a 80%);
+      font-family: "Poppins", sans-serif;
+    }
+
+    @keyframes pulse-glow {
+      0% {
+        opacity: 0.4;
+        transform: scale(1);
+      }
+
+      100% {
+        opacity: 0.8;
+        transform: scale(1.1);
+      }
+    }
+
+    .animate-glow {
+      animation: pulse-glow 5s ease-in-out infinite alternate;
+    }
+
+    .input-icon {
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      color: #9ca3af;
+    }
+  </style>
+</head>
+
+=======
+>>>>>>> 12c2b9653c8f9c89302a194e3b62d90ce25d1bdf
 <body class="flex items-center justify-center min-h-screen relative overflow-hidden">
 
   <!-- Efeitos visuais de luz de fundo -->
@@ -71,6 +115,8 @@ require_once "./funcoes.php";
             class="w-full px-12 py-3 rounded-full bg-gray-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300" />
         </div>
 
+        <!-- Botão -->
+
         <!-- Checkbox "Lembrar-me" -->
         <label class="flex items-center gap-2 text-sm text-gray-300">
           <input type="checkbox" class="accent-yellow-500 w-4 h-4 rounded" />
@@ -78,6 +124,7 @@ require_once "./funcoes.php";
         </label>
 
         <!-- Botão de envio -->
+
         <button type="submit"
           class="mt-2 py-3 rounded-full bg-gradient-to-r from-yellow-600 to-yellow-400 text-[#0f1f33] font-bold text-lg shadow-md hover:from-yellow-500 hover:to-yellow-300 transition-transform transform hover:-translate-y-0.5 hover:shadow-yellow-500/40">
           Entrar
