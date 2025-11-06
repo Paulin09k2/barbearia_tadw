@@ -1,22 +1,25 @@
 <?php
 // logout.php
 
-// Sempre inicia a sessão antes de destruí-la
+// Inicia a sessão — necessário para poder manipulá-la antes de destruí-la
 session_start();
 
-// Limpa todas as variáveis de sessão
+// Remove todas as variáveis armazenadas na sessão atual
 $_SESSION = [];
 
-// Destroi a sessão completamente
+// Destroi completamente a sessão do usuário (remove o identificador do servidor)
 session_destroy();
 
-// Garante que o cache da página não mantenha o login
+// Verifica se o PHP está configurado para usar cookies de sessão
 if (ini_get("session.use_cookies")) {
+    // Obtém os parâmetros atuais do cookie de sessão (path, domínio, segurança etc.)
     $params = session_get_cookie_params();
+
+    // Define o cookie de sessão com um tempo expirado no passado, invalidando-o
     setcookie(
-        session_name(), 
-        '', 
-        time() - 42000,
+        session_name(), // nome do cookie da sessão
+        '',             // valor vazio
+        time() - 42000, // tempo de expiração retroativo (faz o cookie "sumir")
         $params["path"], 
         $params["domain"],
         $params["secure"], 
@@ -24,6 +27,6 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-// Redireciona para a tela de login
+// Após limpar tudo, redireciona o usuário de volta para a página de login
 header("Location: login.php");
 exit;
