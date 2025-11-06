@@ -36,7 +36,11 @@ require_once "./funcoes.php";
     }
 
     .input-icon {
-      @apply absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-500;
+      position: absolute;
+      top: 50%;
+      left: 12px;
+      transform: translateY(-50%);
+      color: #9ca3af;
     }
   </style>
 </head>
@@ -97,12 +101,6 @@ require_once "./funcoes.php";
           <input type="password" name="senha" placeholder="Senha" required
             class="w-full px-12 py-3 rounded-full bg-gray-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300" />
         </div>
-
-        <!-- Lembrar-me -->
-        <label class="flex items-center gap-2 text-sm text-gray-300">
-          <input type="checkbox" class="accent-yellow-500 w-4 h-4 rounded" />
-          Lembrar-me
-        </label>
 
         <!-- Botão -->
         <button type="submit"
