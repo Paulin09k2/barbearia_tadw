@@ -43,10 +43,8 @@ require_once "./funcoes.php";
       color: #9ca3af;
     }
   </style>
+  
 </head>
-
-=======
->>>>>>> 12c2b9653c8f9c89302a194e3b62d90ce25d1bdf
 <body class="flex items-center justify-center min-h-screen relative overflow-hidden">
 
   <!-- Efeitos visuais de luz de fundo -->
@@ -114,14 +112,6 @@ require_once "./funcoes.php";
           <input type="password" name="senha" placeholder="Senha" required
             class="w-full px-12 py-3 rounded-full bg-gray-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300" />
         </div>
-
-        <!-- Botão -->
-
-        <!-- Checkbox "Lembrar-me" -->
-        <label class="flex items-center gap-2 text-sm text-gray-300">
-          <input type="checkbox" class="accent-yellow-500 w-4 h-4 rounded" />
-          Lembrar-me
-        </label>
 
         <!-- Botão de envio -->
 
