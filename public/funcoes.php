@@ -412,15 +412,14 @@ function calcularMediaAvaliacoes($conexao, $id_barbeiro = null)
 }
 
 
-function salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico, $foto)
-{
-    $sql = "INSERT INTO avaliacao (estrela, comentario, barbeiro_id_barbeiro, servico_id_servico, foto) VALUES (?, ?, ?, ?, ?)";
-    $comando = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($comando, 'isiss', $estrela, $comentario, $barbeiro_id_barbeiro, $servico_id_servico, $foto);
-    $ok = mysqli_stmt_execute($comando);
-    mysqli_stmt_close($comando);
-    return $ok;
+function salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id, $servico_id, $foto, $id_cliente) {
+    $sql = "INSERT INTO avaliacao (estrela, comentario, barbeiro_id_barbeiro, servico_id_servico, foto, cliente_id_cliente)
+            VALUES (?, ?, ?, ?, ?, ?)";
+    $stmt = mysqli_prepare($conexao, $sql);
+    mysqli_stmt_bind_param($stmt, "isissi", $estrela, $comentario, $barbeiro_id, $servico_id, $foto, $id_cliente);
+    return mysqli_stmt_execute($stmt);
 }
+
 
 function pesquisarClienteId($conexao, $id_cliente)
 {
