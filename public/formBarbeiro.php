@@ -1,44 +1,35 @@
 <?php
-// Importa o arquivo de conexão com o banco de dados
 require_once "./conexao.php";
-// Importa funções auxiliares do sistema
 require_once "./funcoes.php";
-// Inicia a sessão para acessar informações do usuário logado
 session_start();
 
-// Pega o ID do usuário logado, se existir na sessão
 $idusuario = $_SESSION['idusuario'] ?? null;
-
-// Se o ID for enviado pela URL (GET), usa ele; senão, usa o ID da sessão
 $id = isset($_GET['id']) ? $_GET['id'] : $idusuario;
 
-// Busca no banco de dados as informações do barbeiro e do usuário pelo ID
 $barbeiro = pesquisarBarbeiroId($conexao, $id);
 $usuario = pesquisarUsuarioId($conexao, $id);
 
-// Se encontrar o barbeiro e o usuário, significa que está editando
 if ($barbeiro && $usuario) {
-    $id = $barbeiro['id_barbeiro'];       // ID do barbeiro no banco
-    $idusuario = $usuario['idusuario'];   // ID do usuário vinculado
-    $nome = $barbeiro['nome'];            // Nome do barbeiro
-    $email = $usuario['email'];           // E-mail cadastrado
-    $telefone = $barbeiro['telefone'];    // Telefone do barbeiro
-    $cpf = $barbeiro['cpf'];              // CPF do barbeiro
-    $data_nascimento = $barbeiro['data_nascimento']; // Data de nascimento
-    $data_admissao = $barbeiro['data_admissao'];     // Data de admissão na barbearia
-    $senha_cliente = "";                  // Senha não é exibida por segurança
-    $botao = "Editar";                    // Define o texto do botão como "Editar"
+    $id = $barbeiro['id_barbeiro'];
+    $idusuario = $usuario['idusuario'];
+    $nome = $barbeiro['nome'];
+    $email = $usuario['email'];
+    $telefone = $barbeiro['telefone'];
+    $cpf = $barbeiro['cpf'];
+    $data_nascimento = $barbeiro['data_nascimento'];
+    $data_admissao = $barbeiro['data_admissao'];
+    $senha_cliente = "";
+    $botao = "Editar";
 } else {
-    // Se não encontrou registro, é um novo cadastro
     $id = 0;
     $nome = "";
     $email = "";
     $telefone = "";
     $cpf = "";
     $data_nascimento = "";
-    $data_admissao = date('Y-m-d'); // Define a data atual como padrão
+    $data_admissao = date('Y-m-d');
     $senha_cliente = "";
-    $botao = "Cadastrar";            // Define o texto do botão como "Cadastrar"
+    $botao = "Cadastrar";
 }
 ?>
 
@@ -46,56 +37,147 @@ if ($barbeiro && $usuario) {
 <html lang="pt-br">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Ícone da página -->
-    <link rel="icon" type="image/png" href="logo2.png">
-    <!-- O título muda conforme o tipo de ação (Cadastrar/Editar) -->
-    <title><?php echo $botao ?></title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="logo2.png">
+  <title><?php echo $botao ?> Barbeiro</title>
+
+  <style>
+    /* ======= ESTILO GERAL ======= */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0a0a14, #1b1b2f);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      margin-top: 40px;
+      color: #f5b100;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      text-align: center;
+    }
+
+    form {
+      background-color: #111827;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
+      width: 90%;
+      max-width: 500px;
+      margin-top: 30px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    label {
+      font-weight: bold;
+      color: #f5b100;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"] {
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 6px;
+      border: 1px solid #333;
+      background-color: #1e293b;
+      color: #fff;
+      font-size: 1em;
+      outline: none;
+      transition: 0.3s;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="password"]:focus,
+    input[type="date"]:focus {
+      border-color: #f5b100;
+      box-shadow: 0 0 8px #f5b100;
+    }
+
+    input[type="submit"] {
+      background-color: #f5b100;
+      color: #111;
+      font-weight: bold;
+      font-size: 1em;
+      padding: 12px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #fff;
+      color: #111;
+    }
+
+    a {
+      color: #f5b100;
+      text-decoration: none;
+      margin-top: 20px;
+      transition: 0.3s;
+    }
+
+    a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    /* ======= RESPONSIVO ======= */
+    @media (max-width: 600px) {
+      form {
+        padding: 25px;
+      }
+
+      input {
+        font-size: 0.95em;
+      }
+    }
+  </style>
 </head>
 
 <body>
-    <!-- Cabeçalho principal da página -->
-    <h1><?php echo $botao ?> Barbeiro</h1>
+  <h1><?php echo $botao ?> Barbeiro</h1>
 
-    <!-- Formulário que envia os dados para salvarBarbeiro.php -->
-    <form action="salvarBarbeiro.php" method="post" enctype="multipart/form-data">
+  <form action="salvarBarbeiro.php" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="id" value="<?php echo $id; ?>">
+    <input type="hidden" name="idusuario" value="<?php echo $idusuario; ?>">
 
-        <!-- Campos ocultos com os IDs do barbeiro e usuário -->
-        <input type="hidden" name="id" value="<?php echo $id; ?>">
-        <input type="hidden" name="idusuario" value="<?php echo $idusuario; ?>">
+    <label for="nome">Nome:</label>
+    <input type="text" id="nome" name="nome" value="<?php echo $nome; ?>" required>
 
-        <!-- Campo: Nome do barbeiro -->
-        Nome: <br>
-        <input type="text" name="nome" value="<?php echo $nome; ?>" required> <br><br>
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" value="<?php echo $email; ?>" required>
 
-        <!-- Campo: Email -->
-        Email: <br>
-        <input type="email" name="email" value="<?php echo $email; ?>" required> <br><br>
+    <label for="telefone">Telefone:</label>
+    <input type="text" id="telefone" name="telefone" value="<?php echo $telefone; ?>" required>
 
-        <!-- Campo: Telefone -->
-        Telefone: <br>
-        <input type="text" name="telefone" value="<?php echo $telefone; ?>" required> <br><br>
+    <label for="cpf">CPF:</label>
+    <input type="text" id="cpf" name="cpf" value="<?php echo $cpf; ?>" maxlength="11" required>
 
-        <!-- Campo: CPF -->
-        Cpf: <br>
-        <input type="text" name="cpf" value="<?php echo $cpf; ?>" maxlength="11" required> <br><br>
+    <label for="data_nascimento">Data de Nascimento:</label>
+    <input type="date" id="data_nascimento" name="data_nascimento" value="<?php echo $data_nascimento; ?>" required max="<?= date('Y-m-d') ?>">
 
-        <!-- Campo: Data de nascimento (limita para não aceitar datas futuras) -->
-        Data de Nascimento: <br>
-        <input type="date" name="data_nascimento" value="<?php echo $data_nascimento; ?>" required max="<?= date('Y-m-d') ?>"> <br><br>
+    <label for="data">Data de Admissão:</label>
+    <input type="date" id="data" name="data" value="<?php echo $data_admissao; ?>" required>
 
-        <!-- Campo: Data de admissão na barbearia -->
-        Data de Admissao: <br>
-        <input type="date" name="data" value="<?php echo $data_admissao; ?>" required><br><br>
+    <label for="senha">Senha:</label>
+    <input type="password" id="senha" name="senha" required>
 
-        <!-- Campo: Senha (nunca pré-preenchida por segurança) -->
-        Senha: <br>
-        <input type="password" name="senha" value="" required> <br><br>
+    <input type="submit" value="<?php echo $botao; ?>">
+  </form>
 
-        <!-- Botão de envio do formulário -->
-        <input type="submit" value="<?php echo $botao; ?>">
-    </form>
+  <a href="./index.php">← Voltar ao Painel do Admin</a>
 </body>
-
 </html>
