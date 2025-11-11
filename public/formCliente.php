@@ -148,6 +148,12 @@ if ($cliente && $usuario) {
 
 <body>
     <div class="form-container">
+        <?
+        if($_SESSION['erro']){
+            echo "<p style='color: red;'>".$_SESSION['erro']."</p>";
+            unset($_SESSION['erro']);
+        }
+        ?>
         <h1><?php echo $botao ?> Cliente</h1>
 
         <form action="salvarCliente.php" method="post" enctype="multipart/form-data">

@@ -16,7 +16,10 @@ $data_cadastro = $_POST['data_cadastro'];     // Data de cadastro
 $senha_cliente = $_POST['senha_cliente'];     // Senha do cliente
 $idusuario = $_POST['idusuario'];             // ID do usuário vinculado (em caso de atualização)
 
-
+if($senha_cliente == ""){
+    $_SESSION['erro']="Senha não pode ser vazia";
+    header("Location: ./cadastroCliente.php");
+}
 // --- Verifica se é um novo cadastro ou atualização ---
 if ($id == 0) {
     // ===== Novo cadastro =====

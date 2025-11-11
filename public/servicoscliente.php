@@ -1,153 +1,152 @@
+<?php
+session_start();
+require_once 'conexao.php';
+require_once 'funcoes.php';
+
+?>
 <!DOCTYPE html>
-<!-- Define que o documento é HTML5 -->
 <html lang="pt-BR">
-<!-- Inicia o documento HTML e define o idioma como português do Brasil -->
-
 <head>
-  <!-- Cabeçalho do documento (informações não exibidas diretamente na página) -->
-
   <meta charset="UTF-8">
-  <!-- Define o conjunto de caracteres como UTF-8 (suporta acentos e caracteres especiais) -->
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Faz a página se adaptar ao tamanho da tela (responsivo) -->
-
-  <title>Serviços</title>
-  <!-- Título que aparece na aba do navegador -->
-
+  <title>Serviços - Barbearia Elite</title>
   <style>
-    /* Início do estilo interno da página */
-
-    table {
-      width: 100%;
-      /* A tabela ocupa toda a largura da página */
-      border-collapse: collapse;
-      /* Remove os espaços entre as bordas das células */
-      margin: 20px 0;
-      /* Margem superior e inferior de 20px */
-    }
-
-    th, td {
-      border: 1px solid #ddd;
-      /* Cria bordas cinza claras nas células */
-      padding: 8px;
-      /* Espaçamento interno em cada célula */
-      text-align: left;
-      /* Alinha o texto à esquerda */
-    }
-
-    th {
-      background-color: #f2f2f2;
-      /* Define uma cor de fundo para o cabeçalho da tabela */
+    /* ====== ESTILO GERAL ====== */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(to bottom, #0b0f16, #0d1117);
+      color: #fff;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
     }
 
     h1 {
+      margin-top: 50px;
+      color: #fff;
+      text-transform: uppercase;
+      letter-spacing: 2px;
       text-align: center;
-      /* Centraliza o título na tela */
-      color: #333;
-      /* Define uma cor cinza escura para o texto */
+    }
+
+    a {
+      color: #fff;
+      text-decoration: none;
+      margin: 25px 0;
+      display: inline-block;
+      transition: 0.3s;
+      font-weight: 500;
+    }
+
+    a:hover {
+      color: #d1d5db; /* text-gray-300 */
+      transform: translateY(-2px);
+    }
+
+    /* ====== CONTAINER ====== */
+    .container {
+      width: 90%;
+      max-width: 1000px;
+      background-color: #141a22; /* mesmo tom dos cards */
+      border-radius: 16px;
+      box-shadow: 0 4px 25px rgba(255, 255, 255, 0.05);
+      padding: 30px;
+      margin-bottom: 50px;
+      border: 1px solid #1f2937; /* cor da borda */
+      overflow-x: auto;
+      transition: 0.3s;
+    }
+
+    .container:hover {
+      box-shadow: 0 6px 30px rgba(255, 255, 255, 0.08);
+    }
+
+    /* ====== TABELA ====== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 14px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #0d1b2a; /* mesma navbar do painel */
+      color: #fff;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      border-bottom: 2px solid #1f2937;
+    }
+
+    tr:nth-child(even) {
+      background-color: #141a22; /* tom escuro principal */
+    }
+
+    tr:nth-child(odd) {
+      background-color: #0d1117; /* leve variação */
+    }
+
+    tr:hover {
+      background-color: #1e293b; /* destaque hover */
+      transition: 0.3s;
+    }
+
+    td {
+      color: #d1d5db; /* cinza claro */
+      font-size: 15px;
+    }
+
+    /* ====== RESPONSIVO ====== */
+    @media (max-width: 768px) {
+      table {
+        font-size: 13px;
+      }
+      th, td {
+        padding: 10px;
+      }
     }
   </style>
 </head>
-
 <body>
-  <!-- Corpo da página (conteúdo visível no navegador) -->
 
   <h1>Serviços</h1>
-  <!-- Título principal da página -->
 
-  <table>
-    <!-- Início da tabela que lista os serviços -->
+  <div class="container">
+    <table>
+      <thead>
+        <tr>
+          <th>Serviço</th>
+          <th>Preço</th>
+          <th>Tempo Estimado</th>
+          <th>Descrição</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php
+        $servicos = listarServicosDisponiveis($conexao);
+        foreach ($servicos as $s) {
+          echo "<tr>";
+          echo "<td>" . htmlspecialchars($s['nome_servico']) . "</td>";
+          echo "<td>R$ " . number_format($s['preco'], 2, ',', '.') . "</td>";
+          echo "<td>{$s['tempo_estimado']} min</td>";
+          echo "<td>" . htmlspecialchars($s['descricao']) . "</td>";
+          echo "</tr>";
+        }
+        ?>
+      </tbody>
+    </table>
+  </div>
 
-    <thead>
-      <!-- Cabeçalho da tabela -->
-      <tr>
-        <!-- Linha do cabeçalho -->
-        <th>Serviço</th>
-        <th>Preço</th>
-        <th>Tempo Estimado</th>
-        <th>Descrição</th>
-      </tr>
-    </thead>
-
-    <tbody>
-      <!-- Corpo da tabela com os dados dos serviços -->
-
-      <tr>
-        <!-- Cada <tr> é uma linha da tabela -->
-        <td>Barba Completa</td>
-        <td>R$ 25,00</td>
-        <td>20 min</td>
-        <td>Aparar, desenhar e hidratar a barba.</td>
-      </tr>
-
-      <tr>
-        <td>Corte + Barba</td>
-        <td>R$ 50,00</td>
-        <td>45 min</td>
-        <td>Pacote completo de corte e barba.</td>
-      </tr>
-
-      <tr>
-        <td>Corte Clássico</td>
-        <td>R$ 35,00</td>
-        <td>30 min</td>
-        <td>Corte de cabelo tradicional masculino.</td>
-      </tr>
-
-      <tr>
-        <td>Corte Degradê</td>
-        <td>R$ 40,00</td>
-        <td>35 min</td>
-        <td>Corte moderno com transição suave.</td>
-      </tr>
-
-      <tr>
-        <td>Hidratação Capilar</td>
-        <td>R$ 30,00</td>
-        <td>25 min</td>
-        <td>Tratamento capilar completo.</td>
-      </tr>
-
-      <tr>
-        <td>Luzes Masculinas</td>
-        <td>R$ 70,00</td>
-        <td>60 min</td>
-        <td>Mechas sutis e modernas.</td>
-      </tr>
-
-      <tr>
-        <td>Pezinho</td>
-        <td>R$ 10,00</td>
-        <td>5 min</td>
-        <td>Acabamento rápido e preciso.</td>
-      </tr>
-
-      <tr>
-        <td>Pintura Capilar</td>
-        <td>R$ 60,00</td>
-        <td>50 min</td>
-        <td>Coloração capilar masculina.</td>
-      </tr>
-
-      <tr>
-        <td>Relaxamento</td>
-        <td>R$ 45,00</td>
-        <td>40 min</td>
-        <td>Tratamento para reduzir o volume do cabelo.</td>
-      </tr>
-
-      <tr>
-        <td>Sobrancelha</td>
-        <td>R$ 15,00</td>
-        <td>10 min</td>
-        <td>Design masculino com navalha.</td>
-      </tr>
-    </tbody>
-  </table>
-
-  <!-- Link simples que leva o usuário de volta à página inicial -->
-  <a href="index.php">Sair</a>
+  <a href="index.php">← Voltar</a>
 
 </body>
 </html>
