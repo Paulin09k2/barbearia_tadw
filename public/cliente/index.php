@@ -188,9 +188,6 @@ if (isset($_SESSION['mensagem'])) {
     // busca avaliações do banco
     $avaliacoes = listarAvaliacaoPorCliente($conexao, $id_cliente);
 
-    // Debug: mostra número de avaliações encontradas
-    // echo "<!-- DEBUG: Encontradas " . count($avaliacoes) . " avaliações para cliente " . $id_cliente . " -->";
-
     if (empty($avaliacoes)) {
       echo "<p style='text-align:center;'>Você não fez nenhuma avaliação ainda.</p>";
       echo "<div style='text-align:center;'><a href=\"./avaliacao.php\">Deixar uma avaliação agora</a></div>";
@@ -208,7 +205,7 @@ if (isset($_SESSION['mensagem'])) {
           echo "<img src='../img/avaliacoes/" . htmlspecialchars($avaliacao['foto']) . "' alt='Foto da avaliação' width='150' style='border-radius: 8px; display: block; margin: 10px auto;'>";
         }
         echo "<div style='margin-top: 10px;'>";
-        echo "<a href='../excluirAvaliacao.php?id=" . htmlspecialchars($avaliacao['idavaliacao']) . "' style='color: #ff6b6b;' onclick=\"return confirm('Tem certeza que deseja deletar esta avaliação?')\">🗑️ Deletar</a>";
+        echo "<a href='../excluirAvaliacao.php?id=" . htmlspecialchars($avaliacao['idavaliacao']) . "&from=cliente' style='color: #ff6b6b;' onclick=\"return confirm('Tem certeza que deseja deletar esta avaliação?')\">🗑️ Deletar</a>";
         echo "</div>";
         echo "</div><hr>";
       }

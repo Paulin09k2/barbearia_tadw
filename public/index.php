@@ -1,5 +1,10 @@
+<?php
+require_once './conexao.php';
+require_once './funcoes.php';
+?>
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +18,7 @@
       transform: translateY(20px);
       animation: fadeInUp 1s forwards;
     }
+
     @keyframes fadeInUp {
       to {
         opacity: 1;
@@ -22,15 +28,21 @@
 
     /* ===== Texto dourado animado ===== */
     .gold-gradient {
-      background: linear-gradient(90deg, #ffffff );
+      background: linear-gradient(90deg, #ffffff);
       background-size: 200% 200%;
       animation: shine 3s infinite linear;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
+
     @keyframes shine {
-      0% { background-position: 0% 50%; }
-      100% { background-position: 100% 50%; }
+      0% {
+        background-position: 0% 50%;
+      }
+
+      100% {
+        background-position: 100% 50%;
+      }
     }
 
     /* ===== Carrossel infinito ===== */
@@ -39,9 +51,15 @@
       animation: scroll 30s linear infinite;
       width: max-content;
     }
+
     @keyframes scroll {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
     }
   </style>
 </head>
@@ -107,90 +125,78 @@
         </p>
       </div>
 
-      <div class="testimonial-slider">
-        <div class="testimonial-track">
+      <?php
+      // Busca todas as avaliações do banco
+      $avaliacoes = listarAvaliacoes($conexao);
 
-          <!-- Depoimento 1 -->
-          <div class="min-w-[300px] md:min-w-[400px] p-6 mx-4 bg-[#141a22] rounded-xl border border-[#2a2f3a] shadow-lg">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#2e2ee1]">
-                <img src="" alt="Cliente" class="object-cover w-full h-full">
-              </div>
-              <div>
-                <h4 class="font-bold text-[#ffffff]">Eduardo Silva</h4>
-                <p class="text-gray-400 text-sm">Cliente há 2 anos</p>
-              </div>
-            </div>
-            <p class="text-white/80 italic">
-              "O melhor corte da minha vida. Atendimento impecável e ambiente de alto nível. Recomendo fortemente!"
-            </p>
-          </div>
-
-          <!-- Depoimento 2 -->
-          <div class="min-w-[300px] md:min-w-[400px] p-6 mx-4 bg-[#141a22] rounded-xl border border-[#2a2f3a] shadow-lg">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#2e2ee1]">
-                <img src="" alt="Cliente" class="object-cover w-full h-full">
-              </div>
-              <div>
-                <h4 class="font-bold text-[#ffffff]">Lucas Ferreira</h4>
-                <p class="text-gray-400 text-sm">Cliente há 8 meses</p>
-              </div>
-            </div>
-            <p class="text-white/80 italic">
-              "O combo elite é sensacional. Saí relaxado, com visual impecável e atendimento nota mil."
-            </p>
-          </div>
-
-          <!-- Depoimento 3 -->
-          <div class="min-w-[300px] md:min-w-[400px] p-6 mx-4 bg-[#141a22] rounded-xl border border-[#2a2f3a] shadow-lg">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#2e2ee1]">
-                <img src="" alt="Cliente" class="object-cover w-full h-full">
-              </div>
-              <div>
-                <h4 class="font-bold text-[#ffffff]">Mariana Costa</h4>
-                <p class="text-gray-400 text-sm">Cliente há 1 ano</p>
-              </div>
-            </div>
-            <p class="text-white/80 italic">
-              "Levei meu marido e ele simplesmente amou o resultado. Profissionalismo e estilo em cada detalhe."
-            </p>
-          </div>
-
-          <!-- Duplicação para efeito infinito -->
-          <div class="min-w-[300px] md:min-w-[400px] p-6 mx-4 bg-[#141a22] rounded-xl border border-[#2a2f3a] shadow-lg">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#2e2ee1]">
-                <img src="" alt="Cliente" class="object-cover w-full h-full">
-              </div>
-              <div>
-                <h4 class="font-bold text-[#ffffff]">Eduardo Silva</h4>
-                <p class="text-gray-400 text-sm">Cliente há 2 anos</p>
-              </div>
-            </div>
-            <p class="text-white/80 italic">
-              "O melhor corte da minha vida. Atendimento impecável e ambiente de alto nível. Recomendo fortemente!"
-            </p>
-          </div>
-
-          <div class="min-w-[300px] md:min-w-[400px] p-6 mx-4 bg-[#141a22] rounded-xl border border-[#2a2f3a] shadow-lg">
-            <div class="flex items-center mb-4">
-              <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#2e2ee1]">
-                <img src="" alt="Cliente" class="object-cover w-full h-full">
-              </div>
-              <div>
-                <h4 class="font-bold text-[#ffffff]">Lucas Ferreira</h4>
-                <p class="text-gray-400 text-sm">Cliente há 8 meses</p>
-              </div>
-            </div>
-            <p class="text-white/80 italic">
-              "O combo elite é sensacional. Saí relaxado, com visual impecável e atendimento nota mil."
-            </p>
-          </div>
-
+      if (empty($avaliacoes)):
+      ?>
+        <div class="text-center py-12">
+          <p class="text-gray-400 text-lg">Nenhuma avaliação disponível ainda. Seja o primeiro a avaliar!</p>
         </div>
-      </div>
+      <?php
+      else:
+      ?>
+        <div class="testimonial-slider">
+          <div class="testimonial-track">
+            <?php
+            // Exibe cada avaliação do banco
+            foreach ($avaliacoes as $avaliacao):
+            ?>
+              <div class="min-w-[300px] md:min-w-[400px] p-6 mx-4 bg-[#141a22] rounded-xl border border-[#2a2f3a] shadow-lg">
+                <div class="flex items-center mb-4">
+                  <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#2e2ee1] bg-gray-700 flex items-center justify-center">
+                    <?php if (!empty($avaliacao['foto'])): ?>
+                      <img src="./img/avaliacoes/<?php echo htmlspecialchars($avaliacao['foto']); ?>" alt="Foto da avaliação" class="object-cover w-full h-full">
+                    <?php else: ?>
+                      <span class="text-gray-400">👤</span>
+                    <?php endif; ?>
+                  </div>
+                  <div>
+                    <h4 class="font-bold text-[#ffffff]"><?php echo htmlspecialchars($avaliacao['nome_cliente']); ?></h4>
+                    <p class="text-gray-400 text-sm">⭐ <?php echo htmlspecialchars($avaliacao['estrela']); ?>/5 - <?php echo htmlspecialchars($avaliacao['nome_barbeiro']); ?></p>
+                  </div>
+                </div>
+                <p class="text-white/80 italic">
+                  "<?php echo htmlspecialchars($avaliacao['comentario']); ?>"
+                </p>
+                <p class="text-gray-500 text-xs mt-3">Serviço: <?php echo htmlspecialchars($avaliacao['nome_servico']); ?></p>
+              </div>
+              <?php
+            endforeach;
+
+            // Duplica os primeiros itens para o efeito infinito do carrossel
+            if (count($avaliacoes) > 0):
+              foreach ($avaliacoes as $avaliacao):
+              ?>
+                <div class="min-w-[300px] md:min-w-[400px] p-6 mx-4 bg-[#141a22] rounded-xl border border-[#2a2f3a] shadow-lg">
+                  <div class="flex items-center mb-4">
+                    <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#2e2ee1] bg-gray-700 flex items-center justify-center">
+                      <?php if (!empty($avaliacao['foto'])): ?>
+                        <img src="./img/avaliacoes/<?php echo htmlspecialchars($avaliacao['foto']); ?>" alt="Foto da avaliação" class="object-cover w-full h-full">
+                      <?php else: ?>
+                        <span class="text-gray-400">👤</span>
+                      <?php endif; ?>
+                    </div>
+                    <div>
+                      <h4 class="font-bold text-[#ffffff]"><?php echo htmlspecialchars($avaliacao['nome_cliente']); ?></h4>
+                      <p class="text-gray-400 text-sm">⭐ <?php echo htmlspecialchars($avaliacao['estrela']); ?>/5 - <?php echo htmlspecialchars($avaliacao['nome_barbeiro']); ?></p>
+                    </div>
+                  </div>
+                  <p class="text-white/80 italic">
+                    "<?php echo htmlspecialchars($avaliacao['comentario']); ?>"
+                  </p>
+                  <p class="text-gray-500 text-xs mt-3">Serviço: <?php echo htmlspecialchars($avaliacao['nome_servico']); ?></p>
+                </div>
+            <?php
+              endforeach;
+            endif;
+            ?>
+          </div>
+        </div>
+      <?php
+      endif;
+      ?>
     </div>
   </section>
 
@@ -200,4 +206,5 @@
   </footer>
 
 </body>
+
 </html>
