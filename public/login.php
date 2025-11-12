@@ -58,7 +58,7 @@ require_once "./funcoes.php";
     <div class="flex flex-col items-center text-center space-y-4">
       <img src="logo.png" alt="Logo Barbearia Elite"
         class="h-60 md:h-80 drop-shadow-[0_0_15px_rgba(255,255,255,0.15)] transition-transform duration-500 hover:scale-105" />
-      <h1 class="text-3xl font-bold text-yellow-400 uppercase tracking-wide">Barbearia Elite</h1>
+      <h1 class="text-3xl font-bold text-gray-100 uppercase tracking-wide">Barbearia Elite</h1>
       <p class="text-gray-400 max-w-sm text-sm md:text-base leading-relaxed">
         Estilo, confiança e tradição. Faça login para agendar seu atendimento e viver a experiência Elite.
       </p>
@@ -66,7 +66,7 @@ require_once "./funcoes.php";
 
     <!-- Caixa do formulário de login -->
     <div
-      class="bg-[#0f1f33]/90 backdrop-blur-lg p-10 md:p-12 rounded-2xl w-[350px] md:w-[400px] shadow-2xl border border-gray-800/50 hover:border-yellow-500/30 transition-all duration-300">
+      class="bg-[#0f1f33]/90 backdrop-blur-lg p-10 md:p-12 rounded-2xl w-[350px] md:w-[400px] shadow-2xl border border-gray-800/50 hover:border-blue-900 transition-all duration-300">
 
       <!-- Título do formulário -->
       <h2 class="text-2xl font-semibold text-gray-100 mb-8 text-center uppercase tracking-wide">Acessar Conta</h2>
@@ -94,7 +94,7 @@ require_once "./funcoes.php";
 
           <!-- Input para digitar o e-mail -->
           <input type="email" name="email" placeholder="E-mail" required
-            class="w-full px-12 py-3 rounded-full bg-gray-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300" />
+            class="w-full px-12 py-3 rounded-full bg-gray-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-900 transition-all duration-300" />
         </div>
 
         <!-- Campo de senha -->
@@ -110,21 +110,21 @@ require_once "./funcoes.php";
 
           <!-- Input para digitar a senha -->
           <input type="password" name="senha" placeholder="Senha" required
-            class="w-full px-12 py-3 rounded-full bg-gray-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300" />
+            class="w-full px-12 py-3 rounded-full bg-gray-200 text-gray-800 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-blue-900 transition-all duration-300" />
         </div>
 
         <!-- Botão de envio -->
 
         <button type="submit"
-          class="mt-2 py-3 rounded-full bg-gradient-to-r from-yellow-600 to-yellow-400 text-[#0f1f33] font-bold text-lg shadow-md hover:from-yellow-500 hover:to-yellow-300 transition-transform transform hover:-translate-y-0.5 hover:shadow-yellow-500/40">
+          class="mt-2 py-3 rounded-full bg-gradient-to-r from-gray-200 to-gray-200 text-[#0f1f33] font-bold text-lg shadow-md hover:from-blue-800 hover:to-blue-800 transition-transform transform hover:-translate-y-0.5 hover:shadow-blue-900/40">
           Entrar
         </button>
 
         <!-- Links para cadastro e voltar -->
         <div class="text-center mt-4 space-y-1">
           <a href="formCliente.php"
-            class="text-sm text-gray-300 hover:text-yellow-400 transition-colors block">Primeiro acesso</a>
-          <a href="index.php" class="text-sm text-gray-300 hover:text-yellow-400 transition-colors block">Voltar</a>
+          class="text-sm text-gray-300 hover:text-blue-800 transition-colors block">Primeiro acesso</a>
+          <a href="index.php" class="text-sm text-gray-300 hover:text-blue-900 transition-colors block">Voltar</a>
         </div>
 
       </form>
