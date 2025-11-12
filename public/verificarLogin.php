@@ -23,8 +23,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     // Essa função deve consultar o banco e retornar os dados do usuário se o login for válido.
     $usuario = verificarLogin($conexao, $email, $senha);
 
-    // var_dump($usuario); // Linha comentada, usada para debug (mostrar o conteúdo retornado).
-
     // Se a função não retornou nenhum usuário (login incorreto):
     if ($usuario === null) {
         // Mostra um alerta no navegador e redireciona de volta para a página de login.
@@ -33,27 +31,43 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     } else {
         // Se o login foi bem-sucedido, armazena os dados do usuário na sessão.
         $_SESSION['idusuario'] = $usuario['idusuario'];
-        $_SESSION['tipo_usuario'] = $usuario['tipo_usuario'];
         $_SESSION['email'] = $usuario['email'];
 
-        // Armazena o tipo de usuário (cliente, barbeiro, etc.) em uma variável local.
-        $tipo = $usuario['tipo_usuario'];
+        // Normaliza o tipo de usuário para um código numérico:
+        // 1 = cliente, 2 = barbeiro, 3 = admin
+        $tipo_raw = $usuario['tipo_usuario'];
+        $tipo_normalizado = null;
 
-        // Se o tipo for 1, é um cliente.
-        if ($tipo == 1) {
-            // Salva o ID do cliente na sessão (por segurança, usa ?? null caso não exista).
-            $_SESSION['id_cliente'] = $usuario['idusuario'] ?? null;
-
-            // Redireciona para o painel do cliente.
-            header("Location: ./cliente/index.php");
+        if (is_numeric($tipo_raw)) {
+            $tipo_normalizado = (int)$tipo_raw;
+        } else {
+            $t = strtolower(trim($tipo_raw));
+            if ($t === 'cliente' || $t === 'client' || $t === '1') $tipo_normalizado = 1;
+            elseif ($t === 'barbeiro' || $t === 'barber' || $t === '2') $tipo_normalizado = 2;
+            elseif ($t === 'admin' || $t === 'administrador' || $t === '3') $tipo_normalizado = 3;
+            else {
+                // fallback: se não reconhece, assume cliente
+                $tipo_normalizado = 1;
+            }
         }
-        // Se o tipo for 2, é um barbeiro (ou administrador).
-        elseif ($tipo == 2) {
-            // Salva o ID do barbeiro na sessão.
-            $_SESSION['id_barbeiro'] = $usuario['idusuario'] ?? null;
 
-            // Redireciona para o painel do barbeiro/admin.
+        // Salva o tipo normalizado na sessão para uso posterior
+        $_SESSION['tipo_usuario'] = $tipo_normalizado;
+
+        // Redireciona baseado no tipo normalizado
+        if ($tipo_normalizado === 1) {
+            $_SESSION['id_cliente'] = $usuario['idusuario'] ?? null;
+            header("Location: ./cliente/index.php");
+        } elseif ($tipo_normalizado === 2) {
+            $_SESSION['id_barbeiro'] = $usuario['idusuario'] ?? null;
+            header("Location: ./barbeiro/index.php");
+        } elseif ($tipo_normalizado === 3) {
+            // admin -> também para painel admin
+            $_SESSION['id_barbeiro'] = $usuario['idusuario'] ?? null;
             header("Location: ./admin/index.php");
+        } else {
+            // fallback
+            header("Location: ./index.php");
         }
 
         // Garante que o script pare após o redirecionamento.

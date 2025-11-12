@@ -48,18 +48,6 @@ $media = calcularMediaAvaliacoes($conexao, $idBarbeiro);
   </header>
 
   <main class="p-6">
-    <!-- Bloco rápido: adicionar barbeiro -->
-    <div class="mb-6">
-      <div class="bg-[#072033] p-4 rounded shadow flex items-center justify-between">
-        <div>
-          <h3 class="text-lg font-semibold">Gerenciar barbeiros</h3>
-          <p class="text-sm text-gray-400">Cadastre um novo barbeiro ou edite existentes.</p>
-        </div>
-        <div class="flex gap-2">
-          <a href="../formBarbeiro.php" class="bg-white text-black px-4 py-2 rounded font-semibold">Adicionar Barbeiro</a>
-        </div>
-      </div>
-    </div>
     <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
       <div class="bg-[#0f1724] p-6 rounded shadow">
         <h3 class="text-lg font-semibold">Média de avaliações</h3>

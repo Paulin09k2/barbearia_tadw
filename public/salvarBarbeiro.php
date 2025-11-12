@@ -22,6 +22,8 @@ $data_admissao = $_POST['data'];            // Data de admissão (provavelmente 
 $senha = trim($_POST['senha']);             // Senha do barbeiro (caso seja usada para login)
 $cpf = trim($_POST['cpf']);                 // CPF do barbeiro
 $id_barbeiro = $id;                         // Define $id_barbeiro com o mesmo valor de $id (usado na função)
+// Tipo de usuário (padrão 'barbeiro')
+$tipo_usuario = $_POST['tipo_usuario'] ?? 'barbeiro';
 
 
 // Linha comentada — usada antes para depuração (mostrar o valor da variável).
@@ -42,13 +44,12 @@ if ($id && $idusuario) {
     $idusuario,
     $id_barbeiro
   );
-
 } else {
   // ===== Cadastrar novo barbeiro =====
   // Chama salvarBarbeiro() com os dados recebidos do formulário.
   // Se vier email e senha, cria primeiro o usuário e usa o id retornado
   if (!empty($email) && !empty($senha)) {
-    $novoIdUsuario = salvarUsuario($conexao, $email, $senha, 'barbeiro');
+    $novoIdUsuario = salvarUsuario($conexao, $email, $senha, $tipo_usuario);
     if ($novoIdUsuario && $novoIdUsuario > 0) {
       $idusuario = $novoIdUsuario;
     } else {
