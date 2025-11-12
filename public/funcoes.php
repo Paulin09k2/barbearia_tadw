@@ -166,13 +166,13 @@ function editarBarbeiro($conexao, $nome, $telefone, $cpf, $data_nascimento, $dat
     $sql = "UPDATE barbeiro 
             SET nome=?, telefone=?, cpf=?, data_nascimento=?, data_admissao=?, usuario_idusuario=? 
             WHERE id_barbeiro=?";
-    
+
     $comando = mysqli_prepare($conexao, $sql);
     mysqli_stmt_bind_param($comando, 'sssssii', $nome, $telefone, $cpf, $data_nascimento, $data_admissao, $usuario_idusuario, $id_barbeiro);
-    
+
     $ok = mysqli_stmt_execute($comando);
     mysqli_stmt_close($comando);
-    
+
     return $ok;
 }
 
@@ -412,7 +412,8 @@ function calcularMediaAvaliacoes($conexao, $id_barbeiro = null)
 }
 
 
-function salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id, $servico_id, $foto, $id_cliente) {
+function salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id, $servico_id, $foto, $id_cliente)
+{
     $sql = "INSERT INTO avaliacao (estrela, comentario, barbeiro_id_barbeiro, servico_id_servico, foto, cliente_id_cliente)
             VALUES (?, ?, ?, ?, ?, ?)";
     $stmt = mysqli_prepare($conexao, $sql);
@@ -592,6 +593,10 @@ function listarResumoCliente($conexao, $id_cliente)
 
 function listarAvaliacaoPorCliente($conexao, $id_cliente)
 {
+    // Busca todas as avaliações registradas para o cliente
+    // Observação: não podemos filtrar via JOIN em agendamento porque nem sempre
+    // existe um registro de agendamento que corresponda ao par barbeiro/cliente
+    // no momento da avaliação. Filtramos diretamente por a.cliente_id_cliente.
     $sql = "
         SELECT 
             a.idavaliacao,
@@ -603,9 +608,7 @@ function listarAvaliacaoPorCliente($conexao, $id_cliente)
         FROM avaliacao a
         INNER JOIN barbeiro b ON a.barbeiro_id_barbeiro = b.id_barbeiro
         INNER JOIN servico s ON a.servico_id_servico = s.id_servico
-        INNER JOIN agendamento ag ON ag.barbeiro_id_barbeiro = b.id_barbeiro 
-                                   AND ag.cliente_id_cliente = ?
-        GROUP BY a.idavaliacao
+        WHERE a.cliente_id_cliente = ?
         ORDER BY a.idavaliacao DESC
     ";
 
@@ -707,7 +710,8 @@ function pesquisarBarbeiroId($conexao, $idusuario)
     }
 }
 
-function obterProximosAgendamentos($conexao, $idBarbeiro, $limite = 5) {
+function obterProximosAgendamentos($conexao, $idBarbeiro, $limite = 5)
+{
     $agendamentos = [];
     $sql = "
         SELECT a.id_agendamento, a.data_agendamento, c.nome AS nome_cliente
@@ -730,7 +734,8 @@ function obterProximosAgendamentos($conexao, $idBarbeiro, $limite = 5) {
     return $agendamentos;
 }
 
-function obterTotalClientes($conexao, $idBarbeiro) {
+function obterTotalClientes($conexao, $idBarbeiro)
+{
     $total = 0;
     $sql = "
         SELECT COUNT(DISTINCT cliente_id_cliente) AS total_clientes
@@ -750,7 +755,8 @@ function obterTotalClientes($conexao, $idBarbeiro) {
     return $total;
 }
 
-function obterTotalServicos($conexao, $idBarbeiro) {
+function obterTotalServicos($conexao, $idBarbeiro)
+{
     $total = 0;
     $sql = "
         SELECT COUNT(DISTINCT s.id_servico) AS total_servicos
@@ -772,7 +778,8 @@ function obterTotalServicos($conexao, $idBarbeiro) {
     return $total;
 }
 
-function obterResumoPainelBarbeiro($conexao, $idBarbeiro) {
+function obterResumoPainelBarbeiro($conexao, $idBarbeiro)
+{
     $resumo = [];
 
     $resumo['proximos_agendamentos'] = obterProximosAgendamentos($conexao, $idBarbeiro);
@@ -819,7 +826,7 @@ function tipoUsuario($conexao, $idusuario)
     $usuario = mysqli_fetch_assoc($resultado);
     mysqli_stmt_close($comando);
 
-    return $usuario; 
+    return $usuario;
 }
 
 function listarHorariosDisponiveis($conexao, $barbeiro_id, $data_dia)
