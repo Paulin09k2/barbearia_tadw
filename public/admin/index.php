@@ -26,30 +26,32 @@ $barbeiro = pesquisarBarbeiroId($conexao, $idusuario);
       <li><a href="./gerenciador.php">Gerenciar</a></li>
       <li><a href="./avaliacao.php">Avaliações</a></li>
       <li><a href="./servico.php">Serviços</a></li>
+      <li><a href="../formBarbeiro.php">Adicionar Barbeiro</a></li>
       <li><a href="../formBarbeiro.php?id=<?php echo $idusuario; ?>">Editar Perfil</a></li>
       <li><a href="../sair.php">Sair</a></li>
     </ul>
   </nav>
 
 
-<section>
-  <?php
-  $resumo = obterResumoPainelBarbeiro($conexao, $barbeiro['id_barbeiro']);
+  <section>
+    <?php
+    $resumo = obterResumoPainelBarbeiro($conexao, $barbeiro['id_barbeiro']);
 
-echo "<h3>Resumo do Barbeiro</h3>";
-echo "<p>Total de Clientes: {$resumo['total_clientes']}</p>";
-echo "<p>Total de Serviços: {$resumo['total_servicos']}</p>";
+    echo "<h3>Resumo do Barbeiro</h3>";
+    echo "<p>Total de Clientes: {$resumo['total_clientes']}</p>";
+    echo "<p>Total de Serviços: {$resumo['total_servicos']}</p>";
 
-echo "<h4>Próximos Agendamentos:</h4>";
-if (count($resumo['proximos_agendamentos']) > 0) {
-    foreach ($resumo['proximos_agendamentos'] as $ag) {
+    echo "<h4>Próximos Agendamentos:</h4>";
+    if (count($resumo['proximos_agendamentos']) > 0) {
+      foreach ($resumo['proximos_agendamentos'] as $ag) {
         echo "<p>{$ag['data_agendamento']} - {$ag['nome_cliente']}</p>";
+      }
+    } else {
+      echo "<p>Nenhum agendamento futuro encontrado.</p>";
     }
-} else {
-    echo "<p>Nenhum agendamento futuro encontrado.</p>";
-}
-?>
-</section>
+    ?>
+  </section>
 
 </body>
+
 </html>

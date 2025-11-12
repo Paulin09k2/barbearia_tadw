@@ -46,6 +46,19 @@ if ($id && $idusuario) {
 } else {
   // ===== Cadastrar novo barbeiro =====
   // Chama salvarBarbeiro() com os dados recebidos do formulário.
+  // Se vier email e senha, cria primeiro o usuário e usa o id retornado
+  if (!empty($email) && !empty($senha)) {
+    $novoIdUsuario = salvarUsuario($conexao, $email, $senha, 'barbeiro');
+    if ($novoIdUsuario && $novoIdUsuario > 0) {
+      $idusuario = $novoIdUsuario;
+    } else {
+      // falha ao criar usuário
+      $resposta = false;
+      header("Location: ./admin/index.php");
+      exit;
+    }
+  }
+
   $resposta = salvarBarbeiro(
     $conexao,
     $nome,

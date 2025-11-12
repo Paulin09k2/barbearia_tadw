@@ -3,33 +3,40 @@ require_once "./conexao.php";
 require_once "./funcoes.php";
 session_start();
 
-$idusuario = $_SESSION['idusuario'] ?? null;
-$id = isset($_GET['id']) ? $_GET['id'] : $idusuario;
+$idusuario_session = $_SESSION['idusuario'] ?? null;
+$param_idusuario = isset($_GET['id']) ? $_GET['id'] : null;
 
-$barbeiro = pesquisarBarbeiroId($conexao, $id);
-$usuario = pesquisarUsuarioId($conexao, $id);
+$barbeiro = null;
+$usuario = null;
+if ($param_idusuario !== null && $param_idusuario !== '') {
+  $barbeiro = pesquisarBarbeiroId($conexao, $param_idusuario);
+  $usuario = pesquisarUsuarioId($conexao, $param_idusuario);
+}
 
 if ($barbeiro && $usuario) {
-    $id = $barbeiro['id_barbeiro'];
-    $idusuario = $usuario['idusuario'];
-    $nome = $barbeiro['nome'];
-    $email = $usuario['email'];
-    $telefone = $barbeiro['telefone'];
-    $cpf = $barbeiro['cpf'];
-    $data_nascimento = $barbeiro['data_nascimento'];
-    $data_admissao = $barbeiro['data_admissao'];
-    $senha_cliente = "";
-    $botao = "Editar";
+  // Modo edição: preenche com os dados existentes
+  $id = $barbeiro['id_barbeiro'];
+  $idusuario = $usuario['idusuario'];
+  $nome = $barbeiro['nome'];
+  $email = $usuario['email'];
+  $telefone = $barbeiro['telefone'];
+  $cpf = $barbeiro['cpf'];
+  $data_nascimento = $barbeiro['data_nascimento'];
+  $data_admissao = $barbeiro['data_admissao'];
+  $senha_cliente = "";
+  $botao = "Editar";
 } else {
-    $id = 0;
-    $nome = "";
-    $email = "";
-    $telefone = "";
-    $cpf = "";
-    $data_nascimento = "";
-    $data_admissao = date('Y-m-d');
-    $senha_cliente = "";
-    $botao = "Cadastrar";
+  // Modo cadastro: campos vazios
+  $id = 0;
+  $idusuario = ""; // não vincula a um usuário existente
+  $nome = "";
+  $email = "";
+  $telefone = "";
+  $cpf = "";
+  $data_nascimento = "";
+  $data_admissao = date('Y-m-d');
+  $senha_cliente = "";
+  $botao = "Cadastrar";
 }
 ?>
 
@@ -178,6 +185,7 @@ if ($barbeiro && $usuario) {
     <input type="submit" value="<?php echo $botao; ?>">
   </form>
 
-  <a href="./index.php">← Voltar ao Painel do Admin</a>
+  <a href="admin/index.php">← Voltar ao Painel do Admin</a>
 </body>
+
 </html>
