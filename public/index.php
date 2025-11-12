@@ -25,6 +25,7 @@
       background: linear-gradient(90deg, #ffffff );
       background-size: 200% 200%;
       animation: shine 3s infinite linear;
+      -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     @keyframes shine {
@@ -75,19 +76,19 @@
   <section class="mt-24 px-8 md:px-16 fade-in">
     <h2 class="text-4xl font-bold text-center mb-12 gold-gradient">Nossos Serviços</h2>
     <div class="grid md:grid-cols-3 gap-10">
-      <div class="bg-[#141a22] p-6 rounded-2xl shadow-lg hover:shadow-[#d4af37]/40 transition-transform transform hover:-translate-y-2 border border-[#1f2937]">
+      <div class="bg-[#141a22] p-6 rounded-2xl shadow-lg hover:shadow-[#]/40 transition-transform transform hover:-translate-y-2 border border-[#1f2937]">
         <img src="" alt="Corte de cabelo" class="rounded-xl mb-5">
         <h3 class="text-2xl font-semibold mb-3">Corte de Cabelo</h3>
         <p class="text-gray-400 mb-4">Cortes clássicos ou modernos, com acabamento de mestre e atenção aos detalhes.</p>
         <span class="text-[#ffffff] font-semibold text-lg">R$ 45,00</span>
       </div>
-      <div class="bg-[#141a22] p-6 rounded-2xl shadow-lg hover:shadow-[#d4af37]/40 transition-transform transform hover:-translate-y-2 border border-[#1f2937]">
+      <div class="bg-[#141a22] p-6 rounded-2xl shadow-lg hover:shadow-[#]/40 transition-transform transform hover:-translate-y-2 border border-[#1f2937]">
         <img src="" alt="Barba" class="rounded-xl mb-5">
         <h3 class="text-2xl font-semibold mb-3">Barba Premium</h3>
         <p class="text-gray-400 mb-4">Modelagem completa com toalha quente, navalha e finalização com óleo de barba.</p>
         <span class="text-[#ffffff] font-semibold text-lg">R$ 35,00</span>
       </div>
-      <div class="bg-[#141a22] p-6 rounded-2xl shadow-lg hover:shadow-[#d4af37]/40 transition-transform transform hover:-translate-y-2 border border-[#1f2937]">
+      <div class="bg-[#141a22] p-6 rounded-2xl shadow-lg hover:shadow-[#]/40 transition-transform transform hover:-translate-y-2 border border-[#1f2937]">
         <img src="" alt="Combo completo" class="rounded-xl mb-5">
         <h3 class="text-2xl font-semibold mb-3">Combo Elite</h3>
         <p class="text-gray-400 mb-4">Corte + Barba + Massagem facial e finalização completa. Experiência VIP.</p>
@@ -112,11 +113,11 @@
           <!-- Depoimento 1 -->
           <div class="min-w-[300px] md:min-w-[400px] p-6 mx-4 bg-[#141a22] rounded-xl border border-[#2a2f3a] shadow-lg">
             <div class="flex items-center mb-4">
-              <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#d4af37]">
+              <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#2e2ee1]">
                 <img src="" alt="Cliente" class="object-cover w-full h-full">
               </div>
               <div>
-                <h4 class="font-bold text-[#d4af37]">Eduardo Silva</h4>
+                <h4 class="font-bold text-[#ffffff]">Eduardo Silva</h4>
                 <p class="text-gray-400 text-sm">Cliente há 2 anos</p>
               </div>
             </div>
@@ -128,11 +129,11 @@
           <!-- Depoimento 2 -->
           <div class="min-w-[300px] md:min-w-[400px] p-6 mx-4 bg-[#141a22] rounded-xl border border-[#2a2f3a] shadow-lg">
             <div class="flex items-center mb-4">
-              <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#d4af37]">
+              <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#2e2ee1]">
                 <img src="" alt="Cliente" class="object-cover w-full h-full">
               </div>
               <div>
-                <h4 class="font-bold text-[#d4af37]">Lucas Ferreira</h4>
+                <h4 class="font-bold text-[#ffffff]">Lucas Ferreira</h4>
                 <p class="text-gray-400 text-sm">Cliente há 8 meses</p>
               </div>
             </div>
@@ -144,11 +145,11 @@
           <!-- Depoimento 3 -->
           <div class="min-w-[300px] md:min-w-[400px] p-6 mx-4 bg-[#141a22] rounded-xl border border-[#2a2f3a] shadow-lg">
             <div class="flex items-center mb-4">
-              <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#d4af37]">
+              <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#2e2ee1]">
                 <img src="" alt="Cliente" class="object-cover w-full h-full">
               </div>
               <div>
-                <h4 class="font-bold text-[#d4af37]">Mariana Costa</h4>
+                <h4 class="font-bold text-[#ffffff]">Mariana Costa</h4>
                 <p class="text-gray-400 text-sm">Cliente há 1 ano</p>
               </div>
             </div>
@@ -160,11 +161,11 @@
           <!-- Duplicação para efeito infinito -->
           <div class="min-w-[300px] md:min-w-[400px] p-6 mx-4 bg-[#141a22] rounded-xl border border-[#2a2f3a] shadow-lg">
             <div class="flex items-center mb-4">
-              <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#d4af37]">
+              <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#2e2ee1]">
                 <img src="" alt="Cliente" class="object-cover w-full h-full">
               </div>
               <div>
-                <h4 class="font-bold text-[#d4af37]">Eduardo Silva</h4>
+                <h4 class="font-bold text-[#ffffff]">Eduardo Silva</h4>
                 <p class="text-gray-400 text-sm">Cliente há 2 anos</p>
               </div>
             </div>
@@ -175,11 +176,11 @@
 
           <div class="min-w-[300px] md:min-w-[400px] p-6 mx-4 bg-[#141a22] rounded-xl border border-[#2a2f3a] shadow-lg">
             <div class="flex items-center mb-4">
-              <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#d4af37]">
+              <div class="w-12 h-12 rounded-full overflow-hidden mr-4 border-2 border-[#2e2ee1]">
                 <img src="" alt="Cliente" class="object-cover w-full h-full">
               </div>
               <div>
-                <h4 class="font-bold text-[#d4af37]">Lucas Ferreira</h4>
+                <h4 class="font-bold text-[#ffffff]">Lucas Ferreira</h4>
                 <p class="text-gray-400 text-sm">Cliente há 8 meses</p>
               </div>
             </div>
@@ -195,7 +196,7 @@
 
   <!-- ======= FOOTER ======= -->
   <footer class="mt-24 py-8 text-center text-gray-400 border-t border-gray-800 w-full">
-    <p>© 2025 Barbearia Elite. Todos os direitos reservados.</p>
+    <p>© 2025 Barbearia Elite..</p>
   </footer>
 
 </body>
