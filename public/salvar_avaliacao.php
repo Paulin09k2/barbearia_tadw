@@ -1,104 +1,82 @@
 <?php
-// Importa o arquivo de conexão com o banco de dados
-require_once "conexao.php";
-
-// Importa o arquivo com as funções auxiliares
-require_once "funcoes.php";
-
-// Inicia a sessão para usar variáveis globais de sessão
+require_once 'conexao.php';
+require_once 'funcoes.php';
 session_start();
 
-// Verifica se o formulário foi enviado via método POST
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Pega os dados do formulário
+$servico_id = intval($_POST['servico_id_servico'] ?? 0);
+$barbeiro_id = intval($_POST['barbeiro_id_barbeiro'] ?? 0);
+$estrela = intval($_POST['estrela'] ?? 0);
+$comentario = trim($_POST['comentario'] ?? '');
+$idusuario_form = intval($_POST['id_cliente'] ?? 0);
+$foto = $_FILES['foto'] ?? null;
 
-    // Captura a avaliação enviada pelo formulário (quantidade de estrelas, por exemplo)
-    $avaliacoes = $_POST['avaliacao'] ?? null;
-
-    // Captura o comentário textual do formulário
-    $comentario = $_POST['comentario'] ?? '';
-
-    // Captura o ID do usuário que fez a avaliação
-    $idusuario = $_POST['idusuario'] ?? null;
-
-    // Verifica se os campos obrigatórios foram preenchidos
-    if (!$avaliacoes || !$idusuario) {
-        // Interrompe a execução se faltar algum dado essencial
-        die("Avaliação ou usuário não informado.");
-    }
-
-    // Verifica se um arquivo de imagem foi enviado junto com o formulário
-    if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
-        // Armazena o nome original do arquivo
-        $nome_arquivo = $_FILES['foto']['name'];
-
-        // Armazena o caminho temporário onde o PHP guarda o arquivo até ser movido
-        $caminho_temporario = $_FILES['foto']['tmp_name'];
-
-        // Extrai a extensão do arquivo (por exemplo, jpg, png, gif)
-        $extensao = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION));
-
-        // Lista de extensões de imagem permitidas
-        $extensoes_validas = ['jpg', 'jpeg', 'png', 'gif'];
-
-        // Verifica se a extensão do arquivo é válida
-        if (!in_array($extensao, $extensoes_validas)) {
-            // Interrompe a execução se o tipo de arquivo for inválido
-            die("Extensão de arquivo inválida. Apenas JPG, PNG e GIF são permitidos.");
-        }
-
-        // Cria um novo nome único para o arquivo para evitar conflitos
-        $novo_nome = uniqid() . "." . $extensao;
-
-        // Define a pasta onde o arquivo será salvo
-        $caminho_pasta = "./img/avaliacao/";
-
-        // Verifica se a pasta de destino existe
-        if (!is_dir($caminho_pasta)) {
-            // Cria a pasta se ela não existir, com permissões adequadas
-            if (!mkdir($caminho_pasta, 0755, true)) {
-                // Interrompe caso ocorra erro ao criar a pasta
-                die("Erro ao criar a pasta de destino.");
-            }
-        }
-
-        // Verifica se a pasta tem permissão de escrita
-        if (!is_writable($caminho_pasta)) {
-            // Interrompe se a pasta não permitir salvar arquivos
-            die("A pasta '$caminho_pasta' não tem permissão de escrita.");
-        }
-
-        // Define o caminho completo onde o arquivo será armazenado
-        $caminho_destino = $caminho_pasta . $novo_nome;
-
-        // Move o arquivo da pasta temporária para a pasta de destino
-        if (!move_uploaded_file($caminho_temporario, $caminho_destino)) {
-            // Interrompe se ocorrer erro ao mover o arquivo
-            die("Erro ao mover o arquivo para a pasta de destino.");
-        }
-
-    } else {
-        // Caso nenhum arquivo tenha sido enviado, define o caminho como nulo
-        $caminho_destino = null;
-    }
-
-    // Chama a função responsável por salvar a avaliação no banco de dados
-    // Passa as informações necessárias (nota, comentário, barbeiro, serviço, etc.)
-    salvarAvaliacao(
-        $conexao,
-        $avaliacoes,
-        $comentario,
-        $_POST['barbeiro_id_barbeiro'] ?? null,
-        $_POST['servico_id_servico'] ?? null,
-        $caminho_destino,
-        $idusuario
-    );
-
-    // Redireciona o usuário de volta para a página principal após salvar
-    header("Location: ./cliente/index.php");
+// Valida se o usuário está logado
+if (!$idusuario_form) {
+    echo "<script>alert('Erro: Usuário não identificado. Faça login novamente.'); window.location.href='./login.php';</script>";
     exit;
-
-} else {
-    // Caso o acesso ao arquivo não seja feito por POST, exibe mensagem de erro 
-    die("Acesso inválido.");
 }
-?>
+
+// Busca o ID do cliente a partir do ID do usuário
+$cliente = pesquisarClienteId($conexao, $idusuario_form);
+if (!$cliente || !isset($cliente['id_cliente'])) {
+    echo "<script>alert('Erro: Cliente não encontrado. Contate o administrador.'); window.history.back();</script>";
+    exit;
+}
+$id_cliente = intval($cliente['id_cliente']);
+
+// Validações básicas
+if (!$servico_id || !$barbeiro_id || !$estrela) {
+    echo "<script>alert('Erro: Todos os campos obrigatórios devem ser preenchidos.'); window.history.back();</script>";
+    exit;
+}
+
+if ($estrela < 1 || $estrela > 5) {
+    echo "<script>alert('Erro: A nota deve estar entre 1 e 5.'); window.history.back();</script>";
+    exit;
+}
+
+// Processa a foto se foi enviada
+$foto_nome = '';
+if ($foto && $foto['error'] === UPLOAD_ERR_OK) {
+    $nome_arquivo = basename($foto['name']);
+    $extensao = strtolower(pathinfo($nome_arquivo, PATHINFO_EXTENSION));
+
+    // Valida extensão
+    if (!in_array($extensao, ['jpg', 'jpeg', 'png'])) {
+        echo "<script>alert('Erro: Apenas arquivos JPG e PNG são aceitos.'); window.history.back();</script>";
+        exit;
+    }
+
+    // Valida tamanho (2MB)
+    if ($foto['size'] > 2 * 1024 * 1024) {
+        echo "<script>alert('Erro: Arquivo muito grande. Máximo 2MB.'); window.history.back();</script>";
+        exit;
+    }
+
+    // Cria nome único para a foto
+    $foto_nome = 'avaliacao_' . time() . '_' . uniqid() . '.' . $extensao;
+    $caminho_destino = 'img/avaliacoes/' . $foto_nome;
+
+    // Cria diretório se não existir
+    if (!is_dir('img/avaliacoes')) {
+        mkdir('img/avaliacoes', 0755, true);
+    }
+
+    // Move arquivo para o destino
+    if (!move_uploaded_file($foto['tmp_name'], $caminho_destino)) {
+        echo "<script>alert('Erro ao fazer upload da imagem.'); window.history.back();</script>";
+        exit;
+    }
+}
+
+// Salva a avaliação no banco de dados
+$resultado = salvarAvaliacao($conexao, $estrela, $comentario, $barbeiro_id, $servico_id, $foto_nome, $id_cliente);
+
+if ($resultado) {
+    echo "<script>alert('Avaliação salva com sucesso!'); window.location.href='./cliente/index.php';</script>";
+} else {
+    echo "<script>alert('Erro ao salvar avaliação. Tente novamente.'); window.history.back();</script>";
+}
+
+exit;
