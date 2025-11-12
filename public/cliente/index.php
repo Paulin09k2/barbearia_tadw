@@ -131,7 +131,6 @@ if (isset($_SESSION['mensagem'])) {
 <body>
   <nav>
     <ul>
-      <li><a href="./index.php">Início</a></li>
       <li><a href="../formAgendamento.php">Agendamentos</a></li>
       <li><a href="./avaliacao.php">Avaliações</a></li>
       <li><a href="./servico.php">Serviços</a></li>
