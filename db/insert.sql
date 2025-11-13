@@ -28,7 +28,7 @@ VALUES ('1234', 'joao@elite.com', '2'), -- id = 2
         'pedro@elite.com',
         '2'
     ), -- id = 4
-    ('1234', 'ana@elite.com', '1'), -- id = 5
+    ('1234', 'ana@elite.com', '2'), -- id = 5
     (
         '1234',
         'carlos@elite.com',
