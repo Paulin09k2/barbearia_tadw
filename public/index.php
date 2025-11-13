@@ -88,13 +88,13 @@ require_once './funcoes.php';
     <h2 class="text-4xl font-bold text-center mb-12 gold-gradient">Nossos Serviços</h2>
     <div class="grid md:grid-cols-3 gap-10">
       <div class="bg-[#141a22] p-6 rounded-2xl shadow-lg hover:shadow-[#]/40 transition-transform transform hover:-translate-y-2 border border-[#1f2937]">
-        <img src="" alt="Corte de cabelo" class="rounded-xl mb-5">
+        <img src="../public/img/CortedeCabelo.jpeg" alt="Corte de cabelo" class="rounded-xl mb-5">
         <h3 class="text-2xl font-semibold mb-3">Corte de Cabelo</h3>
         <p class="text-gray-400 mb-4">Cortes clássicos ou modernos, com acabamento de mestre e atenção aos detalhes.</p>
         <span class="text-[#ffffff] font-semibold text-lg">R$ 45,00</span>
       </div>
       <div class="bg-[#141a22] p-6 rounded-2xl shadow-lg hover:shadow-[#]/40 transition-transform transform hover:-translate-y-2 border border-[#1f2937]">
-        <img src="" alt="Barba" class="rounded-xl mb-5">
+        <img src="../public/img/BarbaPremium.jpeg" alt="Barba" class="rounded-xl mb-5">
         <h3 class="text-2xl font-semibold mb-3">Barba Premium</h3>
         <p class="text-gray-400 mb-4">Modelagem completa com toalha quente, navalha e finalização com óleo de barba.</p>
         <span class="text-[#ffffff] font-semibold text-lg">R$ 35,00</span>
