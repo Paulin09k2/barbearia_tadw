@@ -145,8 +145,7 @@ require_once 'funcoes.php';
       </tbody>
     </table>
   </div>
-
-  <a href="index.php">← Voltar</a>
+  <a href="index.php">Voltar</a>
 
 </body>
 </html>

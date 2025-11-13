@@ -67,8 +67,6 @@ require_once './funcoes.php';
     <p class="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto">
       Na Barbearia Elite, cada corte é uma obra de arte. Experimente o cuidado, o estilo e a precisão que definem os verdadeiros mestres da barba e cabelo.
     </p>
-    <a href="login.php" class="mt-10 inline-block bg-[#ffffff] text-black font-semibold px-8 py-3 rounded-xl shadow-lg hover:bg-[#ffffff] transition-transform transform hover:scale-105">
-      Agende seu Horário
     </a>
   </section>
 
@@ -78,7 +76,7 @@ require_once './funcoes.php';
   
   <div class="grid md:grid-cols-3 gap-10">
     <!-- ===== CARD 1 ===== -->
-    <div class="bg-[#141a22] p-6 rounded-2xl shadow-lg hover:shadow-[#ffcd00]/40 transition-transform transform hover:-translate-y-2 border border-[#1f2937]">
+    <div class="bg-[#141a22] p-6 rounded-2xl shadow-lg hover:shadow-[#ffc]/40 transition-transform transform hover:-translate-y-2 border border-[#1f2937]">
       <img src="../public/img/CortedeCabelo.jpeg" alt="Corte de cabelo" 
            class="rounded-xl mb-5 w-full h-64 object-cover"> <!-- 🔧 imagem padronizada -->
       <h3 class="text-2xl font-semibold mb-3">Corte de Cabelo</h3>
@@ -87,7 +85,7 @@ require_once './funcoes.php';
     </div>
 
     <!-- ===== CARD 2 ===== -->
-    <div class="bg-[#141a22] p-6 rounded-2xl shadow-lg hover:shadow-[#ffcd00]/40 transition-transform transform hover:-translate-y-2 border border-[#1f2937]">
+    <div class="bg-[#141a22] p-6 rounded-2xl shadow-lg hover:shadow-[#ffc]/40 transition-transform transform hover:-translate-y-2 border border-[#1f2937]">
       <img src="../public/img/BarbaPremium.jpeg" alt="Barba" 
            class="rounded-xl mb-5 w-full h-64 object-cover"> <!-- 🔧 imagem padronizada -->
       <h3 class="text-2xl font-semibold mb-3">Barba Premium</h3>
@@ -96,7 +94,7 @@ require_once './funcoes.php';
     </div>
 
     <!-- ===== CARD 3 ===== -->
-    <div class="bg-[#141a22] p-6 rounded-2xl shadow-lg hover:shadow-[#ffcd00]/40 transition-transform transform hover:-translate-y-2 border border-[#1f2937]">
+    <div class="bg-[#141a22] p-6 rounded-2xl shadow-lg hover:shadow-[#ffc]/40 transition-transform transform hover:-translate-y-2 border border-[#1f2937]">
       <img src="../public/img/barbeiro.jpg" alt="Combo completo" 
            class="rounded-xl mb-5 w-full h-64 object-cover"> <!-- 🔧 imagem padronizada -->
       <h3 class="text-2xl font-semibold mb-3">Combo Elite</h3>

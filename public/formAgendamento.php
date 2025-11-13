@@ -1,59 +1,66 @@
 <?php
-require_once "./conexao.php";
-require_once "./funcoes.php";
-session_start();
+// Inicia a sessão para acessar variáveis de sessão
+require_once "./conexao.php"; // Inclui o arquivo de conexão com o banco de dados
+require_once "./funcoes.php"; // Inclui o arquivo com funções auxiliares
+session_start(); // Inicia a sessão
 
-
+// Obtém o ID do usuário logado (cliente ou barbeiro) da sessão
 $idusuario = $_SESSION['idusuario'];
 
+// Busca todas as informações completas do cliente com base no ID do usuário
 $usuario = listarCompletoCliente($conexao, $idusuario);
 
+// Pega o ID do cliente da primeira posição do array retornado
 $id_cliente = $usuario[0]['id_cliente'];
 
 // --- VERIFICA O TIPO DE USUÁRIO (1 = cliente, 2 = barbeiro/admin) ---
 $tipo = tipoUsuario($conexao, idusuario: $idusuario);
 
-// var_dump( $tipo);
-// --- PEGA ID DO AGENDAMENTO (EDIÇÃO) ---
-$id = $_GET['id_agendamento'] ?? 0;
-$botao = "Cadastrar";
+// --- PEGA ID DO AGENDAMENTO (CASO SEJA EDIÇÃO) ---
+$id = $_GET['id_agendamento'] ?? 0; // Se não houver, define como 0 (novo cadastro)
+$botao = "Cadastrar"; // Texto padrão do botão
 
-// --- DADOS PADRÃO ---
+// --- VALORES PADRÃO PARA O FORMULÁRIO ---
 $id_agendamento = 0;
 $data_agendamento = "";
-$status = "pendente";
+$status = "pendente"; // Padrão inicial do status
 $cliente_id = $id_cliente;
 $barbeiro_id = "";
-$servico_id = $_GET['id_servico'] ?? "";
+$servico_id = $_GET['id_servico'] ?? ""; // Caso venha via URL, já preenche
 
-// --- SE FOR EDIÇÃO ---
+// --- SE FOR EDIÇÃO (id_agendamento > 0), BUSCA DADOS EXISTENTES ---
 if ($id > 0) {
+    // Consulta SQL para pegar dados do agendamento específico
     $sql = "SELECT id_agendamento, data_agendamento, status, cliente_id_cliente, barbeiro_id_barbeiro 
             FROM agendamento WHERE id_agendamento = ?";
-    $stmt = mysqli_prepare($conexao, $sql);
-    mysqli_stmt_bind_param($stmt, "i", $id);
-    mysqli_stmt_execute($stmt);
-    $resultado = mysqli_stmt_get_result($stmt);
-    $agendamento = mysqli_fetch_assoc($resultado);
-    mysqli_stmt_close($stmt);
+    $stmt = mysqli_prepare($conexao, $sql); // Prepara a consulta
+    mysqli_stmt_bind_param($stmt, "i", $id); // Substitui o ? pelo valor do ID
+    mysqli_stmt_execute($stmt); // Executa a query
+    $resultado = mysqli_stmt_get_result($stmt); // Pega o resultado
+    $agendamento = mysqli_fetch_assoc($resultado); // Converte para array associativo
+    mysqli_stmt_close($stmt); // Fecha o statement
 
+    // Se encontrou o agendamento, preenche os campos do formulário
     if ($agendamento) {
         $id_agendamento = $agendamento['id_agendamento'];
+        // Converte a data/hora para o formato aceito pelo input datetime-local
         $data_agendamento = date('Y-m-d\TH:i', strtotime($agendamento['data_agendamento']));
         $status = $agendamento['status'];
         $cliente_id = $agendamento['cliente_id_cliente'];
         $barbeiro_id = $agendamento['barbeiro_id_barbeiro'];
-        $botao = "Editar";
+        $botao = "Editar"; // Troca o texto do botão
     }
 }
 
-$barbeiros = listarBarbeiro($conexao);
-$servicos = listarServicosDisponiveis($conexao);
-$clientes = listarCliente($conexao);
+// --- CARREGA DADOS PARA OS SELECTS ---
+$barbeiros = listarBarbeiro($conexao); // Lista todos os barbeiros
+$servicos = listarServicosDisponiveis($conexao); // Lista serviços disponíveis
+$clientes = listarCliente($conexao); // Lista clientes (para uso do admin)
 
+// --- EXIBE ALERTA DE MENSAGEM (CASO EXISTE NA SESSÃO) ---
 if (isset($_SESSION['mensagem'])) {
     echo "<script>alert('{$_SESSION['mensagem']}');</script>";
-    unset($_SESSION['mensagem']);
+    unset($_SESSION['mensagem']); // Apaga a mensagem após exibir
 }
 ?>
 <!DOCTYPE html>
@@ -63,7 +70,9 @@ if (isset($_SESSION['mensagem'])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?php echo $botao; ?> Agendamento</title>
+
 <style>
+  /* --- ESTILO GERAL DA PÁGINA --- */
   * {
     margin: 0;
     padding: 0;
@@ -72,7 +81,6 @@ if (isset($_SESSION['mensagem'])) {
   }
 
   body {
-    font-family: Arial, Helvetica, sans-serif;
     background-color: #0f1724;
     color: #fff;
     display: flex;
@@ -95,7 +103,6 @@ if (isset($_SESSION['mensagem'])) {
     font-size: 22px;
     font-weight: 700;
     margin-bottom: 25px;
-    text-align: left;
     color: #fff;
   }
 
@@ -104,7 +111,6 @@ if (isset($_SESSION['mensagem'])) {
     font-size: 14px;
     font-weight: 600;
     margin-bottom: 6px;
-    color: #fff;
   }
 
   select,
@@ -130,35 +136,6 @@ if (isset($_SESSION['mensagem'])) {
     background-color: #202b36;
   }
 
-  textarea {
-    resize: vertical;
-    min-height: 90px;
-  }
-
-  .file-label {
-    font-size: 13px;
-    color: #aaa;
-    margin-bottom: 6px;
-  }
-
-  input[type="file"] {
-    width: 100%;
-    padding: 10px;
-    background-color: #1c2530;
-    border: 1px solid #2b3440;
-    border-radius: 6px;
-    color: #ccc;
-    cursor: pointer;
-  }
-
-  small {
-    display: block;
-    font-size: 12px;
-    color: #888;
-    margin-bottom: 16px;
-    line-height: 1.4;
-  }
-
   button[type="submit"] {
     width: 100%;
     background-color: #fff;
@@ -169,7 +146,6 @@ if (isset($_SESSION['mensagem'])) {
     border-radius: 8px;
     cursor: pointer;
     transition: 0.3s;
-    font-size: 15px;
   }
 
   button[type="submit"]:hover {
@@ -182,44 +158,40 @@ if (isset($_SESSION['mensagem'])) {
     color: #fff;
     text-decoration: none;
     font-size: 14px;
-    font-weight: 500;
-    transition: 0.2s;
   }
 
   a:hover {
     text-decoration: underline;
   }
-
-  @media (max-width: 500px) {
-    .container {
-      padding: 30px 20px;
-    }
-  }
 </style>
-
 </head>
 
 <body>
     <div class="container">
+        <!-- Título dinâmico conforme a ação (Cadastrar/Editar) -->
         <h1><?php echo htmlspecialchars($botao); ?> Agendamento</h1>
+
         <?php
+        // Exibe link de retorno conforme o tipo de usuário
         if ((int)$tipo['tipo_usuario'] === 1) {
             echo '<a href="./cliente/index.php">Voltar ao Painel do Cliente</a>';
         } else {
             echo '<a href="./admin/index.php">Voltar ao Painel do Admin</a>';
         }
-
         ?>
         <hr>
 
+        <!-- Formulário para criar ou editar o agendamento -->
         <form action="./salvarAgendamento.php" method="POST">
             <?php
+            // Campos ocultos com dados importantes
             echo '
         <input type="hidden" name="id_agendamento" value="' . htmlspecialchars($id_agendamento ?? '') . '">
         <input type="hidden" name="id_cliente" value="' . htmlspecialchars($id_cliente ?? '') . '">
         <input type="hidden" name="tipo_usuario" value="' . htmlspecialchars($tipo['tipo_usuario'] ?? '') . '">
     ';
 
+            // Caso seja barbeiro/admin, pode escolher o cliente
             if ((int)$tipo['tipo_usuario'] === 2) {
                 echo '
             <label for="id_cliente">Cliente:</label><br>
@@ -233,6 +205,7 @@ if (isset($_SESSION['mensagem'])) {
             </select><br><br>';
             }
 
+            // Campo de data e hora do agendamento
             echo '
         <label for="data_agendamento">Data e Hora:</label><br>
         <input type="datetime-local"
@@ -242,7 +215,7 @@ if (isset($_SESSION['mensagem'])) {
             required
             min="' . date('Y-m-d\TH:i') . '"><br><br>
             
-
+        <!-- Seleção do barbeiro -->
         <label for="barbeiro_id">Barbeiro:</label><br>
         <select name="barbeiro_id" id="barbeiro_id" required>
             <option value="">Selecione...</option>';
@@ -253,6 +226,7 @@ if (isset($_SESSION['mensagem'])) {
             echo '
         </select><br><br>
 
+        <!-- Seleção do serviço -->
         <label for="servico_id">Serviço:</label><br>
         <select name="servico_id" id="servico_id" required>
             <option value="">Selecione...</option>';
@@ -264,6 +238,7 @@ if (isset($_SESSION['mensagem'])) {
             echo '
         </select><br><br>';
 
+            // Campo de status só aparece para barbeiro/admin
             if ((int)$tipo['tipo_usuario'] === 2) {
                 echo '
             <label for="status">Status:</label><br>
@@ -277,14 +252,11 @@ if (isset($_SESSION['mensagem'])) {
             </select><br><br>';
             }
 
+            // Botão de enviar
             echo '
         <button type="submit">' . htmlspecialchars($botao) . '</button>
     ';
             ?>
         </form>
-
-
 </body>
-
-
 </html>
