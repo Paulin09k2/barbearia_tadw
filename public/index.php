@@ -26,14 +26,7 @@ require_once './funcoes.php';
       }
     }
 
-    /* ===== Texto dourado animado ===== */
-    .gold-gradient {
-      background: linear-gradient(90deg, #ffffff);
-      background-size: 200% 200%;
-      animation: shine 3s infinite linear;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+    /* ===== Gradiente dourado ===== */
 
     @keyframes shine {
       0% {
@@ -48,7 +41,7 @@ require_once './funcoes.php';
     /* ===== Carrossel infinito ===== */
     .testimonial-track {
       display: flex;
-      animation: scroll 30s linear infinite;
+      animation: scroll 20s linear infinite;
       width: max-content;
     }
 
@@ -107,7 +100,7 @@ require_once './funcoes.php';
         <span class="text-[#ffffff] font-semibold text-lg">R$ 35,00</span>
       </div>
       <div class="bg-[#141a22] p-6 rounded-2xl shadow-lg hover:shadow-[#]/40 transition-transform transform hover:-translate-y-2 border border-[#1f2937]">
-        <img src="" alt="Combo completo" class="rounded-xl mb-5">
+        <img src="../public/img/barbeiro.jpg" alt="Combo completo" class="rounded-xl mb-5">
         <h3 class="text-2xl font-semibold mb-3">Combo Elite</h3>
         <p class="text-gray-400 mb-4">Corte + Barba + Massagem facial e finalização completa. Experiência VIP.</p>
         <span class="text-[#ffffff] font-semibold text-lg">R$ 70,00</span>
