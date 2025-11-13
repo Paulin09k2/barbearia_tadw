@@ -1,76 +1,55 @@
 <?php
-
-// Importa o arquivo de conexão com o banco de dados (cria a variável $conexao).
-require_once './conexao.php';
-
-// Importa o arquivo com funções auxiliares (onde estão salvarBarbeiro e editarBarbeiro).
-require_once './funcoes.php';
-
-// Inicia ou continua a sessão (necessária para manter informações do usuário logado).
+// Inicia ou continua a sessão
 session_start();
 
+// Importa a conexão e funções auxiliares
+require_once './conexao.php';
+require_once './funcoes.php';
 
-// --- Captura dos dados enviados pelo formulário (método POST) ---
-
-$id = $_POST['id'] ?? null;                 // ID do barbeiro (nulo = novo cadastro)
-$idusuario = $_POST['idusuario'] ?? null;   // ID do usuário vinculado
-$nome = trim($_POST['nome']);               // Nome do barbeiro
-$email = trim($_POST['email']);             // E-mail (pode ser usado para login)
-$telefone = trim($_POST['telefone']);       // Telefone do barbeiro
-$data_nascimento = $_POST['data_nascimento']; // Data de nascimento
-$data_admissao = $_POST['data'];            // Data de admissão (provavelmente data de contratação)
-$senha = trim($_POST['senha']);             // Senha do barbeiro (caso seja usada para login)
-$cpf = trim($_POST['cpf']);                 // CPF do barbeiro
-$id_barbeiro = $id;                         // Define $id_barbeiro com o mesmo valor de $id (usado na função)
-// Tipo de usuário (padrão 'barbeiro')
-$tipo_usuario = $_POST['tipo_usuario'] ?? 'barbeiro';
-
-
-// Linha comentada — usada antes para depuração (mostrar o valor da variável).
-// var_dump(value: $data_admissao);
-
-
-// --- Verifica se o barbeiro já existe (edição) ou é novo (cadastro) ---
-if ($id && $idusuario) {
-  // ===== Editar barbeiro existente =====
-  // Chama a função editarBarbeiro() passando os dados atualizados.
-  $resposta = editarBarbeiro(
-    $conexao,
-    $nome,
-    $telefone,
-    $cpf,
-    $data_nascimento,
-    $data_admissao,
-    $idusuario,
-    $id_barbeiro
-  );
-} else {
-  // ===== Cadastrar novo barbeiro =====
-  // Chama salvarBarbeiro() com os dados recebidos do formulário.
-  // Se vier email e senha, cria primeiro o usuário e usa o id retornado
-  if (!empty($email) && !empty($senha)) {
-    $novoIdUsuario = salvarUsuario($conexao, $email, $senha, $tipo_usuario);
-    if ($novoIdUsuario && $novoIdUsuario > 0) {
-      $idusuario = $novoIdUsuario;
-    } else {
-      // falha ao criar usuário
-      $resposta = false;
-      header("Location: ./admin/index.php");
-      exit;
-    }
-  }
-
-  $resposta = salvarBarbeiro(
-    $conexao,
-    $nome,
-    $telefone,
-    $cpf,
-    $data_nascimento,
-    $data_admissao,
-    $idusuario
-  );
+// Verifica se o barbeiro está logado
+if (empty($_SESSION['idusuario'])) {
+  header("Location: ../login.php");
+  exit;
 }
 
+// Captura o ID do usuário logado (barbeiro)
+$idusuario = $_SESSION['idusuario'];
 
-// --- Redireciona o usuário após salvar ou editar ---
-header("Location: ./admin/index.php");
+// Busca o barbeiro vinculado ao usuário logado
+$barbeiro = pesquisarBarbeiroId($conexao, $idusuario);
+
+if (!$barbeiro) {
+  echo "<script>alert('Barbeiro não encontrado. Faça login novamente.'); window.location='../login.php';</script>";
+  exit;
+}
+
+// --- Captura os dados enviados pelo formulário ---
+$nome = trim($_POST['nome'] ?? '');
+$telefone = trim($_POST['telefone'] ?? '');
+$cpf = trim($_POST['cpf'] ?? '');
+$data_nascimento = $_POST['data_nascimento'] ?? '';
+$data_admissao = $_POST['data_admissao'] ?? ''; // campo opcional
+$id_barbeiro = $barbeiro['id_barbeiro']; // usa o id do barbeiro logado
+
+// --- Atualiza os dados do barbeiro no banco ---
+$resposta = editarBarbeiro(
+  $conexao,
+  $nome,
+  $telefone,
+  $cpf,
+  $data_nascimento,
+  $data_admissao,
+  $idusuario,
+  $id_barbeiro
+);
+
+// --- Verifica o resultado e redireciona ---
+if ($resposta) {
+  $_SESSION['mensagem'] = "Perfil atualizado com sucesso!";
+} else {
+  $_SESSION['mensagem'] = "Erro ao atualizar o perfil. Tente novamente.";
+}
+
+header("Location: login.php"); // volta para a página de perfil
+exit;
+?>

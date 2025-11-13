@@ -43,6 +43,7 @@ $media = calcularMediaAvaliacoes($conexao, $idBarbeiro);
     <nav class="space-x-4">
       <a href="servicosregistrado.php" class="bg-white text-black px-3 py-1 rounded">Meus Serviços</a>
       <a href="avaliacao.php" class="bg-white text-black px-3 py-1 rounded">Avaliações</a>
+      <a href="editar.php" class="bg-white text-black px-3 py-1 rounded">Editar Perfil</a>
       <a href="../sair.php" class="bg-red-600 px-3 py-1 rounded">Sair</a>
     </nav>
   </header>

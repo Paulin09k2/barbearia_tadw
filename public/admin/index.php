@@ -230,7 +230,6 @@ $barbeiro = pesquisarBarbeiroId($conexao, $idusuario);
         <li><a href="./adicionarServico.php">Serviços</a></li>
         <li><a href="./adicionarbarbeiro.php">Adicionar Barbeiro</a></li>
         <?php if ($idusuario): ?>
-          <li><a href="./adicionarbarbeiro.php?id=<?php echo htmlspecialchars($idusuario, ENT_QUOTES); ?>">Editar Perfil</a></li>
         <?php endif; ?>
         <li><a href="../sair.php">Sair</a></li>
       </ul>

@@ -49,109 +49,128 @@ if ($barbeiro && $usuario) {
   <link rel="icon" type="image/png" href="logo2.png">
   <title><?php echo $botao ?> Barbeiro</title>
 
-  <style>
-    /* ======= ESTILO GERAL ======= */
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(135deg, #0a0a14, #1b1b2f);
-      color: #fff;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
+<style>
+  /* ======= ESTILO GERAL ======= */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", system-ui, sans-serif;
+  }
+
+  body {
+    background-color: #0f1724;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-height: 100vh;
+    padding: 40px 20px;
+  }
+
+  h1 {
+    font-size: 22px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #fff;
+    margin-bottom: 25px;
+    text-align: center;
+  }
+
+  form {
+    background-color: #121a23;
+    width: 100%;
+    max-width: 450px;
+    padding: 40px 32px;
+    border-radius: 12px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+  }
+
+  label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #fff;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="date"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #2b3440;
+    border-radius: 6px;
+    background-color: #1c2530;
+    color: #fff;
+    font-size: 14px;
+    margin-bottom: 18px;
+    transition: 0.2s;
+  }
+
+  input:focus {
+    border-color: #ffcd00;
+    outline: none;
+    background-color: #202b36;
+  }
+
+  input[type="submit"] {
+    width: 100%;
+    background-color: #fff;
+    border: none;
+    color: #000;
+    font-weight: 700;
+    padding: 12px 0;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+    font-size: 15px;
+    margin-top: 10px;
+  }
+
+  input[type="submit"]:hover {
+    background-color: #ffcd00;
+    color: #000;
+  }
+
+  a {
+    display: inline-block;
+    margin-top: 18px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: 0.2s;
+    text-align: center;
+  }
+
+  a:hover {
+    text-decoration: underline;
+    color: #ffcd00;
+  }
+
+  /* ======= RESPONSIVO ======= */
+  @media (max-width: 500px) {
+    form {
+      padding: 30px 20px;
     }
 
     h1 {
-      margin-top: 40px;
-      color: #fff;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      text-align: center;
+      font-size: 18px;
     }
 
-    form {
-      background-color: #111827;
-      padding: 30px 40px;
-      border-radius: 10px;
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.6);
-      width: 90%;
-      max-width: 500px;
-      margin-top: 30px;
-      display: flex;
-      flex-direction: column;
+    input,
+    button {
+      font-size: 13.5px;
     }
+  }
+</style>
 
-    label {
-      font-weight: bold;
-      color: #fff;
-      margin-bottom: 5px;
-    }
-
-    input[type="text"],
-    input[type="email"],
-    input[type="password"],
-    input[type="date"] {
-      padding: 10px;
-      margin-bottom: 20px;
-      border-radius: 6px;
-      border: 1px solid #333;
-      background-color: #1e293b;
-      color: #fff;
-      font-size: 1em;
-      outline: none;
-      transition: 0.3s;
-    }
-
-    input[type="text"]:focus,
-    input[type="email"]:focus,
-    input[type="password"]:focus,
-    input[type="date"]:focus {
-      border-color: #fff;
-      box-shadow: 0 0 8px #ccc;
-    }
-
-    input[type="submit"] {
-      background-color: #fff;
-      color: #111;
-      font-weight: bold;
-      font-size: 1em;
-      padding: 12px;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    input[type="submit"]:hover {
-      background-color: #ccc;
-      color: #111;
-    }
-
-    a {
-      color: #fff;
-      text-decoration: none;
-      margin-top: 20px;
-      transition: 0.3s;
-    }
-
-    a:hover {
-      color: #ccc;
-      text-decoration: underline;
-    }
-
-    /* ======= RESPONSIVO ======= */
-    @media (max-width: 600px) {
-      form {
-        padding: 25px;
-      }
-
-      input {
-        font-size: 0.95em;
-      }
-    }
-  </style>
 </head>
 
 <body>
