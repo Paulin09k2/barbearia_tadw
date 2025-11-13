@@ -48,7 +48,7 @@ if ($cliente && $usuario) {
 <head>
     <meta charset="UTF-8"> <!-- Define o conjunto de caracteres como UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsivo em dispositivos móveis -->
-    <link rel="icon" type="image/png" href="logo2.png"> <!-- Ícone da aba do navegador -->
+    <link rel="icon" type="image/png" href="5.png"> <!-- Ícone da aba do navegador -->
     <title><?php echo $botao ?> Cliente</title> <!-- O título muda dinamicamente entre “Cadastrar” e “Editar” -->
 
     <style>
