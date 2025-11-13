@@ -26,17 +26,6 @@ require_once './funcoes.php';
       }
     }
 
-    /* ===== Gradiente dourado ===== */
-
-    @keyframes shine {
-      0% {
-        background-position: 0% 50%;
-      }
-
-      100% {
-        background-position: 100% 50%;
-      }
-    }
 
     /* ===== Carrossel infinito ===== */
     .testimonial-track {
